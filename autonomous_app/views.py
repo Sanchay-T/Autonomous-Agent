@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.clickjacking import xframe_options_exempt
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse , FileResponse
 import random
 from .ai import Chat
 from .config import default_config
@@ -65,18 +65,6 @@ def email_data_post(request):
 
         return JsonResponse({'message': "Email successfully generated." , 'user_id' : business.id})
     
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -168,3 +156,34 @@ def business_data_post(request):
 
     return JsonResponse({'message': 'Invalid request'}, status=400)
 
+
+
+def file_upload(request):
+
+    if request.method == "POST":
+
+        file = request.FILES['file']
+        print("\n\n\nFile: " , file)
+
+        file_name = file.name
+        print("\n\n\nFile name: " , file_name)
+
+        file_content = file.read()
+        print("\n\n\nFile content: " , file_content)
+
+        file_type = file.content_type
+        print("\n\n\nFile type: " , file_type)
+
+        file_size = file.size
+        print("\n\n\nFile size: " , file_size)
+
+        file_path = "autonomous_app/static/autonomous_app/files/" + file_name
+
+        with open(file_path , "wb") as f:
+            f.write(file_content)
+
+        # Return the uploaded file as a response
+        response = FileResponse(open(file_path, 'rb'), content_type=file_type)
+        response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(file_path)
+        return response
+        # return JsonResponse({'message': "File uploaded successfully." , 'file_path' : file_path})

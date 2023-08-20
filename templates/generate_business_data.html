@@ -69,6 +69,7 @@
             align-items: center;
             padding: 10px;
             background-color: #f2f2f2;
+            border-radius: 4px;
         }
 
         .message-input input {
@@ -114,7 +115,7 @@
             display: block !important;
         }
 
-        .email-container {
+        .content {
             max-width: 100%;
             width: 100%;
             height: 100%;
@@ -130,7 +131,7 @@
             width: 4rem;
             height: 4rem;
             border-radius: 50%;
-            border: 6px solid #c0c0c0 ;
+            border: 6px solid #c0c0c0;
             border-top: 5px solid black;
             animation: spin 1s linear infinite;
             position: absolute;
@@ -161,7 +162,7 @@
 
 
 
-        .container {
+        .email_container {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -218,7 +219,10 @@
 
             flex-direction: column;
             height: 70%;
-            flex: 1;
+            width: min(100%, 600px);
+            background-color: #fff;
+            padding: 0.2rem;
+            border-radius: 6px;
         }
 
         @media (max-width: 600px) {
@@ -245,7 +249,91 @@
                 height: auto;
             }
         }
+
+
+
+        /* Add this CSS code to your existing <style> section or CSS file */
+
+        .upload-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            background: white
+        }
+
+        .upload-area.drag-over {
+            border-color: #007bff;
+        }
+
+        .upload-icon {
+            font-size: 40px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .upload-progress,
+        .upload-success,
+        .upload-error {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .upload-progress {
+            color: #007bff;
+        }
+
+        .upload-success {
+            color: #28a745;
+        }
+
+        .upload-error {
+            color: #dc3545;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .url_input {
+            width: 100%;
+            border-radius: 4px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            outline-color: #bebebe;
+        }
+
+        upload-container{
+            width: 100%;
+        }
+
+        label{
+            width: 100%;
+        }
+
+        .section2{
+            width: 40%;
+        }
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
@@ -259,51 +347,77 @@
         <div class="menu-icon">☰</div>
     </header>
 
+
+
     <div class="overlay"></div>
 
     <div class="email_loader"></div>
 
-    <div class="email-container">
-        <div class="container">
+    <div class="content">
+        <div class="email_container">
             <div class="email-div">
                 <input type="email" name="email" placeholder="Enter your email address" required />
                 <div class="email-error">Email cannot be empty.</div>
             </div>
             <button class="email_button">Submit</button>
         </div>
-    </div>
 
-    <div class="chatbot">
-        <div class="chat-container" id="chat-container">
-            <!-- Messages will be dynamically added here -->
-            <div id="chats"></div>
-            <div id="loading">
-                <lottie-player src="https://lottie.host/c04594cc-52c6-47d4-b073-687a34b491a6/8uRSGnrpd3.json"
-                    background="#FFFFFF" speed="1" style="width: 4rem; height: 4rem" loop autoplay direction="1"
-                    mode="normal"></lottie-player>
+        <div class="chatbot">
+            <div class="chat-container" id="chat-container">
+                <!-- Messages will be dynamically added here -->
+                <div id="chats"></div>
+                <div id="loading">
+                    <lottie-player src="https://lottie.host/c04594cc-52c6-47d4-b073-687a34b491a6/8uRSGnrpd3.json"
+                        background="#FFFFFF" speed="1" style="width: 4rem; height: 4rem" loop autoplay direction="1"
+                        mode="normal"></lottie-player>
+                </div>
+            </div>
+            <div class="message-input">
+                <textarea id="user-input" placeholder="Type your message..." cols="1" rows="1"></textarea>
+                <!-- <textarea name="" id="" > -->
+                <button id="send-button">Send</button>
             </div>
         </div>
-        <div class="message-input">
-            <textarea id="user-input" placeholder="Type your message..." cols="1" rows="1"></textarea>
-            <!-- <textarea name="" id="" > -->
-            <button id="send-button">Send</button>
+
+
+
+        <div class="section2">
+            <div class="upload-container">
+                <label for="file-input">
+                    <div class="upload-area">
+                        <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <div class="upload-text">Drag and drop a file here or click to browse</div>
+                    </div>
+                </label>
+                <input type="file" id="file-input" accept=".txt, .pdf" />
+            </div>
+
+            <input type="text" class="url_input" placeholder="Paste url if any...">
         </div>
     </div>
+
     <script>
         // const chatContainer = document.getElementById("chat-container");
 
         let converter = new showdown.Converter();
+
+        const uploadContainer = $(".upload-container");
+        const uploadArea = $(".upload-area");
+        const fileInput = $("#file-input");
+
 
         const userInputElement = $("#user-input");
         const sendButton = $("#send-button");
         const loading = $("#loading");
         const chatContainer = $("#chats");
         const email_loader = $(".email_loader");
-        const email_container = $(".email-container");
+        const email_container = $(".email_container");
+        const upload_container = $(".upload-container");
         const email_button = $(".email_button");
         const email_error = $(".email-error");
         const overlay = $(".overlay");
         const chatbot = $(".chatbot");
+        const section2 = $(".section2");
 
         let start_of_talk = true;
         let end_of_talk = "";
@@ -313,6 +427,7 @@
         chatbot.hide();
         overlay.hide();
         email_loader.hide();
+        section2.hide();
 
         function sendMessage(message, isUser = true) {
             const messageDiv = document.createElement("div");
@@ -344,7 +459,7 @@
                 url: "{% url 'business_data_post' %}", // Replace with your actual backend URL
                 data: {
                     message: userInput,
-                    user_id : curr_user_id,
+                    user_id: curr_user_id,
                     start_of_talk: start_of_talk,
                     end_of_talk: end_of_talk,
                     csrfmiddlewaretoken: "{{ csrf_token }}",
@@ -352,7 +467,7 @@
                 success: function (response) {
                     start_of_talk = "";
                     const botResponse = response
-                    .message; // Assuming the response from the backend has a 'message' property
+                        .message; // Assuming the response from the backend has a 'message' property
                     //let md = botResponse;
                     //let html = converter.makeHtml(md);
                     console.log("BotResponse ", botResponse);
@@ -396,7 +511,7 @@
 
         email_button.on("input", function () {
             const email = $("input[name='email']").val();
-            if(email.length > 0){
+            if (email.length > 0) {
                 email_error.hide();
             }
         });
@@ -410,7 +525,7 @@
             console.log(email);
             email_loader.show();
             overlay.show();
-            
+
             $.ajax({
                 type: "POST", // Use GET, POST, PUT, DELETE, etc. depending on your API
                 url: "{% url 'email_data_post' %}", // Replace with your actual backend URL
@@ -422,8 +537,10 @@
 
                 success: function (response) {
                     email_container.hide();
+                    upload_container.show();
                     overlay.hide();
                     email_loader.hide();
+                    section2.show();
 
                     chatbot.prop("style", "display: flex !important;")
 
@@ -438,6 +555,71 @@
                     alert("An error occurred while processing your request.");
                 },
             });
+        });
+
+
+
+        function handleFileUpload(file) {
+            if (!file) {
+                console.log("No file selected.")
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("csrfmiddlewaretoken", '{{csrf_token}}');
+
+            // Display upload progress UI
+            uploadArea.html('<div class="upload-progress">Uploading...</div>');
+
+            // Make AJAX call to backend for file upload
+            $.ajax({
+                type: "POST",
+                url: "{% url 'file_upload' %}", // Replace with your actual backend URL
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    // Handle successful upload response
+                    console.log(response);
+                    uploadArea.html('<div class="upload-success">File uploaded successfully!</div>');
+                    uploadArea.removeClass("drag-over");
+                },
+                error: function () {
+                    // Handle upload error
+                    console.error("An error occurred during file upload.");
+                    uploadArea.html('<div class="upload-error">Upload failed. Please try again.</div>');
+                },
+                complete: function () {
+                    // Restore default upload UI after completion
+                    setTimeout(() => {
+                        uploadArea.html(
+                            '<div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>' +
+                            '<div class="upload-text">Drag and drop a file here or click to browse</div>'
+                        );
+                    }, 3000); // Reset UI after 3 seconds
+                }
+            });
+        }
+
+        uploadContainer.on("dragover", function (event) {
+            event.preventDefault();
+            uploadArea.addClass("drag-over");
+        });
+
+        uploadContainer.on("dragleave", function (event) {
+            uploadArea.removeClass("drag-over");
+        });
+
+        uploadArea.on("drop", function (event) {
+            event.preventDefault();
+            const file = event.originalEvent.dataTransfer.files[0];
+            handleFileUpload(file);
+        });
+
+        fileInput.on("change", function (event) {
+            const file = event.target.files[0];
+            handleFileUpload(file);
         });
     </script>
 </body>

@@ -66,6 +66,10 @@ def create_vector_store(documents, vector_store_path:str) -> Chroma:
         model_kwargs=model_kwargs,
         encode_kwargs=encode_kwargs
     )
+
+    user_vector_store_path = os.path.join(vector_store_base_path, user_key)
+
+
     vector_store = Chroma.from_documents(
         documents=documents,
         embedding=embeddings_function,
@@ -74,32 +78,33 @@ def create_vector_store(documents, vector_store_path:str) -> Chroma:
     vector_store.persist()
     return vector_store
 
-def log_prompt(prompt:dict, run:wandb.run):
+def log_prompt(prompt:dict, run:wandb.run , unique_user_key):
     prompt_artifact = wandb.Artifact(name="chat_prompt", type="prompt")
     with prompt_artifact.new_file("prompt.json") as f:
         f.write(json.dumps(prompt))
     run.log_artifact(prompt_artifact)
 
-def log_dataset(documents:List[Document], run:wandb.run):
+def log_dataset(documents:List[Document], run:wandb.run , unique_user_key):
     document_artifact = wandb.Artifact(name="documentation_dataset", type="dataset")
     with document_artifact.new_file("document.json") as f:
         for document in documents:
             f.write(document.json() + "\n")
     run.log_artifact(document_artifact)
 
-def log_index(vector_store_dir:str, run:wandb.run):
+def log_index(vector_store_dir:str, run:wandb.run , unique_user_key):
     index_artifact = wandb.Artifact(name="vector_store", type="search_index")
     index_artifact.add_dir(vector_store_dir)
     run.log_artifact(index_artifact)
     
 
 def ingest_and_log_data(
+        unique_user_key: str,
         docs_dir: str = "/Users/ayusi/OneDrive/Desktop/Hackathon-Projects/Autonomous Agent/autonomous_app/documents",
         chunk_size: int = 600,
         chunk_overlap: int = 200,
         vector_store_path: str = "/Users/ayusi/OneDrive/Desktop/Hackathon-Projects/Autonomous Agent/autonomous_app/vector_store",
         prompt_file_path: str = "/Users/ayusi/OneDrive/Desktop/Hackathon-Projects/Autonomous Agent/autonomous_app/chat_prompt.json",
-        wandb_project: str = "AI Agents Hackathon"
+        wandb_project: str = "AI Agents Hackathon",
     ):
     """
     Ingest documentation data, create a vector store, and log artifacts to W&B.
@@ -118,16 +123,16 @@ def ingest_and_log_data(
     )
 
     # Log data to wandb
-    log_dataset(documents, run)
-    log_index(vector_store_path, run)
+    log_dataset(documents, run , unique_user_key=unique_user_key)
+    log_index(vector_store_path, run , unique_user_key=unique_user_key)
     
     with open(prompt_file_path, 'r') as f:
         prompt_data = json.load(f)
-    log_prompt(prompt_data, run)
+    log_prompt(prompt_data, run , unique_user_key=unique_user_key)
 
     # Finish the wandb run
     run.finish()
 
 if __name__ == "__main__":
     # Call the function only when this module is run as a script
-    ingest_and_log_data()
+    ingest_and_log_data("ayushi")

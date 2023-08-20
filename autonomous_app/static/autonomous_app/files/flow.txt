@@ -1,0 +1,10 @@
+layer 1 : save chathistory
+
+layer 2 : create prompt behind the scenes
+
+deploy agent to superagi
+
+layer 3 : embed code generation
+
+layer 4 : lead generation if needed manual problem solving then append to monday.com
+

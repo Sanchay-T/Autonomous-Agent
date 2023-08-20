@@ -20,3 +20,12 @@ class BusinessChatHistory(models.Model):
 
     def __str__(self):
         return self.business.email
+    
+class BusinessChatbot(models.Model):
+    business = models.ForeignKey(Business , on_delete=models.CASCADE)
+    chatbot_key = models.CharField(max_length=1000)
+    chatbot_name = models.CharField(max_length=1000)
+
+
+    def __str__(self):
+        return self.business.email
