@@ -1,0 +1,46 @@
+{
+    "os": "Windows-10-10.0.22621-SP0",
+    "python": "3.10.2",
+    "heartbeatAt": "2023-08-20T13:56:46.650669",
+    "startedAt": "2023-08-20T13:56:43.423660",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "runserver"
+    ],
+    "state": "running",
+    "program": "C:\\Users\\ayusi\\OneDrive\\Desktop\\Hackathon-Projects\\Autonomous Agent\\manage.py",
+    "codePath": "manage.py",
+    "host": "LAPTOP-64SMCRE0",
+    "username": "rajaa",
+    "executable": "C:\\Users\\ayusi\\Envs\\auto_vinod\\Scripts\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 2400.0,
+        "min": 0.0,
+        "max": 2400.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2400.0,
+            "min": 0.0,
+            "max": 2400.0
+        }
+    ],
+    "disk": {
+        "total": 475.82519149780273,
+        "used": 444.73768615722656
+    },
+    "gpu": "NVIDIA GeForce GTX 1650",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce GTX 1650",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 7.840869903564453
+    }
+}

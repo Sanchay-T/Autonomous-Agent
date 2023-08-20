@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Chatbot</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+
+        iframe {
+            min-height: 100vh;
+            display: block;
+            width: min(30rem , 100%);
+            border-right: 1px solid #ccc;
+            /* min-width: 30rem; */
+        }
+
+
+        /* @media (max-width: 768px) {
+            iframe {
+                width: min(30rem , 100%);
+                min-width: 100%;
+            }
+        } */
+
+
+
+        /* @media (max-width: 375px) {
+            iframe {
+                width: 100%;
+                min-width: 100%;
+            }
+        } */
+
+        @media (max-width: 600px) {}
+    </style>
+</head>
+
+<body>
+    <iframe src="http://127.0.0.1:8000/chat/" frameborder="0"></iframe></body>
+
+</html>

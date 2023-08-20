@@ -1,0 +1,14 @@
+2023-08-20 18:04:13,284 INFO    Thread-16 (process_request_thread):17324 [wandb_setup.py:_flush():76] Current SDK version is 0.15.8
+2023-08-20 18:04:13,284 INFO    Thread-16 (process_request_thread):17324 [wandb_setup.py:_flush():76] Configure stats pid to 17324
+2023-08-20 18:04:13,284 INFO    Thread-16 (process_request_thread):17324 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\.config\wandb\settings
+2023-08-20 18:04:13,284 INFO    Thread-16 (process_request_thread):17324 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\settings
+2023-08-20 18:04:13,285 INFO    Thread-16 (process_request_thread):17324 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-20 18:04:13,285 INFO    Thread-16 (process_request_thread):17324 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-20 18:04:13,285 INFO    Thread-16 (process_request_thread):17324 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'manage.py', 'program': 'C:\\Users\\ayusi\\OneDrive\\Desktop\\Hackathon-Projects\\Autonomous Agent\\manage.py'}
+2023-08-20 18:04:13,286 INFO    Thread-16 (process_request_thread):17324 [wandb_init.py:_log_setup():507] Logging user logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_180413-j7cvpezr\logs\debug.log
+2023-08-20 18:04:13,286 INFO    Thread-16 (process_request_thread):17324 [wandb_init.py:_log_setup():508] Logging internal logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_180413-j7cvpezr\logs\debug-internal.log
+2023-08-20 18:04:13,287 INFO    Thread-16 (process_request_thread):17324 [wandb_init.py:init():547] calling init triggers
+2023-08-20 18:04:13,287 INFO    Thread-16 (process_request_thread):17324 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'project': 'AI Agents Hackathon', 'entity': None, 'job_type': 'production', 'vector_store_artifact': 'zestt/AI Agents Hackathon/vector_store:latest', 'chat_prompt_artifact': 'zestt/AI Agents Hackathon/chat_prompt:latest', 'chat_temperature': 0, 'max_fallback_retries': 1, 'model_name': 'gpt-3.5-turbo-16k', 'eval_model': 'gpt-3.5-turbo-16k', 'eval_artifact': 'zestt/AI Agents Hackathon/generated_examples:v0'}
+2023-08-20 18:04:13,288 INFO    Thread-16 (process_request_thread):17324 [wandb_init.py:init():591] wandb.init() called when a run is still active
+2023-08-20 18:07:02,864 WARNING MsgRouterThr:17324 [router.py:message_loop():77] message_loop has been closed

@@ -1,0 +1,37 @@
+Traceback (most recent call last):
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 133, in <module>
+    ingest_and_log_data()
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 111, in ingest_and_log_data
+    documents, vector_store = ingest_data(
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 30, in ingest_data
+    vector_store = create_vector_store(chunked_documents, vector_store_path)
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 69, in create_vector_store
+    vector_store = Chroma.from_documents(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\vectorstores\chroma.py", line 613, in from_documents
+    return cls.from_texts(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\vectorstores\chroma.py", line 568, in from_texts
+    chroma_collection = cls(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\vectorstores\chroma.py", line 120, in __init__
+    self._client = chromadb.Client(_client_settings)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\chromadb\__init__.py", line 143, in Client
+    api = system.instance(API)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\chromadb\config.py", line 195, in instance
+    impl = type(self)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\chromadb\api\segment.py", line 81, in __init__
+    self._sysdb = self.require(SysDB)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\chromadb\config.py", line 134, in require
+    inst = self._system.instance(type)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\chromadb\config.py", line 195, in instance
+    impl = type(self)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\chromadb\db\impl\sqlite.py", line 82, in __init__
+    os.makedirs(os.path.dirname(self._db_file), exist_ok=True)
+  File "C:\Users\ayusi\AppData\Local\Programs\Python\Python310\lib\os.py", line 215, in makedirs
+    makedirs(head, exist_ok=exist_ok)
+  File "C:\Users\ayusi\AppData\Local\Programs\Python\Python310\lib\os.py", line 215, in makedirs
+    makedirs(head, exist_ok=exist_ok)
+  File "C:\Users\ayusi\AppData\Local\Programs\Python\Python310\lib\os.py", line 215, in makedirs
+    makedirs(head, exist_ok=exist_ok)
+  [Previous line repeated 2 more times]
+  File "C:\Users\ayusi\AppData\Local\Programs\Python\Python310\lib\os.py", line 225, in makedirs
+    mkdir(name, mode)
+PermissionError: [WinError 5] Access is denied: '/Users/sanchaythalnerkar'

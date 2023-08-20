@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\embeddings\huggingface.py", line 223, in __init__
+    import sentence_transformers
+ModuleNotFoundError: No module named 'sentence_transformers'
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\chatbot\ingest.py", line 133, in <module>
+    ingest_and_log_data()
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\chatbot\ingest.py", line 111, in ingest_and_log_data
+    documents, vector_store = ingest_data(
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\chatbot\ingest.py", line 30, in ingest_data
+    vector_store = create_vector_store(chunked_documents, vector_store_path)
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\chatbot\ingest.py", line 64, in create_vector_store
+    embeddings_function = HuggingFaceBgeEmbeddings(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\embeddings\huggingface.py", line 226, in __init__
+    raise ImportError(
+ImportError: Could not import sentence_transformers python package. Please install it with `pip install sentence_transformers`.

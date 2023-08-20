@@ -1,0 +1,235 @@
+[20/Aug/2023 16:36:17] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:17] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+Internal Server Error: /bot-response/
+Traceback (most recent call last):
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\wandb\apis\normalize.py", line 41, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\wandb\apis\public.py", line 1034, in artifact
+    artifact = wandb.Artifact._from_name(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\wandb\sdk\artifacts\artifact.py", line 284, in _from_name
+    attrs = response.get("project", {}).get("artifact")
+AttributeError: 'NoneType' object has no attribute 'get'
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\views.py", line 47, in bot_response
+    bot_response_ , updated_chat_history = chat(question = query , history = prev_chat_history)
+  File "C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ai.py", line 56, in __call__
+    self.vector_store = load_vector_store(
+  File "C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\chain.py", line 29, in load_vector_store
+    vector_store_artifact_dir = wandb_run.use_artifact(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\wandb\sdk\wandb_run.py", line 341, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\wandb\sdk\wandb_run.py", line 331, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\wandb\sdk\wandb_run.py", line 2681, in use_artifact
+    artifact = public_api.artifact(type=type, name=name)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\wandb\apis\normalize.py", line 87, in wrapper
+    raise CommError(message, err).with_traceback(sys.exc_info()[2])
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\wandb\apis\normalize.py", line 41, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\wandb\apis\public.py", line 1034, in artifact
+    artifact = wandb.Artifact._from_name(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\wandb\sdk\artifacts\artifact.py", line 284, in _from_name
+    attrs = response.get("project", {}).get("artifact")
+wandb.errors.CommError: 'NoneType' object has no attribute 'get'
+[20/Aug/2023 16:36:17] [35m"POST /bot-response/ HTTP/1.1" 500 135076
+[20/Aug/2023 16:36:18] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:18] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:20] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:20] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:22] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:22] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:24] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:24] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:26] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:26] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:28] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:28] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:30] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:30] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:32] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:32] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:34] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:34] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:36] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:36] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:38] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:38] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:40] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:40] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:42] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:42] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:44] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:44] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:46] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:46] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:47] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:47] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:48] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:48] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:50] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:50] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:52] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:52] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:54] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:54] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:56] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:56] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:36:58] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:36:58] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:00] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:00] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:02] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:02] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:04] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:04] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:06] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:06] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:08] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:08] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:10] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:10] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:12] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:12] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:14] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:14] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:16] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:16] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:18] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:18] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:20] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:20] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:22] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:22] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:24] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:24] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:26] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:26] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:28] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:28] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:30] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:30] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:32] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:32] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:34] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:34] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:36] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:36] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:38] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:38] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:40] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:40] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:43] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:43] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:45] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:45] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:47] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:47] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:49] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:49] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:51] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:51] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:53] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:53] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:55] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:55] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:57] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:57] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:37:59] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:37:59] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:01] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:01] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:03] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:03] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:05] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:05] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:07] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:07] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:09] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:09] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:11] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:11] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:13] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:13] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:15] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:15] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:17] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:17] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:19] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:19] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:21] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:21] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:23] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:23] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 16:38:25] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 16:38:25] [33m"GET /chat/logo.png HTTP/1.1" 404 2787

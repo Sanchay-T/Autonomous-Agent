@@ -1,0 +1,118 @@
+[20/Aug/2023 18:08:00] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:00] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:01] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:01] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:03] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:03] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[34m[1mwandb[39m[22m:   5 of 5 files downloaded.
+[20/Aug/2023 18:08:05] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:05] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:07] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:07] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:10] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:10] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:11] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:11] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:13] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:13] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:15] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:15] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[34m[1mwandb[39m[22m:   1 of 1 files downloaded.
+Internal Server Error: /bot-response/
+Traceback (most recent call last):
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\views.py", line 49, in bot_response
+    bot_response_ , updated_chat_history = chat(question = query , history = prev_chat_history)
+  File "C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ai.py", line 70, in __call__
+    response = get_answer(
+  File "C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\chain.py", line 91, in get_answer
+    result = chain(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\chains\base.py", line 282, in __call__
+    raise e
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\chains\base.py", line 276, in __call__
+    self._call(inputs, run_manager=run_manager)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\chains\conversational_retrieval\base.py", line 121, in _call
+    chat_history_str = get_chat_history(inputs["chat_history"])
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\chains\conversational_retrieval\base.py", line 46, in _get_chat_history
+    raise ValueError(
+ValueError: Unsupported chat history format: <class 'list'>. Full chat history: [['hello', 'Answer:\tHello! How can I assist you today?']]
+[20/Aug/2023 18:08:16] [35m"POST /bot-response/ HTTP/1.1" 500 113222
+[20/Aug/2023 18:08:17] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:17] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:19] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:19] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:21] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:21] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:23] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:23] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:25] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:25] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:27] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:27] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:29] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:29] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:30] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:30] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:34] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:34] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:36] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:36] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:38] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:38] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:40] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:40] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:42] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:42] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:44] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:44] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:46] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:46] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:48] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:48] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:50] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:50] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:52] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:52] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:54] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:54] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:56] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:56] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 18:08:57] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:57] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\views.py changed, reloading.
+[20/Aug/2023 18:08:58] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 18:08:58] [33m"GET /chat/logo.png HTTP/1.1" 404 2787

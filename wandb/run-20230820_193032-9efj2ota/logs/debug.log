@@ -1,0 +1,27 @@
+2023-08-20 19:30:32,485 INFO    MainThread:12848 [wandb_setup.py:_flush():76] Current SDK version is 0.15.8
+2023-08-20 19:30:32,486 INFO    MainThread:12848 [wandb_setup.py:_flush():76] Configure stats pid to 12848
+2023-08-20 19:30:32,486 INFO    MainThread:12848 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\.config\wandb\settings
+2023-08-20 19:30:32,486 INFO    MainThread:12848 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\settings
+2023-08-20 19:30:32,486 INFO    MainThread:12848 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-20 19:30:32,486 INFO    MainThread:12848 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-20 19:30:32,486 INFO    MainThread:12848 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'manage.py', 'program': 'C:\\Users\\ayusi\\OneDrive\\Desktop\\Hackathon-Projects\\Autonomous Agent\\manage.py'}
+2023-08-20 19:30:32,488 INFO    MainThread:12848 [wandb_init.py:_log_setup():507] Logging user logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_193032-9efj2ota\logs\debug.log
+2023-08-20 19:30:32,488 INFO    MainThread:12848 [wandb_init.py:_log_setup():508] Logging internal logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_193032-9efj2ota\logs\debug-internal.log
+2023-08-20 19:30:32,490 INFO    MainThread:12848 [wandb_init.py:init():547] calling init triggers
+2023-08-20 19:30:32,490 INFO    MainThread:12848 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'project': 'AI Agents Hackathon', 'entity': None, 'job_type': 'production', 'vector_store_artifact': 'zestt/AI Agents Hackathon/vector_store:latest', 'chat_prompt_artifact': 'zestt/AI Agents Hackathon/chat_prompt:latest', 'chat_temperature': 0, 'max_fallback_retries': 1, 'model_name': 'gpt-3.5-turbo-16k', 'eval_model': 'gpt-3.5-turbo-16k', 'eval_artifact': 'zestt/AI Agents Hackathon/generated_examples:v0'}
+2023-08-20 19:30:32,491 INFO    MainThread:12848 [wandb_init.py:init():596] starting backend
+2023-08-20 19:30:32,491 INFO    MainThread:12848 [wandb_init.py:init():600] setting up manager
+2023-08-20 19:30:32,498 INFO    MainThread:12848 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=spawn, using: spawn
+2023-08-20 19:30:32,505 INFO    MainThread:12848 [wandb_init.py:init():606] backend started and connected
+2023-08-20 19:30:32,521 INFO    MainThread:12848 [wandb_init.py:init():697] updated telemetry
+2023-08-20 19:30:32,523 INFO    MainThread:12848 [wandb_init.py:init():730] communicating run to backend with 60.0 second timeout
+2023-08-20 19:30:33,851 INFO    MainThread:12848 [wandb_run.py:_on_init():2180] communicating current version
+2023-08-20 19:30:34,441 INFO    MainThread:12848 [wandb_run.py:_on_init():2189] got version response 
+2023-08-20 19:30:34,441 INFO    MainThread:12848 [wandb_init.py:init():781] starting run threads in backend
+2023-08-20 19:30:35,469 INFO    MainThread:12848 [wandb_run.py:_console_start():2159] atexit reg
+2023-08-20 19:30:35,470 INFO    MainThread:12848 [wandb_run.py:_redirect():2014] redirect: wrap_raw
+2023-08-20 19:30:35,470 INFO    MainThread:12848 [wandb_run.py:_redirect():2079] Wrapping output streams.
+2023-08-20 19:30:35,470 INFO    MainThread:12848 [wandb_run.py:_redirect():2104] Redirects installed.
+2023-08-20 19:30:35,471 INFO    MainThread:12848 [wandb_init.py:init():822] run started, returning control to user process
+2023-08-20 19:35:36,074 WARNING MsgRouterThr:12848 [router.py:message_loop():77] message_loop has been closed

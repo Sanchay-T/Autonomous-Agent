@@ -1,0 +1,92 @@
+2023-08-20 18:39:05,267 INFO    Thread-16 (process_request_thread):5932 [wandb_setup.py:_flush():76] Current SDK version is 0.15.8
+2023-08-20 18:39:05,267 INFO    Thread-16 (process_request_thread):5932 [wandb_setup.py:_flush():76] Configure stats pid to 5932
+2023-08-20 18:39:05,267 INFO    Thread-16 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\.config\wandb\settings
+2023-08-20 18:39:05,267 INFO    Thread-16 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\settings
+2023-08-20 18:39:05,271 INFO    Thread-16 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-20 18:39:05,271 INFO    Thread-16 (process_request_thread):5932 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-20 18:39:05,271 INFO    Thread-16 (process_request_thread):5932 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'manage.py', 'program': 'C:\\Users\\ayusi\\OneDrive\\Desktop\\Hackathon-Projects\\Autonomous Agent\\manage.py'}
+2023-08-20 18:39:05,272 INFO    Thread-16 (process_request_thread):5932 [wandb_init.py:_log_setup():507] Logging user logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_183905-wek8pbnx\logs\debug.log
+2023-08-20 18:39:05,272 INFO    Thread-16 (process_request_thread):5932 [wandb_init.py:_log_setup():508] Logging internal logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_183905-wek8pbnx\logs\debug-internal.log
+2023-08-20 18:39:05,272 INFO    Thread-16 (process_request_thread):5932 [wandb_init.py:init():547] calling init triggers
+2023-08-20 18:39:05,272 INFO    Thread-16 (process_request_thread):5932 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'project': 'AI Agents Hackathon', 'entity': None, 'job_type': 'production', 'vector_store_artifact': 'zestt/AI Agents Hackathon/vector_store:latest', 'chat_prompt_artifact': 'zestt/AI Agents Hackathon/chat_prompt:latest', 'chat_temperature': 0, 'max_fallback_retries': 1, 'model_name': 'gpt-3.5-turbo-16k', 'eval_model': 'gpt-3.5-turbo-16k', 'eval_artifact': 'zestt/AI Agents Hackathon/generated_examples:v0'}
+2023-08-20 18:39:05,272 INFO    Thread-16 (process_request_thread):5932 [wandb_init.py:init():591] wandb.init() called when a run is still active
+2023-08-20 18:39:30,312 INFO    Thread-19 (process_request_thread):5932 [wandb_setup.py:_flush():76] Current SDK version is 0.15.8
+2023-08-20 18:39:30,315 INFO    Thread-19 (process_request_thread):5932 [wandb_setup.py:_flush():76] Configure stats pid to 5932
+2023-08-20 18:39:30,315 INFO    Thread-19 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\.config\wandb\settings
+2023-08-20 18:39:30,315 INFO    Thread-19 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\settings
+2023-08-20 18:39:30,316 INFO    Thread-19 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-20 18:39:30,317 INFO    Thread-19 (process_request_thread):5932 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-20 18:39:30,317 INFO    Thread-19 (process_request_thread):5932 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'manage.py', 'program': 'C:\\Users\\ayusi\\OneDrive\\Desktop\\Hackathon-Projects\\Autonomous Agent\\manage.py'}
+2023-08-20 18:39:30,317 INFO    Thread-19 (process_request_thread):5932 [wandb_init.py:_log_setup():507] Logging user logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_183930-admo17jx\logs\debug.log
+2023-08-20 18:39:30,318 INFO    Thread-19 (process_request_thread):5932 [wandb_init.py:_log_setup():508] Logging internal logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_183930-admo17jx\logs\debug-internal.log
+2023-08-20 18:39:30,319 INFO    Thread-19 (process_request_thread):5932 [wandb_init.py:init():547] calling init triggers
+2023-08-20 18:39:30,320 INFO    Thread-19 (process_request_thread):5932 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'project': 'AI Agents Hackathon', 'entity': None, 'job_type': 'production', 'vector_store_artifact': 'zestt/AI Agents Hackathon/vector_store:latest', 'chat_prompt_artifact': 'zestt/AI Agents Hackathon/chat_prompt:latest', 'chat_temperature': 0, 'max_fallback_retries': 1, 'model_name': 'gpt-3.5-turbo-16k', 'eval_model': 'gpt-3.5-turbo-16k', 'eval_artifact': 'zestt/AI Agents Hackathon/generated_examples:v0'}
+2023-08-20 18:39:30,321 INFO    Thread-19 (process_request_thread):5932 [wandb_init.py:init():591] wandb.init() called when a run is still active
+2023-08-20 18:41:07,061 INFO    Thread-30 (process_request_thread):5932 [wandb_setup.py:_flush():76] Current SDK version is 0.15.8
+2023-08-20 18:41:07,062 INFO    Thread-30 (process_request_thread):5932 [wandb_setup.py:_flush():76] Configure stats pid to 5932
+2023-08-20 18:41:07,063 INFO    Thread-30 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\.config\wandb\settings
+2023-08-20 18:41:07,063 INFO    Thread-30 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\settings
+2023-08-20 18:41:07,063 INFO    Thread-30 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-20 18:41:07,063 INFO    Thread-30 (process_request_thread):5932 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-20 18:41:07,063 INFO    Thread-30 (process_request_thread):5932 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'manage.py', 'program': 'C:\\Users\\ayusi\\OneDrive\\Desktop\\Hackathon-Projects\\Autonomous Agent\\manage.py'}
+2023-08-20 18:41:07,066 INFO    Thread-30 (process_request_thread):5932 [wandb_init.py:_log_setup():507] Logging user logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_184107-eknztdep\logs\debug.log
+2023-08-20 18:41:07,067 INFO    Thread-30 (process_request_thread):5932 [wandb_init.py:_log_setup():508] Logging internal logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_184107-eknztdep\logs\debug-internal.log
+2023-08-20 18:41:07,067 INFO    Thread-30 (process_request_thread):5932 [wandb_init.py:init():547] calling init triggers
+2023-08-20 18:41:07,067 INFO    Thread-30 (process_request_thread):5932 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'project': 'AI Agents Hackathon', 'entity': None, 'job_type': 'production', 'vector_store_artifact': 'zestt/AI Agents Hackathon/vector_store:latest', 'chat_prompt_artifact': 'zestt/AI Agents Hackathon/chat_prompt:latest', 'chat_temperature': 0, 'max_fallback_retries': 1, 'model_name': 'gpt-3.5-turbo-16k', 'eval_model': 'gpt-3.5-turbo-16k', 'eval_artifact': 'zestt/AI Agents Hackathon/generated_examples:v0'}
+2023-08-20 18:41:07,067 INFO    Thread-30 (process_request_thread):5932 [wandb_init.py:init():591] wandb.init() called when a run is still active
+2023-08-20 18:41:46,205 INFO    Thread-35 (process_request_thread):5932 [wandb_setup.py:_flush():76] Current SDK version is 0.15.8
+2023-08-20 18:41:46,205 INFO    Thread-35 (process_request_thread):5932 [wandb_setup.py:_flush():76] Configure stats pid to 5932
+2023-08-20 18:41:46,205 INFO    Thread-35 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\.config\wandb\settings
+2023-08-20 18:41:46,205 INFO    Thread-35 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\settings
+2023-08-20 18:41:46,213 INFO    Thread-35 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-20 18:41:46,215 INFO    Thread-35 (process_request_thread):5932 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-20 18:41:46,215 INFO    Thread-35 (process_request_thread):5932 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'manage.py', 'program': 'C:\\Users\\ayusi\\OneDrive\\Desktop\\Hackathon-Projects\\Autonomous Agent\\manage.py'}
+2023-08-20 18:41:46,215 INFO    Thread-35 (process_request_thread):5932 [wandb_init.py:_log_setup():507] Logging user logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_184146-aeo6wsoi\logs\debug.log
+2023-08-20 18:41:46,215 INFO    Thread-35 (process_request_thread):5932 [wandb_init.py:_log_setup():508] Logging internal logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_184146-aeo6wsoi\logs\debug-internal.log
+2023-08-20 18:41:46,222 INFO    Thread-35 (process_request_thread):5932 [wandb_init.py:init():547] calling init triggers
+2023-08-20 18:41:46,223 INFO    Thread-35 (process_request_thread):5932 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'project': 'AI Agents Hackathon', 'entity': None, 'job_type': 'production', 'vector_store_artifact': 'zestt/AI Agents Hackathon/vector_store:latest', 'chat_prompt_artifact': 'zestt/AI Agents Hackathon/chat_prompt:latest', 'chat_temperature': 0, 'max_fallback_retries': 1, 'model_name': 'gpt-3.5-turbo-16k', 'eval_model': 'gpt-3.5-turbo-16k', 'eval_artifact': 'zestt/AI Agents Hackathon/generated_examples:v0'}
+2023-08-20 18:41:46,228 INFO    Thread-35 (process_request_thread):5932 [wandb_init.py:init():591] wandb.init() called when a run is still active
+2023-08-20 18:42:29,729 INFO    Thread-40 (process_request_thread):5932 [wandb_setup.py:_flush():76] Current SDK version is 0.15.8
+2023-08-20 18:42:29,731 INFO    Thread-40 (process_request_thread):5932 [wandb_setup.py:_flush():76] Configure stats pid to 5932
+2023-08-20 18:42:29,731 INFO    Thread-40 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\.config\wandb\settings
+2023-08-20 18:42:29,731 INFO    Thread-40 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\settings
+2023-08-20 18:42:29,731 INFO    Thread-40 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-20 18:42:29,731 INFO    Thread-40 (process_request_thread):5932 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-20 18:42:29,731 INFO    Thread-40 (process_request_thread):5932 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'manage.py', 'program': 'C:\\Users\\ayusi\\OneDrive\\Desktop\\Hackathon-Projects\\Autonomous Agent\\manage.py'}
+2023-08-20 18:42:29,737 INFO    Thread-40 (process_request_thread):5932 [wandb_init.py:_log_setup():507] Logging user logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_184229-o113fif6\logs\debug.log
+2023-08-20 18:42:29,739 INFO    Thread-40 (process_request_thread):5932 [wandb_init.py:_log_setup():508] Logging internal logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_184229-o113fif6\logs\debug-internal.log
+2023-08-20 18:42:29,743 INFO    Thread-40 (process_request_thread):5932 [wandb_init.py:init():547] calling init triggers
+2023-08-20 18:42:29,745 INFO    Thread-40 (process_request_thread):5932 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'project': 'AI Agents Hackathon', 'entity': None, 'job_type': 'production', 'vector_store_artifact': 'zestt/AI Agents Hackathon/vector_store:latest', 'chat_prompt_artifact': 'zestt/AI Agents Hackathon/chat_prompt:latest', 'chat_temperature': 0, 'max_fallback_retries': 1, 'model_name': 'gpt-3.5-turbo-16k', 'eval_model': 'gpt-3.5-turbo-16k', 'eval_artifact': 'zestt/AI Agents Hackathon/generated_examples:v0'}
+2023-08-20 18:42:29,748 INFO    Thread-40 (process_request_thread):5932 [wandb_init.py:init():591] wandb.init() called when a run is still active
+2023-08-20 18:44:13,664 INFO    Thread-52 (process_request_thread):5932 [wandb_setup.py:_flush():76] Current SDK version is 0.15.8
+2023-08-20 18:44:13,664 INFO    Thread-52 (process_request_thread):5932 [wandb_setup.py:_flush():76] Configure stats pid to 5932
+2023-08-20 18:44:13,664 INFO    Thread-52 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\.config\wandb\settings
+2023-08-20 18:44:13,664 INFO    Thread-52 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\settings
+2023-08-20 18:44:13,668 INFO    Thread-52 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-20 18:44:13,668 INFO    Thread-52 (process_request_thread):5932 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-20 18:44:13,668 INFO    Thread-52 (process_request_thread):5932 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'manage.py', 'program': 'C:\\Users\\ayusi\\OneDrive\\Desktop\\Hackathon-Projects\\Autonomous Agent\\manage.py'}
+2023-08-20 18:44:13,668 INFO    Thread-52 (process_request_thread):5932 [wandb_init.py:_log_setup():507] Logging user logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_184413-lpmwticq\logs\debug.log
+2023-08-20 18:44:13,668 INFO    Thread-52 (process_request_thread):5932 [wandb_init.py:_log_setup():508] Logging internal logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_184413-lpmwticq\logs\debug-internal.log
+2023-08-20 18:44:13,668 INFO    Thread-52 (process_request_thread):5932 [wandb_init.py:init():547] calling init triggers
+2023-08-20 18:44:13,668 INFO    Thread-52 (process_request_thread):5932 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'project': 'AI Agents Hackathon', 'entity': None, 'job_type': 'production', 'vector_store_artifact': 'zestt/AI Agents Hackathon/vector_store:latest', 'chat_prompt_artifact': 'zestt/AI Agents Hackathon/chat_prompt:latest', 'chat_temperature': 0, 'max_fallback_retries': 1, 'model_name': 'gpt-3.5-turbo-16k', 'eval_model': 'gpt-3.5-turbo-16k', 'eval_artifact': 'zestt/AI Agents Hackathon/generated_examples:v0'}
+2023-08-20 18:44:13,676 INFO    Thread-52 (process_request_thread):5932 [wandb_init.py:init():591] wandb.init() called when a run is still active
+2023-08-20 18:45:07,891 INFO    Thread-57 (process_request_thread):5932 [wandb_setup.py:_flush():76] Current SDK version is 0.15.8
+2023-08-20 18:45:07,891 INFO    Thread-57 (process_request_thread):5932 [wandb_setup.py:_flush():76] Configure stats pid to 5932
+2023-08-20 18:45:07,891 INFO    Thread-57 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\.config\wandb\settings
+2023-08-20 18:45:07,891 INFO    Thread-57 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\settings
+2023-08-20 18:45:07,891 INFO    Thread-57 (process_request_thread):5932 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-20 18:45:07,891 INFO    Thread-57 (process_request_thread):5932 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-20 18:45:07,891 INFO    Thread-57 (process_request_thread):5932 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'manage.py', 'program': 'C:\\Users\\ayusi\\OneDrive\\Desktop\\Hackathon-Projects\\Autonomous Agent\\manage.py'}
+2023-08-20 18:45:07,898 INFO    Thread-57 (process_request_thread):5932 [wandb_init.py:_log_setup():507] Logging user logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_184507-cs7nr466\logs\debug.log
+2023-08-20 18:45:07,898 INFO    Thread-57 (process_request_thread):5932 [wandb_init.py:_log_setup():508] Logging internal logs to C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\wandb\run-20230820_184507-cs7nr466\logs\debug-internal.log
+2023-08-20 18:45:07,904 INFO    Thread-57 (process_request_thread):5932 [wandb_init.py:init():547] calling init triggers
+2023-08-20 18:45:07,906 INFO    Thread-57 (process_request_thread):5932 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'project': 'AI Agents Hackathon', 'entity': None, 'job_type': 'production', 'vector_store_artifact': 'zestt/AI Agents Hackathon/vector_store:latest', 'chat_prompt_artifact': 'zestt/AI Agents Hackathon/chat_prompt:latest', 'chat_temperature': 0, 'max_fallback_retries': 1, 'model_name': 'gpt-3.5-turbo-16k', 'eval_model': 'gpt-3.5-turbo-16k', 'eval_artifact': 'zestt/AI Agents Hackathon/generated_examples:v0'}
+2023-08-20 18:45:07,908 INFO    Thread-57 (process_request_thread):5932 [wandb_init.py:init():591] wandb.init() called when a run is still active
+2023-08-20 19:00:42,146 WARNING MsgRouterThr:5932 [router.py:message_loop():77] message_loop has been closed

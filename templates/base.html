@@ -1,0 +1,139 @@
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Builder</title>
+    <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/bb6477d2-3f3d-4c3c-95d2-04e9b57bcff3/webchat/config.js" defer>
+    </script>
+</head>
+
+<body>
+    <iframe src="https://starfish-app-cekrt.ondigitalocean.app/" frameborder="0"></iframe>
+
+
+    <iframe src="http://127.0.0.1:8800/account/display/" width="500" height="300" frameborder="0"></iframe></body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        header img {
+            width: 40px;
+        }
+
+        .chat-container {
+            padding: 20px;
+        }
+
+        .user-message {
+            background-color: #eaeaea;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
+            align-self: flex-start;
+        }
+
+        .message-input {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .message-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .message-input button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="logo.png" alt="Logo">
+        <div class="menu-icon">☰</div>
+    </header>
+    <div class="chat-container" id="chat-container">
+        <!-- Messages will be dynamically added here -->
+    </div>
+    <div class="message-input">
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button id="send-button">Send</button>
+    </div>
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const userInputElement = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        function sendMessage(message, isUser = true) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = isUser ? 'user-message' : 'bot-message';
+            messageDiv.textContent = message;
+            chatContainer.appendChild(messageDiv);
+        }
+
+        function handleUserInput() {
+            const userInput = userInputElement.value;
+            if (userInput.trim() === '') return;
+
+            sendMessage(userInput, true);
+            userInputElement.value = '';
+
+            setTimeout(() => {
+                const botResponse = 'Thank you for your message. Our team will get back to you soon.';
+                sendMessage(botResponse, false);
+            }, 1000); // Simulate bot response delay
+        }
+
+        sendButton.addEventListener('click', handleUserInput);
+        userInputElement.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                handleUserInput();
+            }
+        });
+    </script>
+</body>
+
+</html>

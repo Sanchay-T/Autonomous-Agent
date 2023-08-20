@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\document_loaders\text.py", line 41, in load
+    text = f.read()
+  File "C:\Users\ayusi\AppData\Local\Programs\Python\Python310\lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x90 in position 1063: character maps to <undefined>
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 133, in <module>
+    ingest_and_log_data()
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 111, in ingest_and_log_data
+    documents, vector_store = ingest_data(
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 24, in ingest_data
+    documents = load_documents(docs_dir)
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 35, in load_documents
+    documents = [
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 36, in <listcomp>
+    TextLoader(file_path=file_path).load()[0] for file_path in md_files
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\document_loaders\text.py", line 54, in load
+    raise RuntimeError(f"Error loading {self.file_path}") from e
+RuntimeError: Error loading \Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\documents\user_1.md

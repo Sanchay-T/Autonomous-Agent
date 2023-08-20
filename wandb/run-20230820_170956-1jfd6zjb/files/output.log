@@ -1,0 +1,84 @@
+Downloading (…)ab102/.gitattributes: 100%|█████████████████████████████████████████████████████████████████████████████████████| 1.52k/1.52k [00:00<?, ?B/s]
+Downloading (…)_Pooling/config.json: 100%|██████████████████████████████████████████████████████████████████████████████████| 190/190 [00:00<00:00, 189kB/s]
+Downloading (…)2d2d7ab102/README.md: 100%|██████████████████████████████████████████████████████████████████████████████| 78.9k/78.9k [00:00<00:00, 519kB/s]
+Downloading (…)2d7ab102/config.json: 100%|██████████████████████████████████████████████████████████████████████████████████| 684/684 [00:00<00:00, 338kB/s]
+Downloading (…)ce_transformers.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 124/124 [00:00<?, ?B/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Downloading model.safetensors: 100%|██████████████████████████████████████████████████████████████████████████████████████| 133M/133M [09:21<00:00, 238kB/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Downloading pytorch_model.bin: 100%|██████████████████████████████████████████████████████████████████████████████████████| 134M/134M [10:26<00:00, 213kB/s]
+Downloading (…)nce_bert_config.json: 100%|███████████████████████████████████████████████████████████████████████████████████████| 52.0/52.0 [00:00<?, ?B/s]
+Downloading (…)cial_tokens_map.json: 100%|█████████████████████████████████████████████████████████████████████████████████| 125/125 [00:00<00:00, 81.6kB/s]
+Downloading (…)ab102/tokenizer.json: 100%|████████████████████████████████████████████████████████████████████████████████| 711k/711k [00:02<00:00, 263kB/s]
+Downloading (…)okenizer_config.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 366/366 [00:00<?, ?B/s]
+Downloading (…)2d2d7ab102/vocab.txt: 100%|████████████████████████████████████████████████████████████████████████████████| 232k/232k [00:00<00:00, 257kB/s]
+Downloading (…)d7ab102/modules.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 229/229 [00:00<?, ?B/s]
+Traceback (most recent call last):
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\vectorstores\chroma.py", line 81, in __init__
+    import chromadb
+ModuleNotFoundError: No module named 'chromadb'
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 133, in <module>
+    ingest_and_log_data()
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 111, in ingest_and_log_data
+    documents, vector_store = ingest_data(
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 30, in ingest_data
+    vector_store = create_vector_store(chunked_documents, vector_store_path)
+  File "c:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ingest.py", line 69, in create_vector_store
+    vector_store = Chroma.from_documents(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\vectorstores\chroma.py", line 613, in from_documents
+    return cls.from_texts(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\vectorstores\chroma.py", line 568, in from_texts
+    chroma_collection = cls(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\vectorstores\chroma.py", line 84, in __init__
+    raise ValueError(
+ValueError: Could not import chromadb python package. Please install it with `pip install chromadb`.

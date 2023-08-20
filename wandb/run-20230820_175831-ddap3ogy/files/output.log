@@ -1,0 +1,62 @@
+[20/Aug/2023 17:58:35] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:35] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:36] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:36] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:38] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:38] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:38] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:38] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[34m[1mwandb[39m[22m:   5 of 5 files downloaded.
+[20/Aug/2023 17:58:39] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:39] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:40] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:40] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:42] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:42] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:44] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:44] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:46] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:46] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+Internal Server Error: /bot-response/
+Traceback (most recent call last):
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\views.py", line 47, in bot_response
+    bot_response_ , updated_chat_history = chat(question = query , history = prev_chat_history)
+  File "C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\ai.py", line 61, in __call__
+    self.chain = load_chain(
+  File "C:\Users\ayusi\OneDrive\Desktop\Hackathon-Projects\Autonomous Agent\autonomous_app\chain.py", line 58, in load_chain
+    llm = ChatOpenAI(
+  File "C:\Users\ayusi\Envs\auto_vinod\lib\site-packages\langchain\load\serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic\main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Could not import openai python package. Please install it with `pip install openai`. (type=value_error)
+[20/Aug/2023 17:58:47] [35m"POST /bot-response/ HTTP/1.1" 500 82554
+[20/Aug/2023 17:58:48] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:48] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:50] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:50] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:52] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:52] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:54] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:54] [33m"GET /chat/logo.png HTTP/1.1" 404 2787
+[20/Aug/2023 17:58:56] "GET /chat/ HTTP/1.1" 200 6619
+Not Found: /chat/logo.png
+[20/Aug/2023 17:58:56] [33m"GET /chat/logo.png HTTP/1.1" 404 2787

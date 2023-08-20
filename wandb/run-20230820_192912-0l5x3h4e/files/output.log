@@ -1,0 +1,10 @@
+System check identified no issues (0 silenced).
+August 20, 2023 - 19:29:16
+Django version 4.2.4, using settings 'config.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+[20/Aug/2023 19:29:16] "GET /chat/ HTTP/1.1" 200 6865
+[20/Aug/2023 19:29:16] "GET /chat/ HTTP/1.1" 200 6865
+[20/Aug/2023 19:29:19] "GET /chat/ HTTP/1.1" 200 6865
+[20/Aug/2023 19:29:21] "GET /chat/ HTTP/1.1" 200 6865
+[20/Aug/2023 19:29:23] "GET /chat/ HTTP/1.1" 200 6865
