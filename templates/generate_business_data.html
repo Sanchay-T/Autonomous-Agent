@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobile Chatbot</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        header img {
+            width: 40px;
+        }
+
+        .chat-container {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        #chats {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-message {
+            background-color: #eaeaea;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
+            align-self: flex-end;
+            max-width: 70%;
+        }
+
+        .bot-message {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
+            align-self: flex-start;
+            max-width: 70%;
+        }
+
+        .message-input {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
+
+        .message-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline-color: #bebebe;
+        }
+
+        .message-input textarea {
+            flex: 1;
+            padding: 9.6px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            overflow: hidden;
+            box-sizing: border-box;
+            /* Include padding in height calculation */
+            transition: height 0.3s ease-in-out;
+            outline-color: #bebebe;
+        }
+
+        .message-input button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            align-self: flex-end;
+        }
+
+        #loading {
+            align-self: flex-start;
+            width: 2rem;
+            height: 2rem;
+            display: none;
+        }
+
+        .show-loading {
+            display: block !important;
+        }
+
+        .email-container {
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
+
+        .email_loader {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            border: 6px solid #c0c0c0 ;
+            border-top: 5px solid black;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            translate: (-50%, -50%);
+            z-index: 1000;
+        }
+
+
+            {
+            % comment %
+        }
+
+        create animation anim {
+            % endcomment %
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: min(100%, 600px);
+        }
+
+
+        input[type="email"] {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .email_button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: 100;
+        }
+
+        .email_button:hover {
+            background-color: #0056b3;
+        }
+
+        .email-error {
+            display: none;
+            color: red;
+
+        }
+
+        .email-div {
+            width: 100%;
+            margin-bottom: 2rem;
+
+        }
+
+        .chatbot {
+
+            flex-direction: column;
+            height: 70%;
+            flex: 1;
+        }
+
+        @media (max-width: 600px) {
+
+            .user-message,
+            .bot-message {
+                max-width: 80%;
+            }
+
+            .message-input input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            header {
+                padding: 10px;
+            }
+
+            .chat-container {
+                padding: 10px;
+            }
+
+            .message-input textarea {
+                height: auto;
+            }
+        }
+    </style>
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        {% comment %} <img src="logo.png" alt="Logo" /> {% endcomment %}
+        <div class="menu-icon">☰</div>
+    </header>
+
+    <div class="overlay"></div>
+
+    <div class="email_loader"></div>
+
+    <div class="email-container">
+        <div class="container">
+            <div class="email-div">
+                <input type="email" name="email" placeholder="Enter your email address" required />
+                <div class="email-error">Email cannot be empty.</div>
+            </div>
+            <button class="email_button">Submit</button>
+        </div>
+    </div>
+
+    <div class="chatbot">
+        <div class="chat-container" id="chat-container">
+            <!-- Messages will be dynamically added here -->
+            <div id="chats"></div>
+            <div id="loading">
+                <lottie-player src="https://lottie.host/c04594cc-52c6-47d4-b073-687a34b491a6/8uRSGnrpd3.json"
+                    background="#FFFFFF" speed="1" style="width: 4rem; height: 4rem" loop autoplay direction="1"
+                    mode="normal"></lottie-player>
+            </div>
+        </div>
+        <div class="message-input">
+            <textarea id="user-input" placeholder="Type your message..." cols="1" rows="1"></textarea>
+            <!-- <textarea name="" id="" > -->
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    <script>
+        // const chatContainer = document.getElementById("chat-container");
+
+        let converter = new showdown.Converter();
+
+        const userInputElement = $("#user-input");
+        const sendButton = $("#send-button");
+        const loading = $("#loading");
+        const chatContainer = $("#chats");
+        const email_loader = $(".email_loader");
+        const email_container = $(".email-container");
+        const email_button = $(".email_button");
+        const email_error = $(".email-error");
+        const overlay = $(".overlay");
+        const chatbot = $(".chatbot");
+
+        let start_of_talk = true;
+        let end_of_talk = "";
+
+        let curr_user_id = "";
+
+        chatbot.hide();
+        overlay.hide();
+        email_loader.hide();
+
+        function sendMessage(message, isUser = true) {
+            const messageDiv = document.createElement("div");
+            let className = isUser ? "user-message" : "bot-message";
+            chatContainer.append(`<div class="${className}">${message}</div>`);
+        }
+
+        function showLoadingAnimation() {
+            loading.addClass("show-loading");
+        }
+
+        function removeLoadingAnimation() {
+            loading.removeClass("show-loading");
+        }
+
+        function handleUserInput() {
+            console.log("Handling user input");
+            const userInput = userInputElement.val();
+            if (userInput.trim() === "") return;
+
+            showLoadingAnimation();
+
+            sendMessage(userInput, true);
+            userInputElement.val("");
+
+            // Make AJAX call to backend
+            $.ajax({
+                type: "POST", // Use GET, POST, PUT, DELETE, etc. depending on your API
+                url: "{% url 'business_data_post' %}", // Replace with your actual backend URL
+                data: {
+                    message: userInput,
+                    user_id : curr_user_id,
+                    start_of_talk: start_of_talk,
+                    end_of_talk: end_of_talk,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                }, // Data to send to the backend
+                success: function (response) {
+                    start_of_talk = "";
+                    const botResponse = response
+                    .message; // Assuming the response from the backend has a 'message' property
+                    //let md = botResponse;
+                    //let html = converter.makeHtml(md);
+                    console.log("BotResponse ", botResponse);
+                    removeLoadingAnimation();
+                    sendMessage(botResponse, false);
+                },
+                error: function () {
+                    removeLoadingAnimation();
+                    sendMessage(
+                        "An error occurred while processing your request.",
+                        false
+                    );
+                },
+            });
+        }
+
+        function adjustTextareaHeight() {
+            userInputElement
+                .css("height", "auto")
+                .css("height", $("#user-input").prop("scrollHeight") + "px");
+        }
+
+        userInputElement.on("input", adjustTextareaHeight);
+
+        $("#send-button").on("click", handleUserInput);
+
+        userInputElement.on("keydown", function (event) {
+            if (event.keyCode === 13 && event.shiftKey) {
+                const text = userInputElement.val();
+                userInputElement.val(text + "\n");
+                adjustTextareaHeight();
+                event.preventDefault();
+            } else if (event.keyCode === 13) {
+                event.preventDefault();
+                handleUserInput();
+                userInputElement.val("");
+                adjustTextareaHeight();
+            }
+        });
+
+
+        email_button.on("input", function () {
+            const email = $("input[name='email']").val();
+            if(email.length > 0){
+                email_error.hide();
+            }
+        });
+
+        email_button.on("click", function () {
+            const email = $("input[name='email']").val();
+            if (email.trim() === "") {
+                email_error.show();
+                return;
+            }
+            console.log(email);
+            email_loader.show();
+            overlay.show();
+            
+            $.ajax({
+                type: "POST", // Use GET, POST, PUT, DELETE, etc. depending on your API
+                url: "{% url 'email_data_post' %}", // Replace with your actual backend URL
+                data: {
+                    email: email,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                }, // Data to send to the backend
+
+
+                success: function (response) {
+                    email_container.hide();
+                    overlay.hide();
+                    email_loader.hide();
+
+                    chatbot.prop("style", "display: flex !important;")
+
+                    $("input[name='email']").val("");
+                    curr_user_id = response.user_id;
+                    console.log("User ID: ", curr_user_id);
+                    alert(response.message);
+                },
+                error: function () {
+                    overlay.hide();
+                    email_loader.hide();
+                    alert("An error occurred while processing your request.");
+                },
+            });
+        });
+    </script>
+</body>
+
+</html>

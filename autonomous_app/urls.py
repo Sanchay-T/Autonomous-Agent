@@ -23,5 +23,8 @@ urlpatterns = [
     path("bard/", views.bard , name = "bard"),
     path("chat/", views.gpt_chat , name = "chat"),
     path('bot-response/', views.bot_response, name='bot_response'),
+    path('business-data-post/', views.business_data_post, name='business_data_post'),
+    path('email_data_post/', views.email_data_post, name='email_data_post'),
+    path('generate-business-data/', views.generate_business_data, name='generate_business_data'),
 
 ]
