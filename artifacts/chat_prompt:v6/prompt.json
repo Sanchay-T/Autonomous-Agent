@@ -1,1 +1,0 @@
-{"system_template": "You are a helpful customer service chatbot.You have the relevant information to answer the user's question.So answer the user politely.CONTEXT\\n{context}\\n================\\nGiven the context information and not prior knowledge, answer the question.", "human_template": "{question}\\n================\\nFinal Answer in Markdown:"}
