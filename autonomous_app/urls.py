@@ -18,6 +18,10 @@ from django.contrib import admin
 from django.urls import path , include
 from . import views
 
+from django.conf.urls.static import static
+from django.conf import settings
+
+
 urlpatterns = [
     path("", views.base , name = "base"),
     path("bard/", views.bard , name = "bard"),
@@ -28,7 +32,14 @@ urlpatterns = [
     path('generate-business-data/', views.generate_business_data, name='generate_business_data'),
     path('file_upload/', views.file_upload, name='file_upload'),
     path('create_chatbot/', views.create_chatbot, name='create_chatbot'),
-
-    
+    path('url_data_post/', views.url_data_post, name='url_data_post'),
 
 ]
+
+
+urlpatterns += urlpatterns + static(
+    settings.STATIC_URL, document_root=settings.STATIC_ROOT
+)
+urlpatterns += urlpatterns + static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)

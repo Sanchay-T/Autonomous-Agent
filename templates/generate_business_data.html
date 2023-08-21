@@ -258,7 +258,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 0;
+            margin-block: 1rem;
         }
 
         .upload-area {
@@ -326,7 +327,7 @@
         }
 
         .section2 {
-            width: 40%;
+            width: min(100%, 600px);
         }
 
         .chatbot_creating {
@@ -340,6 +341,11 @@
             gap: 3rem;
             transform: translate(-50%, -20%);
             z-index: 1000;
+        }
+
+        .url-container{
+            display: flex;
+            background-color: #fff;
         }
     </style>
 
@@ -418,7 +424,10 @@
                 <input type="file" id="file-input" accept=".txt, .pdf" />
             </div>
 
-            <input type="text" class="url_input" placeholder="Paste url if any...">
+            <div class="url-container">
+                <input type="text" class="url_input" placeholder="Paste url if any...">
+                <button class="send-url btn">Send</button>
+            </div>
         </div>
     </div>
 
@@ -444,6 +453,7 @@
         const overlay = $(".overlay");
         const chatbot = $(".chatbot");
         const section2 = $(".section2");
+        const send_url = $(".send-url");
         const chatbot_creating_loader = $(".chatbot_creating");
         chatbot_creating_loader.hide();
 
@@ -456,6 +466,7 @@
         overlay.hide();
         email_loader.hide();
         section2.hide();
+        send_url.hide();
 
         function sendMessage(message, isUser = true) {
             const messageDiv = document.createElement("div");
@@ -557,6 +568,43 @@
                 .css("height", $("#user-input").prop("scrollHeight") + "px");
         }
 
+
+        $(".url_input").on("input", function () {
+            const url = $(this).val();
+            if (url.length > 0) {
+                send_url.show();
+            } else {
+                send_url.hide();
+            }
+        });
+
+        send_url.on('click', function (event) {
+            if ($(".url_input").val().trim() === "") return;
+
+            $ajax({
+                type: "POST",
+                url: "{% url 'url_data_post' %}",
+                data: {
+                    url: $(".url_input").val(),
+                    user_id: curr_user_id,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+                success: function (response) {
+                    console.log("Url response ", response);
+                    if (response.status === 400) {
+                        alert("Invalid url");
+                        return;
+                    }
+                    $(".url_input").remove();
+                    sendMessage(response.message, false);
+                },
+                error: function () {
+                    alert("An error occurred while processing your request.");
+                },
+            })
+        })
+
+
         userInputElement.on("input", adjustTextareaHeight);
 
         $("#send-button").on("click", handleUserInput);
@@ -632,9 +680,9 @@
                 return;
             }
 
-            const formData = new FormData();
+            /*const formData = new FormData();
             formData.append("file", file);
-            formData.append("csrfmiddlewaretoken", '{{csrf_token}}');
+            formData.append("csrfmiddlewaretoken", '{{csrf_token}}');*/
 
             // Display upload progress UI
             uploadArea.html('<div class="upload-progress">Uploading...</div>');
@@ -643,13 +691,22 @@
             $.ajax({
                 type: "POST",
                 url: "{% url 'file_upload' %}", // Replace with your actual backend URL
-                data: formData,
+                data: {
+                    file: file,
+                    user_id: curr_user_id,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                }, // Data to send to the backend
                 contentType: false,
-                processData: false,
+                //processData: false,
                 success: function (response) {
                     // Handle successful upload response
                     console.log(response);
-                    uploadArea.html('<div class="upload-success">File uploaded successfully!</div>');
+
+                    if (response.status === 400) {
+                        uploadArea.html(`<div class="upload-error">${response.message}.</div>`);
+                    } else {
+                        uploadArea.html(`<div class="upload-success">${response.message}!</div>`);
+                    }
                     uploadArea.removeClass("drag-over");
 
                 },

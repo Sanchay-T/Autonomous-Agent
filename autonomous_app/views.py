@@ -8,10 +8,15 @@ import os
 from .models import *
 import re
 import hashlib
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
+from .pdf2markdown import convert_and_save
 
 from .utils import *
 from .ingest import ingest_and_log_data
 import json
+
+from .html2markdown import url_to_doc
 
 email = "example@example.com"
 
@@ -109,6 +114,19 @@ def bot_response(request):
 
     return JsonResponse({'message': 'Invalid request'}, status=400)
 
+def url_data_post(request):
+
+    if request.method == "POST":
+        url = request.POST.get('url', '')
+        if url:
+            if url_to_doc(url):
+                return JsonResponse({'message': "URL Scraped Successfully."})
+            else:
+                return JsonResponse({'message': "Not a Valid URL."} , status=400)
+            
+        
+
+
 
 def business_data_post(request):
 
@@ -147,15 +165,34 @@ def business_data_post(request):
         print("\n\n\nBot response: " , bot_response_)
         print("\n\n\n")
 
+
+        
+        pattern = r'Prompt:\s*(.*)'
+        match = re.search(pattern, bot_response_, re.DOTALL)
+     
+
         if match:
             end = True
+            extracted_text = match.group(1).strip()
+            print(extracted_text)  
             busi_chat_hist = BusinessChatHistory(business_id = query)
             busi_chat_hist.chat_history = json.dumps(updated_chat_history)
             busi_chat_hist.save()
 
 
+            new_prompt = extracted_text + "\n\n" + "CONTEXT\\n{context}\\n================\\nGiven the context information and not prior knowledge, answer the question."
+            # save in chat_prompt.json 
+            prompt_json = {"system_template": new_prompt, "human_template": "{question}\\n================\\nFinal Answer in Markdown:"}
+
+            # open chat_prompt.json and add the prompt
+            with open("chat_prompt.json", "w") as f:
+                # i want to write to this file 
+                f.write(json.dumps(prompt_json))
+
+            f.close()
+
             busi_summary = BusinessSummary(business_id = query)
-            busi_summary.summary = bot_response_
+            busi_summary.summary = extracted_text
             busi_summary.save()
 
             request.session['business_chat_history'] = conversation_stack
@@ -183,30 +220,50 @@ def file_upload(request):
 
     if request.method == "POST":
 
-        file = request.FILES['file']
-        print("\n\n\nFile: " , file)
+        user_id = request.POST.get('user_id', '')
 
-        file_name = file.name
-        print("\n\n\nFile name: " , file_name)
+        file = request.FILES['file']
+
 
         file_content = file.read()
-        print("\n\n\nFile content: " , file_content)
 
-        file_type = file.content_type
-        print("\n\n\nFile type: " , file_type)
 
-        file_size = file.size
-        print("\n\n\nFile size: " , file_size)
 
-        file_path = "autonomous_app/static/autonomous_app/files/" + file_name
 
-        with open(file_path , "wb") as f:
-            f.write(file_content)
+        # try:
+        #     convert_and_save(temp_file_path , user_id)
+        #     return JsonResponse({'message': "File uploaded successfully."})
+        # except:
+        #     return JsonResponse({'message': "Error in uploading file."} , status=400)
+        
+
+        if isinstance(file, InMemoryUploadedFile):
+            # File is stored in memory
+            # Handle it here
+            try:
+                # Use file_content as needed
+                convert_and_save(file_content, user_id)
+                return JsonResponse({'message': "File uploaded successfully."})
+            except:
+                return JsonResponse({'message': "Error in uploading file."}, status=400)
+        else:
+            # File is stored on disk
+            try:
+                temp_file_path = file.temporary_file_path()
+                convert_and_save(temp_file_path, user_id)
+                return JsonResponse({'message': "File uploaded successfully."})
+            except:
+                return JsonResponse({'message': "Error in uploading file."}, status=400)
+
+        # file_path = "autonomous_app/static/autonomous_app/files/" + file_name
+
+        # with open(file_path , "wb") as f:
+        #     f.write(file_content)
 
         # Return the uploaded file as a response
-        response = FileResponse(open(file_path, 'rb'), content_type=file_type)
-        response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(file_path)
-        return response
+        # response = FileResponse(open(file_path, 'rb'), content_type=file_type)
+        # response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(file_path)
+        # return response
         # return JsonResponse({'message': "File uploaded successfully." , 'file_path' : file_path})
 
 

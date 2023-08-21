@@ -100,16 +100,44 @@ def convert_html_to_markdown(html):
     return markdown
 
 
-url = "https://docs.paperspace.com/gradient/notebooks/notebook-storage"
-query = "How to upload large files?"
-html = scrape_website(url)
-markdown = convert_html_to_markdown(html)
-base_url = get_base_url(url)
-markdown = convert_relative_urls_to_absolute_in_markdown(markdown, base_url)
+from urllib.parse import urlparse
+import requests
 
-os.makedirs("documents", exist_ok=True)
 
-iteration_number = 1  
+def is_valid_url(url):
+    try:
+        # Parse the URL
+        parsed_url = urlparse(url)
 
-with open(f"documents/user_{iteration_number}.md", "w") as file:
-    file.write(markdown)
+        # Check if the scheme (protocol) and netloc (domain) are present
+        if parsed_url.scheme and parsed_url.netloc:
+            # Additional checks can be performed here, like checking if the domain exists
+            # or if the URL responds with a valid status code.
+            
+            # You can use the `requests` library to check if the URL responds with a valid status code
+            response = requests.head(url)
+            return response.status_code < 400
+        else:
+            return False
+    except:
+        return False
+
+
+def url_to_doc(url):
+    if is_valid_url(url):
+        return False
+    
+    # query = "How to upload large files?"
+    html = scrape_website(url)
+    markdown = convert_html_to_markdown(html)
+    base_url = get_base_url(url)
+    markdown = convert_relative_urls_to_absolute_in_markdown(markdown, base_url)
+
+    os.makedirs("documents", exist_ok=True)
+
+    iteration_number = 1  
+
+    with open(f"documents/user.md", "w") as file:
+        file.write(markdown)
+
+    return True
