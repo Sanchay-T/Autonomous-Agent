@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,7 +94,7 @@
             outline-color: #bebebe;
         }
 
-        .message-input button {
+        .btn {
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -118,8 +119,9 @@
         .content {
             max-width: 100%;
             width: 100%;
-            height: 100%;
             display: flex;
+            flex: 1;
+            height: 100%;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -131,24 +133,19 @@
             width: 4rem;
             height: 4rem;
             border-radius: 50%;
-            border: 6px solid #c0c0c0;
-            border-top: 5px solid black;
-            animation: spin 1s linear infinite;
-            position: absolute;
+            border: 1px solid #c0c0c0;
+            border-top: 6px solid black;
+            animation: spin 0.7s linear infinite;
+            position: fixed;
             top: 50%;
             left: 50%;
-            translate: (-50%, -50%);
+            transform: translate(-50%, -50%);
             z-index: 1000;
+
         }
 
 
-            {
-            % comment %
-        }
 
-        create animation anim {
-            % endcomment %
-        }
 
         @keyframes spin {
             0% {
@@ -190,7 +187,7 @@
         }
 
         .overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -219,6 +216,7 @@
 
             flex-direction: column;
             height: 70%;
+            max-height: 70%;
             width: min(100%, 600px);
             background-color: #fff;
             padding: 0.2rem;
@@ -319,18 +317,33 @@
             outline-color: #bebebe;
         }
 
-        upload-container{
+        upload-container {
             width: 100%;
         }
 
-        label{
+        label {
             width: 100%;
         }
 
-        .section2{
+        .section2 {
             width: 40%;
         }
+
+        .chatbot_creating {
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            top: 50%;
+            left: 50%;
+            justify-content: center;
+            gap: 3rem;
+            transform: translate(-50%, -20%);
+            z-index: 1000;
+        }
     </style>
+
+    <link rel="stylesheet" href="{% static 'css/animation.css' %}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
@@ -346,6 +359,19 @@
         {% comment %} <img src="logo.png" alt="Logo" /> {% endcomment %}
         <div class="menu-icon">☰</div>
     </header>
+
+
+    <!-- chatbot creating loader -->
+    <div class="chatbot_creating">
+        <div style="color: #f4696b" class="la-ball-fussion la-3x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <p>Creating your Chatbot. Please be patient.</p>
+    </div>
 
 
 
@@ -375,7 +401,7 @@
             <div class="message-input">
                 <textarea id="user-input" placeholder="Type your message..." cols="1" rows="1"></textarea>
                 <!-- <textarea name="" id="" > -->
-                <button id="send-button">Send</button>
+                <button id="send-button" class="btn">Send</button>
             </div>
         </div>
 
@@ -418,6 +444,8 @@
         const overlay = $(".overlay");
         const chatbot = $(".chatbot");
         const section2 = $(".section2");
+        const chatbot_creating_loader = $(".chatbot_creating");
+        chatbot_creating_loader.hide();
 
         let start_of_talk = true;
         let end_of_talk = "";
@@ -441,6 +469,37 @@
 
         function removeLoadingAnimation() {
             loading.removeClass("show-loading");
+        }
+
+
+        function end_business_conversation() {
+            overlay.show();
+            chatbot_creating_loader.show();
+
+            $.ajax({
+                type: "POST", // Use GET, POST, PUT, DELETE, etc. depending on your API
+                url: "{% url 'create_chatbot' %}", // Replace with your actual backend URL
+                data: {
+                    businessId: curr_user_id,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                }, // Data to send to the backend
+                success: function (response) {
+                    console.log("Chatbot creation ", response);
+                    overlay.hide();
+                    chatbot_creating_loader.hide();
+                },
+                error: function () {
+                    overlay.hide();
+                    chatbot_creating_loader.hide();
+                    alert("An error occurred while processing your request.");
+                },
+            });
+            //overlay.hide();
+            //email_loader.hide();
+            //start_of_talk = true;
+            //end_of_talk = "";
+            //curr_user_id = "";
+            //chatContainer.html("");
         }
 
         function handleUserInput() {
@@ -473,6 +532,14 @@
                     console.log("BotResponse ", botResponse);
                     removeLoadingAnimation();
                     sendMessage(botResponse, false);
+                    if (response.end_of_talk) {
+                        userInputElement.parent().remove();
+                        section2.html(
+                            "<button id='proceed_btn' class='btn'>Proceed to create Chatbot.</button>")
+                        $("#proceed_btn").on("click", function () {
+                            end_business_conversation();
+                        });
+                    }
                 },
                 error: function () {
                     removeLoadingAnimation();
@@ -584,6 +651,7 @@
                     console.log(response);
                     uploadArea.html('<div class="upload-success">File uploaded successfully!</div>');
                     uploadArea.removeClass("drag-over");
+
                 },
                 error: function () {
                     // Handle upload error

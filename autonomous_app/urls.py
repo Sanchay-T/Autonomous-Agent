@@ -27,5 +27,8 @@ urlpatterns = [
     path('email_data_post/', views.email_data_post, name='email_data_post'),
     path('generate-business-data/', views.generate_business_data, name='generate_business_data'),
     path('file_upload/', views.file_upload, name='file_upload'),
+    path('create_chatbot/', views.create_chatbot, name='create_chatbot'),
+
+    
 
 ]

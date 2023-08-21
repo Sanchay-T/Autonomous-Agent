@@ -6,9 +6,11 @@ from .ai import Chat
 from .config import default_config
 import os
 from .models import *
-
+import re
 import hashlib
 
+from .utils import *
+from .ingest import ingest_and_log_data
 import json
 
 email = "example@example.com"
@@ -109,6 +111,8 @@ def bot_response(request):
 
 
 def business_data_post(request):
+
+    end = False
     if request.method == 'POST':
         query = request.POST.get('user_id', '')
         question = request.POST.get('message', '')
@@ -118,7 +122,7 @@ def business_data_post(request):
 
         if start_of_talk:
             busi_chat_hist = BusinessChatHistory(business_id = query)
-            if busi_chat_hist.chat_history:
+            if busi_chat_hist and busi_chat_hist.chat_history:
                 request.session['business_chat_history'] = json.loads(busi_chat_hist.chat_history)
             else:
                 request.session['business_chat_history'] = conversation_stack
@@ -135,16 +139,33 @@ def business_data_post(request):
 
         request.session['business_chat_history'] = updated_chat_history
 
-        if end_of_talk:
+
+
+        match = re.search(r'Prompt:\s*', bot_response_)
+
+        # Search for the pattern in the example text
+        print("\n\n\nBot response: " , bot_response_)
+        print("\n\n\n")
+
+        if match:
+            end = True
             busi_chat_hist = BusinessChatHistory(business_id = query)
             busi_chat_hist.chat_history = json.dumps(updated_chat_history)
             busi_chat_hist.save()
 
+
             busi_summary = BusinessSummary(business_id = query)
-            summary = summary_request(updated_chat_history)
-            busi_summary.summary = summary
+            busi_summary.summary = bot_response_
             busi_summary.save()
-            bot_response_ = summary
+
+            request.session['business_chat_history'] = conversation_stack
+
+            request.session.modified = True
+
+
+            # say ression to update 
+
+
 
 
         print("\n\n\nBot history: " , updated_chat_history)
@@ -152,7 +173,7 @@ def business_data_post(request):
 
         # bot_response = random.choice(responses)
 
-        return JsonResponse({'message': bot_response_})
+        return JsonResponse({'message': bot_response_ , 'end_of_talk' : end})
 
     return JsonResponse({'message': 'Invalid request'}, status=400)
 
@@ -187,3 +208,18 @@ def file_upload(request):
         response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(file_path)
         return response
         # return JsonResponse({'message': "File uploaded successfully." , 'file_path' : file_path})
+
+
+
+def create_chatbot(request):
+    businessId = request.POST.get('businessId', '')
+    unique_cb_key = generate_unique_key()
+
+    BusinessChatbot(business_id = businessId , chatbot_key = unique_cb_key , chatbot_name = f"Test{unique_cb_key[:4]}").save()
+
+    try:
+        ingest_and_log_data(unique_user_key = unique_cb_key)
+        return JsonResponse({'message': "Chatbot created successfully." , 'chatbot_key' : unique_cb_key})
+    except:
+        return JsonResponse({'message': "Error in creating chatbot." , 'chatbot_key' : unique_cb_key} , status=400)
+

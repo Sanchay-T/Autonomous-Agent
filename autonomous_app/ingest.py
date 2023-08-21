@@ -12,13 +12,14 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import TextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings import HuggingFaceBgeEmbeddings
+import os
 
 
 langchain.llm_cache = SQLiteCache(database_path="llm_cache.db")
 logger = logging.getLogger(__name__)
 api_key = "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"
 
-def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_path:str, wandb_project:str, prompt_file:str):
+def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_path:str, wandb_project:str, prompt_file:str , user_key:str):
     
     # Load the documents
     documents = load_documents(docs_dir)
@@ -27,7 +28,7 @@ def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_pa
     chunked_documents = chunk_documents(documents, chunk_size, chunk_overlap)
     
     # Create the vector store with the chunked documents
-    vector_store = create_vector_store(chunked_documents, vector_store_path)
+    vector_store = create_vector_store(chunked_documents, vector_store_path , user_key=user_key)
     return documents, vector_store
 
 def load_documents(data_dir:str) -> List[Document]:
@@ -56,7 +57,7 @@ def chunk_documents(
     split_documents = markdown_text_splitter.split_documents(documents)
     return split_documents
 
-def create_vector_store(documents, vector_store_path:str) -> Chroma:
+def create_vector_store(documents, vector_store_path:str , user_key:str) -> Chroma:
 
     model_name = "BAAI/bge-small-en"
     model_kwargs = {'device': 'cpu'}
@@ -67,13 +68,13 @@ def create_vector_store(documents, vector_store_path:str) -> Chroma:
         encode_kwargs=encode_kwargs
     )
 
-    user_vector_store_path = os.path.join(vector_store_base_path, user_key)
+    # user_vector_store_path = os.path.join(vector_store_path, user_key)
 
 
     vector_store = Chroma.from_documents(
         documents=documents,
         embedding=embeddings_function,
-        persist_directory=vector_store_path
+        persist_directory=vector_store_path,
     )
     vector_store.persist()
     return vector_store
@@ -91,7 +92,7 @@ def log_dataset(documents:List[Document], run:wandb.run , unique_user_key):
             f.write(document.json() + "\n")
     run.log_artifact(document_artifact)
 
-def log_index(vector_store_dir:str, run:wandb.run , unique_user_key):
+def log_index(vector_store_dir:str, run:wandb.run):
     index_artifact = wandb.Artifact(name="vector_store", type="search_index")
     index_artifact.add_dir(vector_store_dir)
     run.log_artifact(index_artifact)
@@ -111,15 +112,18 @@ def ingest_and_log_data(
     Designed to be used within a Django context.
     """
     run = wandb.init(project=wandb_project)  # Move the wandb initialization to this function
+    user_vector_store_path = os.path.join(vector_store_path, unique_user_key)
+
 
     # Ingest data
     documents, vector_store = ingest_data(
         docs_dir=docs_dir,
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
-        vector_store_path=vector_store_path,
+        vector_store_path=user_vector_store_path,
         wandb_project=wandb_project,
-        prompt_file=prompt_file_path
+        prompt_file=prompt_file_path,
+        user_key = unique_user_key
     )
 
     # Log data to wandb
@@ -133,6 +137,6 @@ def ingest_and_log_data(
     # Finish the wandb run
     run.finish()
 
-if __name__ == "__main__":
-    # Call the function only when this module is run as a script
-    ingest_and_log_data("ayushi")
+# if __name__ == "__main__":
+#     # Call the function only when this module is run as a script
+#     ingest_and_log_data("ayushi")

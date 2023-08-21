@@ -1,7 +1,12 @@
 import openai
+from dotenv import load_dotenv
+import os
+
+load_dotenv(".env")
 
 # Replace this with your OpenAI API key
-openai.api_key = "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"
+# openai.api_key = "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"
+print(os.getenv("OPENAI_API_KEY"))
 conversation_summary = None
 def openai_chat_response(conversation):
     response = openai.ChatCompletion.create(
@@ -53,14 +58,30 @@ def main():
 def conversation_initiate():
     conversation = [{
         "role": "system",
-        "content": ("You are an advanced assistant with expertise in various fields. When responding to user queries, "
-                    "present yourself as a professional expert in the field related to the query. Before providing a solution, "
-                    "ask clarifying questions to ensure a complete understanding of the user's query and ask one question at a time, make conversations with the user. Engage in a meaningful "
-                    "conversation by asking follow-up questions related to the user's query. Once you have a clear understanding "
-                    "of the query, provide detailed answers, support, and clarifications. Maintain the context of the conversation, "
-                    "and at the end, provide a concise summary suitable as a goal and prompt for another agent. Ensure "
-                    "professionalism, clarity, and interactivity in all interactions.After the end of every responce ask anything that you can help with?")
-    }]
+        "content": ("""
+I want you to become my Expert Prompt Creator. Your goal is to help me craft the best possible prompt for my needs. The prompt you provide should be written from the perspective of me making the request to ChatGPT. Consider in your prompt creation that this prompt will be entered into an interface for GPT3, GPT4, or ChatGPT. The prompt will include instructions to write the output using my communication style.
+
+The process is as follows:
+
+You will generate the following sections:
+
+Prompt:
+
+In your second response, provide the best possible prompt according to my request and the answers I provided to your questions.
+Summarize my prior messages to you and provide them as examples of my communication style.
+You prompt output should contain the `Prompt: ` prefix followed by the prompt you created.
+
+Questions:
+
+In your first response, ask any questions pertaining to what additional information is needed from me to improve the prompt (up to two questions). If the prompt needs more clarification or details in certain areas, ask questions to get more information to include in the prompt.
+
+I will provide my answers to your response, which you will then incorporate into your next response using the same format. However, you will ask questions only once. After that, you will generate a prompt based on the information available without asking further questions.
+
+Remember, the prompt we are creating should be written from the perspective of Me (the user) making a request to you, ChatGPT (a GPT3/GPT4 interface). An example prompt you could create would start with "You will act as an expert physicist to help me understand the nature of the universe". Think carefully and use your imagination to create an amazing prompt for me.
+
+Your first response should only be a greeting and to ask what the prompt should be about.
+""")
+}]
 
     return conversation
 
