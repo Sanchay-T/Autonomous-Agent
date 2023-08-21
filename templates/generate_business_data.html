@@ -347,6 +347,30 @@
             display: flex;
             background-color: #fff;
         }
+
+        .embedcode {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: min(100%, 600px);
+            background-color: #fff;
+            padding: 0.2rem;
+            border-radius: 6px;
+            z-index: 5000;
+        }
+
+        .embedcode-area textarea{
+            width: 100%;
+            height: 100%;
+            resize: none;
+            border: none;
+            outline: none;
+            padding: 1rem;
+            border-radius: 6px;
+            {% comment %} background-color: #f2f2f2; {% endcomment %}
+        }
     </style>
 
     <link rel="stylesheet" href="{% static 'css/animation.css' %}">
@@ -412,6 +436,19 @@
         </div>
 
 
+        <div class="embedcode">
+            <div class="embedcode-container">
+                <div class="embedcode-text">
+                    <p>Copy and paste the following code in your website to embed the chatbot.</p>
+                </div>
+                <div class="embedcode-area">
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <button class="embedcode_copy_btn btn">Copy</button>
+            </div>
+        </div>
+
+
 
         <div class="section2">
             <div class="upload-container">
@@ -455,6 +492,12 @@
         const section2 = $(".section2");
         const send_url = $(".send-url");
         const chatbot_creating_loader = $(".chatbot_creating");
+        const embedcode = $(".embedcode");
+        const embedcode_copy_btn = $(".embedcode_copy_btn");
+        const embedcode_textarea = $(".embedcode-area textarea");
+
+
+        embedcode.hide();
         chatbot_creating_loader.hide();
 
         let start_of_talk = true;
@@ -495,8 +538,13 @@
                     csrfmiddlewaretoken: "{{ csrf_token }}",
                 }, // Data to send to the backend
                 success: function (response) {
-                    console.log("Chatbot creation ", response);
-                    overlay.hide();
+                    console.log("Chatbot creation ", response.message);
+                    let key = response.chatbot_key;
+                    let chat_url = `/chat/${key}/`;
+                    embedcode_textarea.val(`<iframe src="http://127.0.0.1:8000${chat_url}" frameborder="0"></iframe>`);
+                    section2.hide();
+                    chatbot.hide();
+                    embedcode.show();
                     chatbot_creating_loader.hide();
                 },
                 error: function () {
@@ -577,6 +625,13 @@
                 send_url.hide();
             }
         });
+
+
+        embedcode_copy_btn.on('click' , function(){
+            const text = $(".embedcode-area textarea").val();
+            navigator.clipboard.writeText(text);
+            $(this).text("Copied to clipboard!")
+        })
 
         send_url.on('click', function (event) {
             if ($(".url_input").val().trim() === "") return;
@@ -679,10 +734,10 @@
                 console.log("No file selected.")
                 return;
             }
-
-            /*const formData = new FormData();
+            console.log("Uploading file: ", file.name);
+            const formData = new FormData();
             formData.append("file", file);
-            formData.append("csrfmiddlewaretoken", '{{csrf_token}}');*/
+            formData.set("user_id", curr_user_id);
 
             // Display upload progress UI
             uploadArea.html('<div class="upload-progress">Uploading...</div>');
@@ -691,13 +746,12 @@
             $.ajax({
                 type: "POST",
                 url: "{% url 'file_upload' %}", // Replace with your actual backend URL
-                data: {
-                    file: file,
-                    user_id: curr_user_id,
-                    csrfmiddlewaretoken: "{{ csrf_token }}",
-                }, // Data to send to the backend
+                data: formData,
                 contentType: false,
-                //processData: false,
+                processData: false,
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
                 success: function (response) {
                     // Handle successful upload response
                     console.log(response);
@@ -717,11 +771,11 @@
                 },
                 complete: function () {
                     // Restore default upload UI after completion
-                    setTimeout(() => {
-                        uploadArea.html(
-                            '<div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>' +
-                            '<div class="upload-text">Drag and drop a file here or click to browse</div>'
+                   setTimeout(() => {
+                        $(".upload-container").html(
+                           `<div>You have already uploaded the file</div>`
                         );
+                        $(".upload-container").css("padding", "1.5rem");
                     }, 3000); // Reset UI after 3 seconds
                 }
             });

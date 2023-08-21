@@ -8,9 +8,14 @@ from langchain.chat_models import ChatOpenAI
 from langchain.vectorstores import Chroma
 from langchain.embeddings import HuggingFaceBgeEmbeddings
 from .prompts import load_chat_prompt
+import os
+from dotenv import load_dotenv
 
+from langchain.embeddings import OpenAIEmbeddings
 
+load_dotenv(".env") 
 
+api_key = os.getenv("OPENAI_API_KEY")
 logger = logging.getLogger(__name__)
 
 
@@ -22,19 +27,15 @@ def load_vector_store(wandb_run: wandb.run) -> Chroma:
     Returns:
         Chroma: A chroma vector store object
     """
-    model_name = "BAAI/bge-small-en"
-    model_kwargs = {'device': 'cpu'}
-    encode_kwargs = {'normalize_embeddings': True}
+    # model_name = "BAAI/bge-small-en"
+    # model_kwargs = {'device': 'cpu'}
+    # encode_kwargs = {'normalize_embeddings': True}
     # load vector store artifact
     vector_store_artifact_dir = wandb_run.use_artifact(
         wandb_run.config.vector_store_artifact, type="search_index"
     ).download()
     
-    embedding_fn = HuggingFaceBgeEmbeddings(
-        model_name=model_name,
-        model_kwargs=model_kwargs,
-        encode_kwargs=encode_kwargs
-    )
+    embedding_fn = OpenAIEmbeddings(openai_api_key=api_key)
     # load vector store
     vector_store = Chroma(
         embedding_function=embedding_fn, persist_directory=vector_store_artifact_dir

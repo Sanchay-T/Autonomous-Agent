@@ -92,10 +92,10 @@ def conversation_continue(conversation , user_input):
     response = openai_chat_response(conversation)
     conversation.append({"role": "assistant", "content": response})
     print(f"Assistant: {response}")
-    if is_conversation_over(response):
+    # if is_conversation_over(response):
         # todo
-        return response , conversation
-        pass
+        # return response , conversation
+        # pass
     return response , conversation
 
 

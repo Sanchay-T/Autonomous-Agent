@@ -43,8 +43,8 @@ def bard(request):
     return render(request , "bard_chat.html")
 
 @xframe_options_exempt
-def gpt_chat(request):
-    return render(request , "chat.html")
+def gpt_chat(request , cb_key):
+    return render(request , "chat.html" , context={'cb_key' : cb_key})
 
 
 
@@ -185,7 +185,8 @@ def business_data_post(request):
             prompt_json = {"system_template": new_prompt, "human_template": "{question}\\n================\\nFinal Answer in Markdown:"}
 
             # open chat_prompt.json and add the prompt
-            with open("chat_prompt.json", "w") as f:
+            chat_prompt_path = os.path.join("autonomous_app", "chat_prompt.json")
+            with open(chat_prompt_path, "w") as f:
                 # i want to write to this file 
                 f.write(json.dumps(prompt_json))
 
@@ -222,10 +223,12 @@ def file_upload(request):
 
         user_id = request.POST.get('user_id', '')
 
-        file = request.FILES['file']
+        file = request.FILES.get('file')
+
+        print("\n\n\n Uploaded File: " , file)
 
 
-        file_content = file.read()
+        # file_content = file.read()
 
 
 
@@ -239,10 +242,14 @@ def file_upload(request):
 
         if isinstance(file, InMemoryUploadedFile):
             # File is stored in memory
+            # save file to disk
+            file_path = "autonomous_app/static/autonomous_app/files/" + file.name
+            with open(file_path, 'wb') as f:
+                f.write(file.read())
             # Handle it here
             try:
                 # Use file_content as needed
-                convert_and_save(file_content, user_id)
+                convert_and_save(file_path=file_path, id_= user_id)
                 return JsonResponse({'message': "File uploaded successfully."})
             except:
                 return JsonResponse({'message': "Error in uploading file."}, status=400)
@@ -268,15 +275,23 @@ def file_upload(request):
 
 
 
+
+
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
 def create_chatbot(request):
     businessId = request.POST.get('businessId', '')
     unique_cb_key = generate_unique_key()
 
     BusinessChatbot(business_id = businessId , chatbot_key = unique_cb_key , chatbot_name = f"Test{unique_cb_key[:4]}").save()
 
+
+    print("Before ingest")
     try:
-        ingest_and_log_data(unique_user_key = unique_cb_key)
+        ingest_and_log_data()
         return JsonResponse({'message': "Chatbot created successfully." , 'chatbot_key' : unique_cb_key})
-    except:
+    except Exception as e:
+        print(e)
         return JsonResponse({'message': "Error in creating chatbot." , 'chatbot_key' : unique_cb_key} , status=400)
 

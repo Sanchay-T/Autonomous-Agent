@@ -25,7 +25,7 @@ from django.conf import settings
 urlpatterns = [
     path("", views.base , name = "base"),
     path("bard/", views.bard , name = "bard"),
-    path("chat/", views.gpt_chat , name = "chat"),
+    path("chat/<str:cb_key>/", views.gpt_chat , name = "chat"),
     path('bot-response/', views.bot_response, name='bot_response'),
     path('business-data-post/', views.business_data_post, name='business_data_post'),
     path('email_data_post/', views.email_data_post, name='email_data_post'),
