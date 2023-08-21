@@ -23,7 +23,7 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path("", views.base , name = "base"),
+    path("", views.landing , name = "base"),
     path("bard/", views.bard , name = "bard"),
     path("chat/<str:cb_key>/", views.gpt_chat , name = "chat"),
     path('bot-response/', views.bot_response, name='bot_response'),

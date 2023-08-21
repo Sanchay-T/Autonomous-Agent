@@ -35,9 +35,8 @@ conversation_stack = conversation_initiate()
 
 # Create your views here.
 
-@xframe_options_exempt
 def base(request):
-    return render(request , "base.html")
+    return render(request , "landing.html")
 
 def bard(request):
     return render(request , "bard_chat.html")
