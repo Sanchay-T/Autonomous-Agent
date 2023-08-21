@@ -19,6 +19,8 @@ load_dotenv()
 langchain.llm_cache = SQLiteCache(database_path="llm_cache.db")
 logger = logging.getLogger(__name__)
 api_key = os.getenv("OPENAI_API_KEY")
+wandb_api_key = os.getenv("WANDB_API_KEY")
+
 
 def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_path:str, wandb_project:str, prompt_file:str , user_key:str):
     
@@ -76,7 +78,7 @@ def create_vector_store(documents, vector_store_path:str , user_key:str) -> Chro
     
     vector_store = Chroma.from_documents(
         documents=documents,
-        embedding=embeddings_function,
+        embedding=embedding_function,
         persist_directory=vector_store_path,
     )
     vector_store.persist()
@@ -114,6 +116,7 @@ def ingest_and_log_data(
     Ingest documentation data, create a vector store, and log artifacts to W&B.
     Designed to be used within a Django context.
     """
+    wandb.login(key=wandb_api_key)  # Add this line to set the API key
     run = wandb.init(project=wandb_project)  # Move the wandb initialization to this function
     user_vector_store_path = os.path.join(vector_store_path, unique_user_key)
 
