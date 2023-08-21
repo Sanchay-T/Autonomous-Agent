@@ -6,7 +6,7 @@ import wandb
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.vectorstores import Chroma
-from langchain.embeddings import HuggingFaceBgeEmbeddings
+from langchain.embeddings import OpenAIEmbeddings
 from .prompts import load_chat_prompt
 import os 
 from dotenv import load_dotenv
