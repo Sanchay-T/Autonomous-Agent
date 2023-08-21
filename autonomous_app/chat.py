@@ -79,8 +79,7 @@ I will provide my answers to your response, which you will then incorporate into
 
 Remember, the prompt we are creating should be written from the perspective of Me (the user) making a request to you, ChatGPT (a GPT3/GPT4 interface). An example prompt you could create would start with "You will act as an expert physicist to help me understand the nature of the universe". Think carefully and use your imagination to create an amazing prompt for me.
 
-Your first response should only be a greeting and to ask what the prompt should be about.
-""")
+At the end of every conversation add "If you have gif in the documentation then use that gif for explanation" .""")
 }]
 
     return conversation

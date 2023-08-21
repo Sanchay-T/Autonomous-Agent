@@ -13,11 +13,12 @@ from langchain.text_splitter import TextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings import HuggingFaceBgeEmbeddings
 import os
-
-
+from dotenv import load_dotenv
+load_dotenv()
+ 
 langchain.llm_cache = SQLiteCache(database_path="llm_cache.db")
 logger = logging.getLogger(__name__)
-api_key = "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"
+api_key = os.getenv("OPENAI_API_KEY")
 
 def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_path:str, wandb_project:str, prompt_file:str , user_key:str):
     
@@ -59,18 +60,20 @@ def chunk_documents(
 
 def create_vector_store(documents, vector_store_path:str , user_key:str) -> Chroma:
 
-    model_name = "BAAI/bge-small-en"
-    model_kwargs = {'device': 'cpu'}
-    encode_kwargs = {'normalize_embeddings': True}
-    embeddings_function = HuggingFaceBgeEmbeddings(
-        model_name=model_name,
-        model_kwargs=model_kwargs,
-        encode_kwargs=encode_kwargs
-    )
+    # model_name = "BAAI/bge-small-en"
+    # model_kwargs = {'device': 'cpu'}
+    # encode_kwargs = {'normalize_embeddings': True}
+    # embeddings_function = HuggingFaceBgeEmbeddings(
+    #     model_name=model_name,
+    #     model_kwargs=model_kwargs,
+    #     encode_kwargs=encode_kwargs
+    # )
 
     # user_vector_store_path = os.path.join(vector_store_path, user_key)
 
+    embedding_function = OpenAIEmbeddings(openai_api_key=api_key)
 
+    
     vector_store = Chroma.from_documents(
         documents=documents,
         embedding=embeddings_function,
