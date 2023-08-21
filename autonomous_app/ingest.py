@@ -9,13 +9,11 @@ from langchain.cache import SQLiteCache
 from langchain.docstore.document import Document
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import TextSplitter
-from langchain.vectorstores import Chroma,Chroma
+from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 import os
-import getpass
 from dotenv import load_dotenv
-load_dotenv()
-
+load_dotenv(".env")
 
 doc_dir = os.path.join("documents" , "iteration_1")
 
@@ -139,7 +137,3 @@ def ingest_and_log_data(
 
     # Finish the wandb run
     run.finish()
-
-if __name__ == "__main__":
-    # Call the function only when this module is run as a script
-    ingest_and_log_data()
