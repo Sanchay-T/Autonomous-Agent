@@ -4,3 +4,5 @@ wandb/
 
 artifacts
 env
+vector_store
+llm_cache.db

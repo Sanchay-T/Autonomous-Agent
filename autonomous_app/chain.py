@@ -32,6 +32,17 @@ def load_vector_store(wandb_run: wandb.run) -> Chroma:
         wandb_run.config.vector_store_artifact, type="search_index"
     ).download()
     
+    # model_name = "BAAI/bge-small-en"
+    # model_kwargs = {'device': 'cpu'}
+    # encode_kwargs = {'normalize_embeddings': True}
+
+
+
+    # embeddings_function = HuggingFaceBgeEmbeddings(
+    #     model_name=model_name,
+    #     model_kwargs=model_kwargs,
+    #     encode_kwargs=encode_kwargs
+    # )
     embedding_function = OpenAIEmbeddings(openai_api_key=api_key)
 
     # load vector store
