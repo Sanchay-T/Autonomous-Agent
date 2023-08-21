@@ -258,7 +258,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 0;
+            margin-block: 1rem;
         }
 
         .upload-area {
@@ -326,7 +327,7 @@
         }
 
         .section2 {
-            width: 40%;
+            width: min(100%, 600px);
         }
 
         .chatbot_creating {
@@ -340,6 +341,44 @@
             gap: 3rem;
             transform: translate(-50%, -20%);
             z-index: 1000;
+        }
+
+        .url-container {
+            display: flex;
+            background-color: #fff;
+        }
+
+        .embedcode {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: min(100%, 600px);
+            background-color: #fff;
+            padding: 0.2rem;
+            border-radius: 6px;
+            z-index: 5000;
+        }
+
+        .embedcode-area textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+            border: none;
+            outline: none;
+            padding: 1rem;
+            border-radius: 6px;
+
+                {
+                % comment %
+            }
+
+            background-color: #f2f2f2;
+
+                {
+                % endcomment %
+            }
         }
     </style>
 
@@ -406,6 +445,19 @@
         </div>
 
 
+        <div class="embedcode">
+            <div class="embedcode-container">
+                <div class="embedcode-text">
+                    <p>Copy and paste the following code in your website to embed the chatbot.</p>
+                </div>
+                <div class="embedcode-area">
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <button class="embedcode_copy_btn btn">Copy</button>
+            </div>
+        </div>
+
+
 
         <div class="section2">
             <div class="upload-container">
@@ -418,7 +470,13 @@
                 <input type="file" id="file-input" accept=".txt, .pdf" />
             </div>
 
-            <input type="text" class="url_input" placeholder="Paste url if any...">
+            <div class="url-container">
+                <form id="url_form" method="POST" action="{% url 'url_data_post' %}">
+                    {% csrf_token %}
+                    <input type="text" class="url_input" name="url" placeholder="Paste url if any...">
+                    <button type="submit" class="send-url btn">Send</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -444,7 +502,15 @@
         const overlay = $(".overlay");
         const chatbot = $(".chatbot");
         const section2 = $(".section2");
+        const send_url = $(".send-url");
         const chatbot_creating_loader = $(".chatbot_creating");
+        const embedcode = $(".embedcode");
+        const embedcode_copy_btn = $(".embedcode_copy_btn");
+        const embedcode_textarea = $(".embedcode-area textarea");
+        const url_form = $("#url_form");
+
+
+        embedcode.hide();
         chatbot_creating_loader.hide();
 
         let start_of_talk = true;
@@ -456,6 +522,7 @@
         overlay.hide();
         email_loader.hide();
         section2.hide();
+        {% comment %} send_url.hide(); {% endcomment %}
 
         function sendMessage(message, isUser = true) {
             const messageDiv = document.createElement("div");
@@ -484,8 +551,14 @@
                     csrfmiddlewaretoken: "{{ csrf_token }}",
                 }, // Data to send to the backend
                 success: function (response) {
-                    console.log("Chatbot creation ", response);
-                    overlay.hide();
+                    console.log("Chatbot creation ", response.message);
+                    let key = response.chatbot_key;
+                    let chat_url = `/chat/${key}/`;
+                    embedcode_textarea.val(
+                        `<iframe src="http://127.0.0.1:8000${chat_url}" frameborder="0"></iframe>`);
+                    section2.hide();
+                    chatbot.hide();
+                    embedcode.show();
                     chatbot_creating_loader.hide();
                 },
                 error: function () {
@@ -556,6 +629,76 @@
                 .css("height", "auto")
                 .css("height", $("#user-input").prop("scrollHeight") + "px");
         }
+
+{% comment %} 
+        $(".url_input").on("input", function () {
+            const url = $(this).val();
+            if (url.length > 0) {
+            } else {
+                send_url.hide();
+            }
+        }); {% endcomment %}
+
+
+        embedcode_copy_btn.on('click', function () {
+            const text = $(".embedcode-area textarea").val();
+            navigator.clipboard.writeText(text);
+            $(this).text("Copied to clipboard!")
+        })
+
+        /*send_url.on('click', function (event) {
+            if ($(".url_input").val().trim() === "") return;
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'url_data_post' %}",
+                data: {
+                    url: $(".url_input").val(),
+                    user_id: curr_user_id,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+                success: function (response) {
+                    console.log("Url response ", response);
+                    if (response.status === 400) {
+                        alert("Invalid url");
+                        return;
+                    }
+                    $(".url_input").remove();
+                    sendMessage(response.message, false);
+                },
+                error: function () {
+                    alert("An error occurred while processing your request.");
+                },
+            })
+        })*/
+
+        url_form.on('submit' , function (event) {
+            event.preventDefault();
+            if ($(".url_input").val().trim() === "") return;
+
+            formdata = new FormData(this);
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'url_data_post' %}",
+                data: formdata,
+                processData: false,  // Don't process the data
+                contentType: false,
+                success: function (response) {
+                    console.log("Url response ", response);
+                    if (response.status === 400) {
+                        alert("Invalid url");
+                        return;
+                    }
+                    $(".url_input").remove();
+                    sendMessage(response.message, false);
+                },
+                error: function () {
+                    alert("An error occurred while processing your request.");
+                },
+            })
+        })
+
 
         userInputElement.on("input", adjustTextareaHeight);
 
@@ -631,10 +774,10 @@
                 console.log("No file selected.")
                 return;
             }
-
+            console.log("Uploading file: ", file.name);
             const formData = new FormData();
             formData.append("file", file);
-            formData.append("csrfmiddlewaretoken", '{{csrf_token}}');
+            formData.set("user_id", curr_user_id);
 
             // Display upload progress UI
             uploadArea.html('<div class="upload-progress">Uploading...</div>');
@@ -646,10 +789,18 @@
                 data: formData,
                 contentType: false,
                 processData: false,
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
                 success: function (response) {
                     // Handle successful upload response
                     console.log(response);
-                    uploadArea.html('<div class="upload-success">File uploaded successfully!</div>');
+
+                    if (response.status === 400) {
+                        uploadArea.html(`<div class="upload-error">${response.message}.</div>`);
+                    } else {
+                        uploadArea.html(`<div class="upload-success">${response.message}!</div>`);
+                    }
                     uploadArea.removeClass("drag-over");
 
                 },
@@ -661,10 +812,10 @@
                 complete: function () {
                     // Restore default upload UI after completion
                     setTimeout(() => {
-                        uploadArea.html(
-                            '<div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>' +
-                            '<div class="upload-text">Drag and drop a file here or click to browse</div>'
+                        $(".upload-container").html(
+                            `<div>You have already uploaded the file</div>`
                         );
+                        $(".upload-container").css("padding", "1.5rem");
                     }, 3000); // Reset UI after 3 seconds
                 }
             });
