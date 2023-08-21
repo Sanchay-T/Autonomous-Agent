@@ -121,3 +121,4 @@ websockets==11.0.3
 yarl==1.9.2
 gunicorn
 beautifulsoup4
+html2text
