@@ -35,7 +35,7 @@ conversation_stack = conversation_initiate()
 
 # Create your views here.
 
-def base(request):
+def landing(request):
     return render(request , "landing.html")
 
 def bard(request):
@@ -46,21 +46,25 @@ def gpt_chat(request , cb_key):
     return render(request , "chat.html" , context={'cb_key' : cb_key})
 
 
-
-
 def email_data_post(request):
 
     if request.method == "POST":
 
         email = request.POST.get('email' , '')
 
+
         unique_key = hashlib.sha256(email.encode()).hexdigest()
 
         if(Business.objects.filter(email = email).exists()):
-            print("\n\n\nEmail already exists\n\n\n")
-            return JsonResponse({'message': "Email already exists" , 'user_id' : Business.objects.get(email = email).id})
+            business = Business.objects.get(email = email)
+            request.session['anonymous_id'] = business.id
+            print("\nEmail already exists\n")
+            return JsonResponse({'message': "Email already exists" , 'user_id' : business.id})
 
         business = Business.objects.create(email = email , key = unique_key)
+
+        print("Setting session")
+        request.session['anonymous_id'] = business.id
 
 
         print("\n\n\nEmail: " , email)
@@ -75,7 +79,18 @@ def email_data_post(request):
 
 
 def generate_business_data(request):
-    return render(request , "generate_business_data.html")
+
+    context = None
+
+    if request.session.get('anonymous_id'):
+
+
+        print("Present...")
+
+        context = {'user_id' : request.session.get('anonymous_id')}
+
+
+    return render(request , "generate_business_data.html" , context=context)
 
 
 responses = [
@@ -117,8 +132,14 @@ def url_data_post(request):
 
     if request.method == "POST":
         url = request.POST.get('url', '')
+        op = False
         if url:
-            if url_to_doc(url):
+            try:
+                op = url_to_doc(url)
+            except Exception as e:
+                print(e)
+
+            if op:
                 return JsonResponse({'message': "URL Scraped Successfully."})
             else:
                 return JsonResponse({'message': "Not a Valid URL."} , status=400)

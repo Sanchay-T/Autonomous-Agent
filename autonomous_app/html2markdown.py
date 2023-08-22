@@ -124,8 +124,8 @@ def is_valid_url(url):
 
 
 def url_to_doc(url):
-    if is_valid_url(url):
-        return False
+    # if is_valid_url(url):
+    #     return False
     
     # query = "How to upload large files?"
     html = scrape_website(url)
@@ -137,7 +137,8 @@ def url_to_doc(url):
 
     iteration_number = 1  
 
-    with open(f"documents/user.md", "w") as file:
+    filepath = os.path.join("documents", "iteration_1" , 'output1.md')
+    with open(filepath, "w" , encoding="utf-8") as file:
         file.write(markdown)
 
     return True
