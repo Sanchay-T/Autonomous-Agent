@@ -117,6 +117,9 @@ def ingest_and_log_data(
     # Ingest data
     documents = ingest_data(
         docs_dir=docs_dir,
+        chunk_size=500,
+        chunk_overlap=200,
+        vector_store_path=vector_store_path,
         wandb_project=wandb_project,
         prompt_file=prompt_file_path,
     )
