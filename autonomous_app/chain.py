@@ -30,9 +30,7 @@ def load_vector_store(wandb_run: wandb.run) -> Chroma:
     """
     
     # load vector store artifact
-    vector_store_artifact_dir = wandb_run.use_artifact(
-        wandb_run.config.vector_store_artifact, type="search_index"
-    ).download()
+    vector_store_artifact_dir = "vector_store"
     
     # model_name = "BAAI/bge-small-en"
     # model_kwargs = {'device': 'cpu'}
