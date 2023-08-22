@@ -1,846 +1,853 @@
+{% extends 'landing.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mobile Chatbot</title>
-    <style>
-        * {
-            box-sizing: border-box;
+{% block moreCSS %}
+
+<style>
+    .chat-container {
+        padding: 20px;
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    #chats {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-message {
+        background-color: #eaeaea;
+        border-radius: 15px;
+        padding: 10px;
+        margin-bottom: 10px;
+        align-self: flex-end;
+        max-width: 70%;
+    }
+
+    .bot-message {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 15px;
+        padding: 10px;
+        margin-bottom: 10px;
+        align-self: flex-start;
+        max-width: 70%;
+    }
+
+    .message-input {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border-radius: 4px;
+    }
+
+    .message-input input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline-color: #bebebe;
+    }
+
+    .message-input textarea {
+        flex: 1;
+        padding: 9.6px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        resize: none;
+        overflow: hidden;
+        box-sizing: border-box;
+        /* Include padding in height calculation */
+        transition: height 0.3s ease-in-out;
+        outline-color: #bebebe;
+    }
+
+    #loading {
+        align-self: flex-start;
+        width: 2rem;
+        height: 2rem;
+        display: none;
+    }
+
+    .show-loading {
+        display: block !important;
+    }
+
+
+    .email_loader .loader {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        border: 1px solid #c0c0c0;
+        border-top: 6px solid black;
+        animation: spin 0.7s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+
+    }
+
+
+
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
         }
 
-
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            height: 100vh;
+        100% {
+            transform: rotate(360deg);
         }
+    }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
 
-        header img {
-            width: 40px;
-        }
 
-        .chat-container {
-            padding: 20px;
-            overflow-y: auto;
-            flex: 1;
-        }
+    #email_container {
+        width: min(100%, 600px);
+    }
 
-        #chats {
-            display: flex;
-            flex-direction: column;
-        }
 
-        .user-message {
-            background-color: #eaeaea;
-            border-radius: 15px;
-            padding: 10px;
-            margin-bottom: 10px;
-            align-self: flex-end;
-            max-width: 70%;
-        }
+    input[type="email"] {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+    }
 
+    .email_button {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        z-index: 1000;
+    }
+
+    .email_button:hover {
+        background-color: #5969f3;
+        color: white;
+    }
+
+    .email-error {
+        display: none;
+        color: red;
+
+    }
+
+    .send-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+        align-self: flex-end;
+
+    }
+
+
+    .btnn {
+        background: #4154f1;
+        padding: 8px 20px;
+        border-radius: 4px;
+        color: #fff;
+        border: none;
+    }
+
+    .url_btn:hover , .btnn:hover {
+        background: #5969f3;
+        color: #fff;
+
+    }
+
+
+    .email-div {
+        width: 100%;
+        margin-bottom: 2rem;
+
+    }
+
+    .chatbot {
+        display: flex;
+        flex-direction: column;
+        min-height: 65%;
+        height: 65%;
+        max-height: 65%;
+        width: min(100%, 600px);
+        background-color: #fff;
+        padding: 0.2rem;
+        border-radius: 3px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+    @media (max-width: 600px) {
+
+        .user-message,
         .bot-message {
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 15px;
-            padding: 10px;
-            margin-bottom: 10px;
-            align-self: flex-start;
-            max-width: 70%;
-        }
-
-        .message-input {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            background-color: #f2f2f2;
-            border-radius: 4px;
+            max-width: 80%;
         }
 
         .message-input input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline-color: #bebebe;
-        }
-
-        .message-input textarea {
-            flex: 1;
-            padding: 9.6px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
-            overflow: hidden;
-            box-sizing: border-box;
-            /* Include padding in height calculation */
-            transition: height 0.3s ease-in-out;
-            outline-color: #bebebe;
-        }
-
-        .btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px;
-            align-self: flex-end;
-        }
-
-        #loading {
-            align-self: flex-start;
-            width: 2rem;
-            height: 2rem;
-            display: none;
-        }
-
-        .show-loading {
-            display: block !important;
-        }
-
-        .content {
-            max-width: 100%;
             width: 100%;
-            display: flex;
-            flex: 1;
-            height: 100%;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            background-color: #f2f2f2;
-        }
-
-        .email_loader {
-            width: 4rem;
-            height: 4rem;
-            border-radius: 50%;
-            border: 1px solid #c0c0c0;
-            border-top: 6px solid black;
-            animation: spin 0.7s linear infinite;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-
-        }
-
-
-
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-
-
-        .email_container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: min(100%, 600px);
-        }
-
-
-        input[type="email"] {
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 100%;
-        }
-
-        .email_button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.5);
-            z-index: 100;
-        }
-
-        .email_button:hover {
-            background-color: #0056b3;
-        }
-
-        .email-error {
-            display: none;
-            color: red;
-
-        }
-
-        .email-div {
-            width: 100%;
-            margin-bottom: 2rem;
-
-        }
-
-        .chatbot {
-
-            flex-direction: column;
-            height: 70%;
-            max-height: 70%;
-            width: min(100%, 600px);
-            background-color: #fff;
-            padding: 0.2rem;
-            border-radius: 6px;
-        }
-
-        @media (max-width: 600px) {
-
-            .user-message,
-            .bot-message {
-                max-width: 80%;
-            }
-
-            .message-input input {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-
-            header {
-                padding: 10px;
-            }
-
-            .chat-container {
-                padding: 10px;
-            }
-
-            .message-input textarea {
-                height: auto;
-            }
-        }
-
-
-
-        /* Add this CSS code to your existing <style> section or CSS file */
-
-        .upload-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            margin-block: 1rem;
-        }
-
-        .upload-area {
-            border: 2px dashed #ccc;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.3s;
-            background: white
-        }
-
-        .upload-area.drag-over {
-            border-color: #007bff;
-        }
-
-        .upload-icon {
-            font-size: 40px;
-            color: #007bff;
             margin-bottom: 10px;
         }
 
-        .upload-text {
-            font-size: 14px;
-            color: #555;
-        }
-
-        .upload-progress,
-        .upload-success,
-        .upload-error {
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        .upload-progress {
-            color: #007bff;
-        }
-
-        .upload-success {
-            color: #28a745;
-        }
-
-        .upload-error {
-            color: #dc3545;
-        }
-
-        #file-input {
-            display: none;
-        }
-
-        .url_input {
-            width: 100%;
-            border-radius: 4px;
+        header {
             padding: 10px;
-            border: 1px solid #ccc;
-            outline-color: #bebebe;
         }
 
-        upload-container {
-            width: 100%;
+        .chat-container {
+            padding: 10px;
         }
 
-        label {
-            width: 100%;
+        .message-input textarea {
+            height: auto;
         }
-
-        .section2 {
-            width: min(100%, 600px);
-        }
-
-        .chatbot_creating {
-            position: fixed;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            top: 50%;
-            left: 50%;
-            justify-content: center;
-            gap: 3rem;
-            transform: translate(-50%, -20%);
-            z-index: 1000;
-        }
-
-        .url-container {
-            display: flex;
-            background-color: #fff;
-        }
-
-        .embedcode {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: min(100%, 600px);
-            background-color: #fff;
-            padding: 0.2rem;
-            border-radius: 6px;
-            z-index: 5000;
-        }
-
-        .embedcode-area textarea {
-            width: 100%;
-            height: 100%;
-            resize: none;
-            border: none;
-            outline: none;
-            padding: 1rem;
-            border-radius: 6px;
-
-                {
-                % comment %
-            }
-
-            background-color: #f2f2f2;
-
-                {
-                % endcomment %
-            }
-        }
-    </style>
-
-    <link rel="stylesheet" href="{% static 'css/animation.css' %}">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    }
 
 
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-</head>
 
-<body>
-    <header>
-        {% comment %} <img src="logo.png" alt="Logo" /> {% endcomment %}
-        <div class="menu-icon">☰</div>
-    </header>
+    /* Add this CSS code to your existing <style>
+    section or CSS file */
+    .upload-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin-block: 1rem;
+    }
+
+    .upload-area {
+        border: 2px dashed #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.3s;
+        background: white
+    }
+
+    .upload-area.drag-over {
+        border-color: #007bff;
+    }
+
+    .upload-icon {
+        font-size: 40px;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+
+    .upload-text {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .upload-progress,
+    .upload-success,
+    .upload-error {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .upload-progress {
+        color: #007bff;
+    }
+
+    .upload-success {
+        color: #28a745;
+    }
+
+    .upload-error {
+        color: #dc3545;
+    }
+
+    #file-input {
+        display: none;
+    }
 
 
-    <!-- chatbot creating loader -->
-    <div class="chatbot_creating">
-        <div style="color: #f4696b" class="la-ball-fussion la-3x">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+
+    .section2 {
+        width: min(100%, 600px);
+    }
+
+    .chatbot_creating {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        top: 50%;
+        left: 50%;
+        justify-content: center;
+        gap: 3rem;
+        transform: translate(-50%, -20%);
+        z-index: 2000;
+    }
+
+
+    .embedcode {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: min(100%, 600px);
+        background-color: #fff;
+        padding: 0.2rem;
+        border-radius: 6px;
+        z-index: 5000;
+    }
+
+    .embedcode-area textarea {
+        width: 100%;
+        height: 100%;
+        resize: none;
+        outline: none;
+        padding: 1rem;
+        border-radius: 6px
+    }
+
+    .url_btn {
+        background: #4154f1;
+        border-radius: 4px;
+        color: #fff;
+    }
+
+    .chatbotcontent {
+        height: 100%;
+    }
+
+    #file_input_label{
+        width : 100%;
+    }
+
+    .url-success{
+        color: green;
+    }
+</style>
+
+
+<link rel="stylesheet" href="{% static 'css/animation.css' %}">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+{% endblock moreCSS %}
+
+{% block hero %}{% endblock hero %}
+
+{% block content %}
+<!-- chatbot creating loader -->
+
+<section class="vh-100">
+
+
+    <div class="container h-100 p-5" data-aos="fade-up">
+        <div class="chatbot_creating">
+            <div style="color: #f4696b" class="la-ball-fussion la-3x">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <p>Creating your Chatbot. Please be patient.</p>
         </div>
 
-        <p>Creating your Chatbot. Please be patient.</p>
-    </div>
 
 
+        <div class="overlay"></div>
 
-    <div class="overlay"></div>
-
-    <div class="email_loader"></div>
-
-    <div class="content">
-        <div class="email_container">
-            <div class="email-div">
-                <input type="email" name="email" placeholder="Enter your email address" required />
-                <div class="email-error">Email cannot be empty.</div>
-            </div>
-            <button class="email_button">Submit</button>
+        <div class="email_loader">
+            <div class="loader"></div>
         </div>
 
-        <div class="chatbot">
-            <div class="chat-container" id="chat-container">
-                <!-- Messages will be dynamically added here -->
-                <div id="chats"></div>
-                <div id="loading">
-                    <lottie-player src="https://lottie.host/c04594cc-52c6-47d4-b073-687a34b491a6/8uRSGnrpd3.json"
-                        background="#FFFFFF" speed="1" style="width: 4rem; height: 4rem" loop autoplay direction="1"
-                        mode="normal"></lottie-player>
-                </div>
-            </div>
-            <div class="message-input">
-                <textarea id="user-input" placeholder="Type your message..." cols="1" rows="1"></textarea>
-                <!-- <textarea name="" id="" > -->
-                <button id="send-button" class="btn">Send</button>
-            </div>
-        </div>
+        <div class="row h-100 align-items-center justify-content-center">
 
+            <div id="email_container" class="row gx-0 gap-3 justify-content-center">
 
-        <div class="embedcode">
-            <div class="embedcode-container">
-                <div class="embedcode-text">
-                    <p>Copy and paste the following code in your website to embed the chatbot.</p>
-                </div>
-                <div class="embedcode-area">
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                </div>
-                <button class="embedcode_copy_btn btn">Copy</button>
-            </div>
-        </div>
-
-
-
-        <div class="section2">
-            <div class="upload-container">
-                <label for="file-input">
-                    <div class="upload-area">
-                        <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                        <div class="upload-text">Drag and drop a file here or click to browse</div>
+                <h2 class="text-center">Please proceed with your Email.</h2>
+                <div class="emailcontainer">
+                    <div class="email-div">
+                        <input type="email" name="email" placeholder="Enter your email address" required />
+                        <div class="email-error">Email cannot be empty.</div>
                     </div>
-                </label>
-                <input type="file" id="file-input" accept=".txt, .pdf" />
+                    <button class="email_button">Submit</button>
+                </div>
             </div>
 
-            <div class="url-container">
-                <form id="url_form" method="POST" action="{% url 'url_data_post' %}">
-                    {% csrf_token %}
-                    <input type="text" class="url_input" name="url" placeholder="Paste url if any...">
-                    <button type="submit" class="send-url btn">Send</button>
-                </form>
+
+            <div class="chatbotcontent row gx-0 justify-content-center align-items-center">
+                <div class="chatbot">
+                    <div class="chat-container" id="chat-container">
+                        <!-- Messages will be dynamically added here -->
+                        <div id="chats"></div>
+                        <div id="loading" tabindex="0">
+                            <lottie-player
+                                src="https://lottie.host/c04594cc-52c6-47d4-b073-687a34b491a6/8uRSGnrpd3.json"
+                                background="#FFFFFF" speed="1" style="width: 4rem; height: 4rem" loop autoplay
+                                direction="1" mode="normal"></lottie-player>
+                        </div>
+                    </div>
+                    <div class="message-input">
+                        <textarea id="user-input" placeholder="Type your message..." cols="1" rows="1"></textarea>
+                        <!-- <textarea name="" id="" > -->
+                        <button id="send-button" class="send-btn">Send</button>
+                    </div>
+                </div>
+
+
+                <div class="embedcode">
+                    <div class="embedcode-container">
+                        <div class="embedcode-text">
+                            <p>Copy and paste the following code in your website to embed the chatbot.</p>
+                        </div>
+                        <div class="embedcode-area">
+                            <textarea name="" id="" readonly cols="30" rows="10"></textarea>
+                        </div>
+                        <button class="embedcode_copy_btn btnn">Copy</button>
+                    </div>
+                </div>
+
+
+
+                <div class="section2">
+                    <div class="upload-container">
+                        <label id="file_input_label" for="file-input">
+                            <div class="upload-area">
+                                <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                <div class="upload-text">Drag and drop a file here or click to browse</div>
+                            </div>
+                        </label>
+                        <input type="file" id="file-input" accept=".txt, .pdf" />
+                    </div>
+
+
+                    <div class="url-container">
+                        <form id="url_form" method="POST" action="{% url 'url_data_post' %}">
+                            {% csrf_token %}
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <input type="text" class="url_input form-control" name="url"
+                                        placeholder="Paste url if any...">
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="send-url btn url_btn w-100">Scrape</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
-
-    <script>
-        // const chatContainer = document.getElementById("chat-container");
-
-        let converter = new showdown.Converter();
-
-        const uploadContainer = $(".upload-container");
-        const uploadArea = $(".upload-area");
-        const fileInput = $("#file-input");
+</section>
 
 
-        const userInputElement = $("#user-input");
-        const sendButton = $("#send-button");
-        const loading = $("#loading");
-        const chatContainer = $("#chats");
-        const email_loader = $(".email_loader");
-        const email_container = $(".email_container");
-        const upload_container = $(".upload-container");
-        const email_button = $(".email_button");
-        const email_error = $(".email-error");
-        const overlay = $(".overlay");
-        const chatbot = $(".chatbot");
-        const section2 = $(".section2");
-        const send_url = $(".send-url");
-        const chatbot_creating_loader = $(".chatbot_creating");
-        const embedcode = $(".embedcode");
-        const embedcode_copy_btn = $(".embedcode_copy_btn");
-        const embedcode_textarea = $(".embedcode-area textarea");
-        const url_form = $("#url_form");
+{% endblock content %}
 
 
-        embedcode.hide();
-        chatbot_creating_loader.hide();
-
-        let start_of_talk = true;
-        let end_of_talk = "";
-
-        let curr_user_id = "";
-
-        chatbot.hide();
-        overlay.hide();
-        email_loader.hide();
-        section2.hide();
-        {% comment %} send_url.hide(); {% endcomment %}
-
-        function sendMessage(message, isUser = true) {
-            const messageDiv = document.createElement("div");
-            let className = isUser ? "user-message" : "bot-message";
-            chatContainer.append(`<div class="${className}">${message}</div>`);
-        }
-
-        function showLoadingAnimation() {
-            loading.addClass("show-loading");
-        }
-
-        function removeLoadingAnimation() {
-            loading.removeClass("show-loading");
-        }
+{% block footer_newsletter %}{% endblock footer_newsletter %}
 
 
-        function end_business_conversation() {
-            overlay.show();
-            chatbot_creating_loader.show();
-
-            $.ajax({
-                type: "POST", // Use GET, POST, PUT, DELETE, etc. depending on your API
-                url: "{% url 'create_chatbot' %}", // Replace with your actual backend URL
-                data: {
-                    businessId: curr_user_id,
-                    csrfmiddlewaretoken: "{{ csrf_token }}",
-                }, // Data to send to the backend
-                success: function (response) {
-                    console.log("Chatbot creation ", response.message);
-                    let key = response.chatbot_key;
-                    let chat_url = `/chat/${key}/`;
-                    embedcode_textarea.val(
-                        `<iframe src="http://127.0.0.1:8000${chat_url}" frameborder="0"></iframe>`);
-                    section2.hide();
-                    chatbot.hide();
-                    embedcode.show();
-                    chatbot_creating_loader.hide();
-                },
-                error: function () {
-                    overlay.hide();
-                    chatbot_creating_loader.hide();
-                    alert("An error occurred while processing your request.");
-                },
-            });
-            //overlay.hide();
-            //email_loader.hide();
-            //start_of_talk = true;
-            //end_of_talk = "";
-            //curr_user_id = "";
-            //chatContainer.html("");
-        }
-
-        function handleUserInput() {
-            console.log("Handling user input");
-            const userInput = userInputElement.val();
-            if (userInput.trim() === "") return;
-
-            showLoadingAnimation();
-
-            sendMessage(userInput, true);
-            userInputElement.val("");
-
-            // Make AJAX call to backend
-            $.ajax({
-                type: "POST", // Use GET, POST, PUT, DELETE, etc. depending on your API
-                url: "{% url 'business_data_post' %}", // Replace with your actual backend URL
-                data: {
-                    message: userInput,
-                    user_id: curr_user_id,
-                    start_of_talk: start_of_talk,
-                    end_of_talk: end_of_talk,
-                    csrfmiddlewaretoken: "{{ csrf_token }}",
-                }, // Data to send to the backend
-                success: function (response) {
-                    start_of_talk = "";
-                    const botResponse = response
-                        .message; // Assuming the response from the backend has a 'message' property
-                    //let md = botResponse;
-                    //let html = converter.makeHtml(md);
-                    console.log("BotResponse ", botResponse);
-                    removeLoadingAnimation();
-                    sendMessage(botResponse, false);
-                    if (response.end_of_talk) {
-                        userInputElement.parent().remove();
-                        section2.html(
-                            "<button id='proceed_btn' class='btn'>Proceed to create Chatbot.</button>")
-                        $("#proceed_btn").on("click", function () {
-                            end_business_conversation();
-                        });
-                    }
-                },
-                error: function () {
-                    removeLoadingAnimation();
-                    sendMessage(
-                        "An error occurred while processing your request.",
-                        false
-                    );
-                },
-            });
-        }
-
-        function adjustTextareaHeight() {
-            userInputElement
-                .css("height", "auto")
-                .css("height", $("#user-input").prop("scrollHeight") + "px");
-        }
-
-{% comment %} 
-        $(".url_input").on("input", function () {
-            const url = $(this).val();
-            if (url.length > 0) {
-            } else {
-                send_url.hide();
-            }
-        }); {% endcomment %}
 
 
-        embedcode_copy_btn.on('click', function () {
-            const text = $(".embedcode-area textarea").val();
-            navigator.clipboard.writeText(text);
-            $(this).text("Copied to clipboard!")
-        })
+{% block moreJS %}
 
-        /*send_url.on('click', function (event) {
-            if ($(".url_input").val().trim() === "") return;
+<script>
+    // const chatContainer = document.getElementById("chat-container");
 
-            $.ajax({
-                type: "POST",
-                url: "{% url 'url_data_post' %}",
-                data: {
-                    url: $(".url_input").val(),
-                    user_id: curr_user_id,
-                    csrfmiddlewaretoken: "{{ csrf_token }}",
-                },
-                success: function (response) {
-                    console.log("Url response ", response);
-                    if (response.status === 400) {
-                        alert("Invalid url");
-                        return;
-                    }
-                    $(".url_input").remove();
-                    sendMessage(response.message, false);
-                },
-                error: function () {
-                    alert("An error occurred while processing your request.");
-                },
-            })
-        })*/
+    let converter = new showdown.Converter();
 
-        url_form.on('submit' , function (event) {
-            event.preventDefault();
-            if ($(".url_input").val().trim() === "") return;
-
-            formdata = new FormData(this);
-
-            $.ajax({
-                type: "POST",
-                url: "{% url 'url_data_post' %}",
-                data: formdata,
-                processData: false,  // Don't process the data
-                contentType: false,
-                success: function (response) {
-                    console.log("Url response ", response);
-                    if (response.status === 400) {
-                        alert("Invalid url");
-                        return;
-                    }
-                    $(".url_input").remove();
-                    sendMessage(response.message, false);
-                },
-                error: function () {
-                    alert("An error occurred while processing your request.");
-                },
-            })
-        })
+    const uploadContainer = $(".upload-container");
+    const uploadArea = $(".upload-area");
+    const fileInput = $("#file-input");
 
 
-        userInputElement.on("input", adjustTextareaHeight);
+    const userInputElement = $("#user-input");
+    const sendButton = $("#send-button");
+    const loading = $("#loading");
+    const chatContainer = $("#chats");
+    const email_loader = $(".email_loader");
+    const email_container = $("#email_container");
+    const upload_container = $(".upload-container");
+    const email_button = $(".email_button");
+    const email_error = $(".email-error");
+    const overlay = $(".overlay");
+    const chatbot = $(".chatbot");
+    const section2 = $(".section2");
+    const send_url = $(".send-url");
+    const chatbot_creating_loader = $(".chatbot_creating");
+    const embedcode = $(".embedcode");
+    const embedcode_copy_btn = $(".embedcode_copy_btn");
+    const embedcode_textarea = $(".embedcode-area textarea");
+    const url_form = $("#url_form");
+    const chatbotcontent = $(".chatbotcontent");
 
-        $("#send-button").on("click", handleUserInput);
 
-        userInputElement.on("keydown", function (event) {
-            if (event.keyCode === 13 && event.shiftKey) {
-                const text = userInputElement.val();
-                userInputElement.val(text + "\n");
-                adjustTextareaHeight();
-                event.preventDefault();
-            } else if (event.keyCode === 13) {
-                event.preventDefault();
-                handleUserInput();
-                userInputElement.val("");
-                adjustTextareaHeight();
-            }
+    {% if user_id %}
+    email_container.hide();
+    chatbotcontent.show();
+    {% else %}
+    chatbotcontent.hide()
+    {% endif %}
+
+    embedcode.hide();
+    chatbot_creating_loader.hide();
+
+    let start_of_talk = true;
+    let end_of_talk = "";
+
+
+    let curr_user_id = "{{ user_id }}";
+
+    //chatbot.hide();
+    overlay.hide();
+    email_loader.hide();
+    //section2.hide();
+
+    function sendMessage(message, isUser = true) {
+        const messageDiv = document.createElement("div");
+        let className = isUser ? "user-message" : "bot-message";
+        chatContainer.append(`<div class="${className}">${message}</div>`);
+    }
+
+    function showLoadingAnimation() {
+        loading.addClass("show-loading");
+        loading.scrollTop(loading.prop('scrollHeight'));
+    }
+
+    function removeLoadingAnimation() {
+        loading.removeClass("show-loading");
+    }
+
+
+    function end_business_conversation() {
+        overlay.show();
+        chatbot_creating_loader.show();
+
+        $.ajax({
+            type: "POST", // Use GET, POST, PUT, DELETE, etc. depending on your API
+            url: "{% url 'create_chatbot' %}", // Replace with your actual backend URL
+            data: {
+                businessId: curr_user_id,
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            }, // Data to send to the backend
+            success: function (response) {
+                console.log("Chatbot creation ", response.message);
+                let key = response.chatbot_key;
+                let chat_url = `/chat/${key}/`;
+                embedcode_textarea.val(
+                    `<iframe src="https://stingray-app-s3fip.ondigitalocean.app${chat_url}" frameborder="0"></iframe>`
+                );
+                section2.hide();
+                chatbot.hide();
+                embedcode.show();
+                chatbot_creating_loader.hide();
+            },
+            error: function () {
+                overlay.hide();
+                chatbot_creating_loader.hide();
+                alert("An error occurred while processing your request.");
+            },
         });
+        //overlay.hide();
+        //email_loader.hide();
+        //start_of_talk = true;
+        //end_of_talk = "";
+        //curr_user_id = "";
+        //chatContainer.html("");
+    }
 
+    function handleUserInput() {
+        console.log("Handling user input");
+        const userInput = userInputElement.val();
+        if (userInput.trim() === "") return;
 
-        email_button.on("input", function () {
-            const email = $("input[name='email']").val();
-            if (email.length > 0) {
-                email_error.hide();
-            }
-        });
+        showLoadingAnimation();
 
-        email_button.on("click", function () {
-            const email = $("input[name='email']").val();
-            if (email.trim() === "") {
-                email_error.show();
-                return;
-            }
-            console.log(email);
-            email_loader.show();
-            overlay.show();
+        sendMessage(userInput, true);
+        userInputElement.val("");
 
-            $.ajax({
-                type: "POST", // Use GET, POST, PUT, DELETE, etc. depending on your API
-                url: "{% url 'email_data_post' %}", // Replace with your actual backend URL
-                data: {
-                    email: email,
-                    csrfmiddlewaretoken: "{{ csrf_token }}",
-                }, // Data to send to the backend
-
-
-                success: function (response) {
-                    email_container.hide();
-                    upload_container.show();
-                    overlay.hide();
-                    email_loader.hide();
-                    section2.show();
-
-                    chatbot.prop("style", "display: flex !important;")
-
-                    $("input[name='email']").val("");
-                    curr_user_id = response.user_id;
-                    console.log("User ID: ", curr_user_id);
-                    alert(response.message);
-                },
-                error: function () {
-                    overlay.hide();
-                    email_loader.hide();
-                    alert("An error occurred while processing your request.");
-                },
-            });
-        });
-
-
-
-        function handleFileUpload(file) {
-            if (!file) {
-                console.log("No file selected.")
-                return;
-            }
-            console.log("Uploading file: ", file.name);
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.set("user_id", curr_user_id);
-
-            // Display upload progress UI
-            uploadArea.html('<div class="upload-progress">Uploading...</div>');
-
-            // Make AJAX call to backend for file upload
-            $.ajax({
-                type: "POST",
-                url: "{% url 'file_upload' %}", // Replace with your actual backend URL
-                data: formData,
-                contentType: false,
-                processData: false,
-                headers: {
-                    "X-CSRFToken": "{{ csrf_token }}",
-                },
-                success: function (response) {
-                    // Handle successful upload response
-                    console.log(response);
-
-                    if (response.status === 400) {
-                        uploadArea.html(`<div class="upload-error">${response.message}.</div>`);
-                    } else {
-                        uploadArea.html(`<div class="upload-success">${response.message}!</div>`);
-                    }
-                    uploadArea.removeClass("drag-over");
-
-                },
-                error: function () {
-                    // Handle upload error
-                    console.error("An error occurred during file upload.");
-                    uploadArea.html('<div class="upload-error">Upload failed. Please try again.</div>');
-                },
-                complete: function () {
-                    // Restore default upload UI after completion
-                    setTimeout(() => {
-                        $(".upload-container").html(
-                            `<div>You have already uploaded the file</div>`
-                        );
-                        $(".upload-container").css("padding", "1.5rem");
-                    }, 3000); // Reset UI after 3 seconds
+        // Make AJAX call to backend
+        $.ajax({
+            type: "POST", // Use GET, POST, PUT, DELETE, etc. depending on your API
+            url: "{% url 'business_data_post' %}", // Replace with your actual backend URL
+            data: {
+                message: userInput,
+                user_id: curr_user_id,
+                start_of_talk: start_of_talk,
+                end_of_talk: end_of_talk,
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            }, // Data to send to the backend
+            success: function (response) {
+                start_of_talk = "";
+                const botResponse = response
+                    .message; // Assuming the response from the backend has a 'message' property
+                //let md = botResponse;
+                //let html = converter.makeHtml(md);
+                console.log("BotResponse ", botResponse);
+                removeLoadingAnimation();
+                sendMessage(botResponse, false);
+                if (response.end_of_talk) {
+                    userInputElement.parent().remove();
+                    section2.html(
+                        "<button id='proceed_btn' class='btnn'>Proceed to create Chatbot.</button>")
+                    $("#proceed_btn").on("click", function () {
+                        end_business_conversation();
+                    });
                 }
-            });
+            },
+            error: function () {
+                removeLoadingAnimation();
+                sendMessage(
+                    "An error occurred while processing your request.",
+                    false
+                );
+            },
+        });
+    }
+
+    function adjustTextareaHeight() {
+        userInputElement
+            .css("height", "auto")
+            .css("height", $("#user-input").prop("scrollHeight") + "px");
+    }
+
+
+
+
+    embedcode_copy_btn.on('click', function () {
+        const text = $(".embedcode-area textarea").val();
+        navigator.clipboard.writeText(text);
+        $(this).text("Copied to clipboard!")
+    })
+
+    /*send_url.on('click', function (event) {
+        if ($(".url_input").val().trim() === "") return;
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'url_data_post' %}",
+            data: {
+                url: $(".url_input").val(),
+                user_id: curr_user_id,
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            },
+            success: function (response) {
+                console.log("Url response ", response);
+                if (response.status === 400) {
+                    alert("Invalid url");
+                    return;
+                }
+                $(".url_input").remove();
+                sendMessage(response.message, false);
+            },
+            error: function () {
+                alert("An error occurred while processing your request.");
+            },
+        })
+    })*/
+
+    url_form.on('submit', function (event) {
+        event.preventDefault();
+        if ($(".url_input").val().trim() === "") return;
+
+        formdata = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'url_data_post' %}",
+            data: formdata,
+            processData: false, // Don't process the data
+            contentType: false,
+            success: function (response) {
+                console.log("Url response ", response);
+                if (response.status === 400) {
+                    alert("Invalid url");
+                    return;
+                }
+                $(".url_input").remove();
+                $(".url-container").html("<p class='url-success'><b>Nice!</b> Your url has been scraped! :)</p>")
+                sendMessage(response.message, false);
+            },
+            error: function () {
+                alert("An error occurred while processing your request.");
+            },
+        })
+    })
+
+
+    userInputElement.on("input", adjustTextareaHeight);
+
+    $("#send-button").on("click", handleUserInput);
+
+    userInputElement.on("keydown", function (event) {
+        if (event.keyCode === 13 && event.shiftKey) {
+            const text = userInputElement.val();
+            userInputElement.val(text + "\n");
+            adjustTextareaHeight();
+            event.preventDefault();
+        } else if (event.keyCode === 13) {
+            event.preventDefault();
+            handleUserInput();
+            userInputElement.val("");
+            adjustTextareaHeight();
         }
+    });
 
-        uploadContainer.on("dragover", function (event) {
-            event.preventDefault();
-            uploadArea.addClass("drag-over");
-        });
 
-        uploadContainer.on("dragleave", function (event) {
-            uploadArea.removeClass("drag-over");
-        });
+    email_button.on("input", function () {
+        const email = $("input[name='email']").val();
+        if (email.length > 0) {
+            email_error.hide();
+        }
+    });
 
-        uploadArea.on("drop", function (event) {
-            event.preventDefault();
-            const file = event.originalEvent.dataTransfer.files[0];
-            handleFileUpload(file);
-        });
+    email_button.on("click", function () {
+        const email = $("input[name='email']").val();
+        if (email.trim() === "") {
+            email_error.show();
+            return;
+        }
+        console.log(email);
+        email_loader.show();
+        overlay.show();
 
-        fileInput.on("change", function (event) {
-            const file = event.target.files[0];
-            handleFileUpload(file);
+        $.ajax({
+            type: "POST", // Use GET, POST, PUT, DELETE, etc. depending on your API
+            url: "{% url 'email_data_post' %}", // Replace with your actual backend URL
+            data: {
+                email: email,
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            }, // Data to send to the backend
+
+
+            success: function (response) {
+                email_container.hide();
+                //upload_container.show();
+                overlay.hide();
+                chatbotcontent.show();
+                email_loader.hide();
+                //section2.show();
+
+                //chatbot.prop("style", "display: flex !important;")
+
+                $("input[name='email']").val("");
+                curr_user_id = response.user_id;
+                console.log("User ID: ", curr_user_id);
+                alert(response.message);
+            },
+            error: function () {
+                overlay.hide();
+                email_loader.hide();
+                alert("An error occurred while processing your request.");
+            },
         });
-    </script>
+    });
+
+
+
+    function handleFileUpload(file) {
+        if (!file) {
+            console.log("No file selected.")
+            return;
+        }
+        console.log("Uploading file: ", file.name);
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.set("user_id", curr_user_id);
+
+        // Display upload progress UI
+        uploadArea.html('<div class="upload-progress">Uploading...</div>');
+
+        // Make AJAX call to backend for file upload
+        $.ajax({
+            type: "POST",
+            url: "{% url 'file_upload' %}", // Replace with your actual backend URL
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+            },
+            success: function (response) {
+                // Handle successful upload response
+                console.log(response);
+
+                if (response.status === 400) {
+                    uploadArea.html(`<div class="upload-error">${response.message}.</div>`);
+                } else {
+                    uploadArea.html(`<div class="upload-success">${response.message}!</div>`);
+                }
+                uploadArea.removeClass("drag-over");
+
+            },
+            error: function () {
+                // Handle upload error
+                console.error("An error occurred during file upload.");
+                uploadArea.html('<div class="upload-error">Upload failed. Please try again.</div>');
+            },
+            complete: function () {
+                // Restore default upload UI after completion
+                setTimeout(() => {
+                    $(".upload-container").html(
+                        `<div>You have already uploaded the file</div>`
+                    );
+                    $(".upload-container").css("padding", "1.5rem");
+                }, 3000); // Reset UI after 3 seconds
+            }
+        });
+    }
+
+    uploadContainer.on("dragover", function (event) {
+        event.preventDefault();
+        uploadArea.addClass("drag-over");
+    });
+
+    uploadContainer.on("dragleave", function (event) {
+        uploadArea.removeClass("drag-over");
+    });
+
+    uploadArea.on("drop", function (event) {
+        event.preventDefault();
+        const file = event.originalEvent.dataTransfer.files[0];
+        handleFileUpload(file);
+    });
+
+    fileInput.on("change", function (event) {
+        const file = event.target.files[0];
+        handleFileUpload(file);
+    });
+</script>
+
+{% endblock moreJS %}
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 .env
-
 wandb/
+db.sqlite3
+
 
 
 env

@@ -128,27 +128,17 @@ def url_to_doc(url):
     #     return False
     
     # query = "How to upload large files?"
-
-    print("HEERE")
     html = scrape_website(url)
     markdown = convert_html_to_markdown(html)
     base_url = get_base_url(url)
     markdown = convert_relative_urls_to_absolute_in_markdown(markdown, base_url)
 
-    # os.makedirs("documents", exist_ok=True)
+    os.makedirs("documents", exist_ok=True)
 
     iteration_number = 1  
 
-    print("HEERE AFTER MARKDOWN")
-
-    filepath = os.path.join("documents", "iteration_1" , 'output.md')
+    filepath = os.path.join("documents", "iteration_1" , 'output1.md')
     with open(filepath, "w" , encoding="utf-8") as file:
         file.write(markdown)
 
-    file.close()
-
     return True
-
-
-# if _name_ == "main":
-# print(url_to_doc("https://docs.paperspace.com/gradient/notebooks/"))

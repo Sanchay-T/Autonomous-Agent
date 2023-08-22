@@ -1,0 +1,25 @@
+Conversation Id: 405c384d-b4f5-43b3-8e72-c126673466e5
+Created on: 8/19/2023, 9:15:07 PM
+User: c79c93f4-dedd-403f-8157-735466fb3967
+-----------------
+[8/19/2023, 9:15:21 PM] Bot: Event (text): Your skills are listed in your resume. According to your resume, your skills include:
+
+- HTML5
+- CSS3
+- Javascript
+- ReactJS
+- Redux
+- Django
+- NodeJS
+- Java
+- C++
+- C Programming
+- C#
+- Python
+- Web Development
+- Android Development
+- Game Development
+- Problem Solving
+
+These are the skills you have mentioned in your resume.
+[8/19/2023, 9:15:16 PM] User: Event (text): what is my skills

@@ -137,3 +137,4 @@ def ingest_and_log_data(
 
     # Finish the wandb run
     run.finish()
+
