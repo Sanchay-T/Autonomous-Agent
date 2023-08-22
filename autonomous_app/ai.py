@@ -38,7 +38,7 @@ class Chat:
         history: list[tuple[str, str]] | None = None,
         openai_api_key: str = None,
     ):
-        """Answer a question about wandb documentation using the LangChain QA chain and vector store retriever.
+        """
         Args:
             question (str): The question to answer.
             history (list[tuple[str, str]] | None, optional): The chat history. Defaults to None.

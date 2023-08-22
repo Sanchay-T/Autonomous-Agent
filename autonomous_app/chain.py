@@ -5,11 +5,13 @@ import logging
 import wandb
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
-from langchain.vectorstores import Chroma
+from langchain.vectorstores import Chroma , Weaviate
 from langchain.embeddings import OpenAIEmbeddings
 from .prompts import load_chat_prompt
 import os 
+import getpass
 from dotenv import load_dotenv
+
 load_dotenv()
 
 api_key = os.getenv("OPENAI_API_KEY")

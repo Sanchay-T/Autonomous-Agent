@@ -93,19 +93,16 @@ def log_dataset(documents:List[Document], run:wandb.run):
             f.write(document.json() + "\n")
     run.log_artifact(document_artifact)
 
-def log_index(vector_store_dir:str, run:wandb.run):
-    index_artifact = wandb.Artifact(name="vector_store", type="search_index")
-    index_artifact.add_dir(vector_store_dir)
-    run.log_artifact(index_artifact)
+# def log_index(vector_store_dir:str, run:wandb.run):
+#     index_artifact = wandb.Artifact(name="vector_store", type="search_index")
+#     index_artifact.add_dir(vector_store_dir)
+#     run.log_artifact(index_artifact)
     
 
 
 
 def ingest_and_log_data(
         docs_dir: str = doc_dir,
-        chunk_size: int = 600,
-        chunk_overlap: int = 200,
-        vector_store_path: str = vector_store_path,
         prompt_file_path: str = prompt_file_path,
         wandb_project: str = "AI Agents Hackathon",
     ):
@@ -118,18 +115,14 @@ def ingest_and_log_data(
 
 
     # Ingest data
-    documents, vector_store = ingest_data(
+    documents = ingest_data(
         docs_dir=docs_dir,
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        vector_store_path=vector_store_path,
         wandb_project=wandb_project,
         prompt_file=prompt_file_path,
     )
 
     # Log data to wandb
     log_dataset(documents, run )
-    log_index(vector_store_path, run)
     
     with open(prompt_file_path, 'r') as f:
         prompt_data = json.load(f)

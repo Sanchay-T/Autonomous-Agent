@@ -494,7 +494,7 @@ be a strict cap at 2GB and could lead to a failed notebook teardown.
 
 [PreviousRuntimes](https://docs.paperspace.com/gradient/notebooks/runtimes)[NextMachines](https://docs.paperspace.com/gradient/notebooks/machines)
 
-![](https://t.co/i/adsct?bci=3&eci=2&event_id=6835e629-0dff-4481-a2e7-7e47de1e89d7&events=%5B%5B%22pageview%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=08deb07e-1a43-4260-aa90-751c9d34ac89&tw_document_href=https%3A%2F%2Fdocs.paperspace.com%2Fgradient%2Fnotebooks%2Fnotebook-
-storage%2F&tw_iframe_status=0&tw_order_quantity=0&tw_sale_amount=0&txn_id=nyjr5&type=javascript&version=2.3.29)![](https://analytics.twitter.com/i/adsct?bci=3&eci=2&event_id=6835e629-0dff-4481-a2e7-7e47de1e89d7&events=%5B%5B%22pageview%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=08deb07e-1a43-4260-aa90-751c9d34ac89&tw_document_href=https%3A%2F%2Fdocs.paperspace.com%2Fgradient%2Fnotebooks%2Fnotebook-
+![](https://t.co/i/adsct?bci=3&eci=2&event_id=c3c15a41-5e1b-4b29-9d4a-251ccc7c050a&events=%5B%5B%22pageview%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=7b256d00-405d-4dea-8191-6f39a9fea9ff&tw_document_href=https%3A%2F%2Fdocs.paperspace.com%2Fgradient%2Fnotebooks%2Fnotebook-
+storage%2F&tw_iframe_status=0&tw_order_quantity=0&tw_sale_amount=0&txn_id=nyjr5&type=javascript&version=2.3.29)![](https://analytics.twitter.com/i/adsct?bci=3&eci=2&event_id=c3c15a41-5e1b-4b29-9d4a-251ccc7c050a&events=%5B%5B%22pageview%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=7b256d00-405d-4dea-8191-6f39a9fea9ff&tw_document_href=https%3A%2F%2Fdocs.paperspace.com%2Fgradient%2Fnotebooks%2Fnotebook-
 storage%2F&tw_iframe_status=0&tw_order_quantity=0&tw_sale_amount=0&txn_id=nyjr5&type=javascript&version=2.3.29)
 

@@ -48,7 +48,7 @@ def load_eval_prompt(f_name: Union[pathlib.Path, str] = None) -> ChatPromptTempl
         ORIGINAL ANSWER: {answer} GRADE:"""
 
     system_message_prompt = SystemMessagePromptTemplate.from_template(
-        """You are an evaluator for the W&B chatbot.You are given a question, the chatbot's answer, and the original answer, 
+        """You are an evaluator for the customer service chatbot.You are given a question, the chatbot's answer, and the original answer, 
         and are asked to score the chatbot's answer as either CORRECT or INCORRECT. Note 
         that sometimes, the original answer is not the best answer, and sometimes the chatbot's answer is not the 
         best answer. You are evaluating the chatbot's answer only. Example Format:\nQUESTION: question here\nCHATBOT 
