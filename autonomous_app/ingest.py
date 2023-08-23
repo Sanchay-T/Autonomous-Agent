@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 api_key = os.getenv("OPENAI_API_KEY")
 wandb_api_key = os.getenv("WANDB_API_KEY")
 
-def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_path:str, wandb_project:str, prompt_file:str):
+def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, wandb_project:str, prompt_file:str):
     
     # Load the documents
     documents = load_documents(docs_dir)
@@ -36,7 +36,7 @@ def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_pa
     
     # Create the vector store with the chunked documents
     vector_store = create_vector_store(chunked_documents, vector_store_path)
-    return documents, vector_store
+    return documents
 
 def load_documents(data_dir:str) -> List[Document]:
     md_files = list(map(str, pathlib.Path(data_dir).glob("*.md")))
@@ -71,6 +71,8 @@ def create_vector_store(documents, vector_store_path:str ) -> Chroma:
 
     # user_vector_store_path = os.path.join(vector_store_path, user_key)
 
+    vector_store_path = os.path.join('vector_store' , key)
+
 
     vector_store = Chroma.from_documents(
         documents=documents,
@@ -90,22 +92,20 @@ def log_dataset(documents:List[Document], run:wandb.run):
     document_artifact = wandb.Artifact(name="documentation_dataset", type="dataset")
     with document_artifact.new_file("document.json") as f:
         for document in documents:
-            f.write(document.json() + "\n")
+            print(document.page_content)
+            f.write(document.page_content)
     run.log_artifact(document_artifact)
 
 def log_index(vector_store_dir:str, run:wandb.run):
     index_artifact = wandb.Artifact(name="vector_store", type="search_index")
     index_artifact.add_dir(vector_store_dir)
     run.log_artifact(index_artifact)
-    
-
 
 
 def ingest_and_log_data(
         docs_dir: str = doc_dir,
         chunk_size: int = 600,
         chunk_overlap: int = 200,
-        vector_store_path: str = vector_store_path,
         prompt_file_path: str = prompt_file_path,
         wandb_project: str = "AI Agents Hackathon",
     ):
@@ -118,18 +118,17 @@ def ingest_and_log_data(
 
 
     # Ingest data
-    documents, vector_store = ingest_data(
+    documents = ingest_data(
         docs_dir=docs_dir,
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
-        vector_store_path=vector_store_path,
         wandb_project=wandb_project,
         prompt_file=prompt_file_path,
     )
 
     # Log data to wandb
     log_dataset(documents, run )
-    log_index(vector_store_path, run)
+    # log_index(vector_store_path, run)
     
     with open(prompt_file_path, 'r') as f:
         prompt_data = json.load(f)
@@ -138,3 +137,5 @@ def ingest_and_log_data(
     # Finish the wandb run
     run.finish()
 
+
+ingest_and_log_data()

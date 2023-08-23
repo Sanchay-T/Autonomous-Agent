@@ -10,7 +10,7 @@ import re
 import hashlib
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
-from .pdf2markdown import convert_and_save
+# from .pdf2markdown import convert_and_save
 
 from .utils import *
 from .ingest import ingest_and_log_data

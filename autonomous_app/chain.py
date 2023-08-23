@@ -31,14 +31,12 @@ def load_vector_store(wandb_run: wandb.run) -> Chroma:
     # model_kwargs = {'device': 'cpu'}
     # encode_kwargs = {'normalize_embeddings': True}
     # load vector store artifact
-    vector_store_artifact_dir = wandb_run.use_artifact(
-        wandb_run.config.vector_store_artifact, type="search_index"
-    ).download()
+    vector_store_artifact_dir = os.path.join('vector_store')
     
     embedding_fn = OpenAIEmbeddings(openai_api_key=api_key)
     # load vector store
     vector_store = Chroma(
-        embedding_function=embedding_function, persist_directory=vector_store_artifact_dir
+        embedding_function=embedding_fn, persist_directory=vector_store_artifact_dir
     )
 
     return vector_store
