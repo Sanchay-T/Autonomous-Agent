@@ -17,6 +17,7 @@ from .ingest import ingest_and_log_data
 import json
 
 from .html2markdown import url_to_doc
+from django.views.decorators.csrf import csrf_exempt
 
 email = "example@example.com"
 
