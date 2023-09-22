@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv(".env")
 
+
 print("Openai key " , os.getenv("OPENAI_API_KEY"))
 
 class Chat:
