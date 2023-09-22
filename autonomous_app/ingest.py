@@ -93,10 +93,10 @@ def log_dataset(documents:List[Document], run:wandb.run):
             f.write(document.json() + "\n")
     run.log_artifact(document_artifact)
 
-def log_index(vector_store_dir:str, run:wandb.run):
-    index_artifact = wandb.Artifact(name="vector_store", type="search_index")
-    index_artifact.add_dir(vector_store_dir)
-    run.log_artifact(index_artifact)
+# def log_index(vector_store_dir:str, run:wandb.run):
+#     index_artifact = wandb.Artifact(name="vector_store", type="search_index")
+#     index_artifact.add_dir(vector_store_dir)
+#     run.log_artifact(index_artifact)
     
 
 
@@ -118,7 +118,7 @@ def ingest_and_log_data(
 
 
     # Ingest data
-    documents, vector_store = ingest_data(
+    documents = ingest_data(
         docs_dir=docs_dir,
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
@@ -137,4 +137,3 @@ def ingest_and_log_data(
 
     # Finish the wandb run
     run.finish()
-

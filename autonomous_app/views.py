@@ -103,6 +103,7 @@ responses = [
 
 chat = Chat(config=default_config)
 
+@csrf_exempt
 def bot_response(request):
     if request.method == 'POST':
         query = request.POST.get('message', '')

@@ -1,214 +1,500 @@
-﻿![ref1]
+﻿Skip to main content
 
-**Evaluation Only. Created with Aspose.Words. Copyright 2003-2023 Aspose Pty Ltd.**
+Claim your spot on the [waitlist](https://paperspace-6894371.hs-
+sites.com/paperspace-h100) for the NVIDIA H100 GPUs!
 
-Available online at www.sciencedirect.com ![](output.002.png)![](output.003.png)![](output.004.png)
+[![Paperspace Docs](https://docs.paperspace.com/img/logo-light-theme.svg)
+**DOCS**](https://docs.paperspace.com/)[Notebooks](https://docs.paperspace.com/gradient/notebooks/)[Machines](https://docs.paperspace.com/core/)[Deployments](https://docs.paperspace.com/gradient/deployments/)[Account](https://docs.paperspace.com/account-management/)
 
-![](output.005.png) **ScienceDirect** 
+`ctrl``K`
 
-Procedia Computer Science 163 (2019) 85–92 
+[![](https://docs.paperspace.com/img/icon-account.svg)Account](https://docs.paperspace.com/account-management)
 
-16th International Learning & Technology Conference 2019 
+[Sign in](https://console.paperspace.com/)[Sign
+up](https://console.paperspace.com/signup)
 
-A Method Of Skin Disease Detection Using Image Processing And Machine Learning 
+[![Paperspace Docs](https://docs.paperspace.com/img/logo-light-theme.svg) **DOCS**](https://docs.paperspace.com/)
 
-Nawal Soliman ALKolifi ALEnezi 
+  * [Notebooks](https://docs.paperspace.com/gradient/notebooks/)
+  * [Machines](https://docs.paperspace.com/core/)
+  * [Deployments](https://docs.paperspace.com/gradient/deployments/)
+  * [Account](https://docs.paperspace.com/account-management/)
 
-*Department of Computer Science and Engineering, Umm AL-Qura University , Makkah , Saudi Arabia ![ref2]*
+← Back to main menu
 
-**Abstract** 
+  * Getting Started
 
-Skin diseases are more common than other diseases. Skin diseases may be caused by fungal infection, bacteria, allergy, or viruses, etc. The advancement of lasers and Photonics based medical technology has made it possible to diagnose the skin diseases  much  more quickly and accurately. But the cost of such diagnosis is still limited and very expensive. So, image processing techniques help to build automated screening system for dermatology at an initial stage. The extraction of features plays a key role in helping to classify skin diseases. Computer vision has a role in the detection of skin diseases in a variety of techniques. Due to deserts and hot weather, skin diseases are common in Saudi Arabia. This work contributes in the research of skin disease detection. We proposed an image processing-based method to detect skin diseases. This method takes the digital image of disease effect skin area, then use image analysis to identify the type of disease. Our proposed approach is simple, fast and does not require expensive equipment other than a camera and a computer. The approach works on the inputs of a color image. Then resize the of the image to extract features using pretrained convolutional neural network. After that classified feature using Multiclass SVM. Finally, the results are shown to the user, including the type of disease, spread, and severity. The system successfully detects 3 different types of skin diseases with an accuracy rate of 100%. 
+  * Gradient Platform
 
-© 2019 The Authors. Published by Elsevier B.V.
+    * Notebooks
 
-This is an open access article under the CC BY-NC-ND license (https://creativecommons.org/licenses/by-nc-nd/4.0/) Peer-review under responsibility of the scientific committee of the 16th International Learning & Technology Conference 2019.
+      * [Overview](https://docs.paperspace.com/gradient/notebooks/)
+      * [Runtimes](https://docs.paperspace.com/gradient/notebooks/runtimes)
+      * [Storage and datasets](https://docs.paperspace.com/gradient/notebooks/notebook-storage)
+      * [Machines](https://docs.paperspace.com/gradient/notebooks/machines)
+      * [Terminal](https://docs.paperspace.com/gradient/notebooks/terminal)
+      * [Remote Jupyter Kernel](https://docs.paperspace.com/gradient/notebooks/notebooks-remote-kernel)
+      * [Sharing](https://docs.paperspace.com/gradient/notebooks/sharing)
+      * [TensorBoard](https://docs.paperspace.com/gradient/notebooks/tensorboard)
+    * Workflows [beta]
 
-*Keywords:* Skin diseases; Image Processing; Computer Vision; Machine Learning. ![ref2]
+    * Deployments
 
-1. **Introduction** 
+  * Gradient Resources
 
-Skin diseases are more common than other diseases. Skin diseases may be caused by fungal infection, bacteria, allergy, or viruses, etc. A skin disease may change texture or color of the skin. In general, skin diseases are chronic, infectious and sometimes may develop into skin cancer. Therefore, skin diseases must be diagnosed early to reduce 
+  * CLI & SDK
 
-1877-0509 © 2019 The Authors. Published by Elsevier B.V.
+  * [🚀 Run on Gradient](https://docs.paperspace.com/gradient/notebooks/run-on-gradient)
 
-This is an open access article under the CC BY-NC-ND license (https://creativecommons.org/licenses/by-nc-nd/4.0/) Peer-review under responsibility of the scientific committee of the 16th International Learning & Technology Conference 2019. 10.1016/j.procs.2019.12.090
+[{/**/}Account](https://docs.paperspace.com/account-management)
 
-**Created with an evaluation copy of Aspose.Words. To discover the full versions of our APIs please visit: https://products.aspose.com/words/**
-![ref3]*Nawal Soliman ALKolifi ALEnezi  / Procedia Computer Science 163 (2019) 85–92*  91
+[{/**/}Changelog](https://updates.paperspace.com)
 
-2  *Nawal Soliman ALKolifi ALEnezi/ Procedia Computer Science 00 (2019) 000–000* 
+[Contact Support](https://docs.paperspace.com/contact-support)
 
-their development and spread. The diagnosis and treatment of a skin disease takes longer time and causes financial and physical cost to the patient. 
+  * [](https://docs.paperspace.com/)
+  * Gradient Platform
+  * Notebooks
+  * Storage and datasets
 
-In general, most of the common people do not know the type and stage of a skin disease. Some of the skin diseases show symptoms several months later, causing the disease to develop and grow further. This is due to the lack of  medical  knowledge in the public. Sometimes, a  dermatologist (skin specialist doctor) may also find it difficult to diagnose the skin disease and may require expensive laboratory tests to correctly identify the type and stage of the skin disease. The advancement of lasers and photonics based medical technology has made it possible to diagnose the skin diseases much more quickly and accurately. But the cost of such diagnosis is still limited and very expensive. Therefore, we propose an image processing-based approach to diagnose the skin diseases. This method takes the digital image of disease effect skin area then use image analysis  to identify the type of disease. Our proposed approach is simple, fast and does not require expensive equipment's other than a camera and a computer. 
+On this page
 
-2. **Review of Literature** 
+# Storage and datasets
 
-Several researchers have proposed image processing-based techniques to detect the type of skin diseases. Here we briefly review some of the techniques as reported in the literature. 
+In Gradient Notebooks, there is a file browser, shared persistent storage, and
+Gradient Datasets. This guide explains the full storage architecture of your
+notebook.
 
-In [1], a system is proposed for the dissection of skin diseases using color images without the need for doctor intervention. The system consists of two stages, the first the detection of the infected skin by uses color image processing techniques, k-means clustering and color gradient techniques to identify the diseased skin and the second the classification of the disease type using artificial neural networks. The system was tested on six types of skin 
+## Introduction to the file architecture of Gradient Notebooks​
 
-diseases with average accuracy of first stage 95.99% and the second stage 94.016%. 
+Every notebook in Gradient has a file management interface that looks like
+this:
 
-In the method of [2], extraction of image features is the first step in detection of skin diseases. In this method, the greater number of features extracted from the image, better the accuracy of system. 
+![The file manager for Gradient Notebooks lives in the left
+sidebar.](https://docs.paperspace.com/assets/images/notebook-started-0a00613ac3f409b6616be8aad98b879a.png)
 
-The author of [2] applied the method to nine types of skin diseases with accuracy up to 90%. 
+The file manager within the notebook does **not** represent the full file
+structure of the notebook.
 
-Melanoma is type of skin cancer that can cause death, if not diagnose and treat in the early stages. The author of [3], focused on the study of various segmentation techniques that could be applied to detect melanoma using image 
+The full file structure of a notebook is as follows:
 
-processing. Segmentation process is described that falls on the infected spot boundaries to extract more features. 
+![This is the full representation of the file structure behind Gradient
+Notebooks. Notice that the file manager in Gradient Notebooks is represented
+by the yellow box titled { notebook IDE }.](https://docs.paperspace.com/assets/images/local-file-architecture-710291ebcbbec2ce6c2268447def4c06.png)
 
-The  work  of  [4]  proposed  the  development  of  a  Melanoma  diagnosis  tool  for  dark  skin  using  specialized algorithm databases including images from a variety of Melanoma resources. Similarly, [5] discussed classification of skin diseases such as Melanoma, Basal cell carcinoma (BCC), Nevus and Seborrheic keratosis (SK) by using the 
+Here are the main components:
 
-technique support vector machine (SVM). It yields the best accuracy from a range of other techniques. 
+  *  **File manager** \- Files available in the normal IDE sidebar. This corresponds to the directory located at `/notebooks`.
+  *  **Storage** \- Shared persistent storage directory accessible to your entire team on a specific cluster. Available at `/storage`. This is a method for sharing data across notebooks and users. In the case of the **Private Workspace** team, the `/storage` volume cannot be shared with other users.
+  *  **Gradient Datasets** \- Team and public datasets that you can mount in the IDE. Ideal for large amounts of data and for sharing. Public datasets include popular datasets that Gradient makes available out of the box such as [MNIST](http://yann.lecun.com/exdb/mnist/).
 
-On  the  other  hand,  the  spread  of  chronic  skin  diseases  in  different  regions  may  lead  to  severe  consequences. Therefore, [6] proposed a computer system that automatically detects eczema and determines its severity. The system consists of three stages, the first effective segmentation by detecting the skin, the second extract a set of features, namely color, texture, borders and third determine the severity of eczema using Support Vector Machine 
+## What is the file manager?​
 
-(SVM). 
+Refer to Introduction to the file structure of Gradient Notebooks to
+understand the overall file architecture of Gradient Notebooks.
 
-In [7], a new approach is proposed to detect skin diseases, which combines computer vision with machine learning. The role of computer vision is to extract the features from the image while the machine learning is used to detect skin diseases. The system was tested on six types of skin diseases with accurately 95%. 
+Files stored in the file manager are persisted across notebook sessions. This
+is the same directory that is represented by the yellow box labeled `{
+notebook IDE }` in the previous section.
 
-3. **Description of The Dataset** 
+caution
 
-`  `We compiled our dataset by collecting images from different websites specific to skin diseases. The database has 80 images of every disease (20 Normal images, 20 Melanoma images, 20 Eczema images and 20 Psoriasis images). Fig 1 shows some of the sample images from our dataset. 
+Within the `/notebooks` directory, the folder name `checkpoints` is reserved
+by Jupyter. Avoid using `checkpoints` as a directory name in order to avoid
+any unexpected behavior.
 
-![](output.008.png)
+![Files in the notebook IDE file manager \(pictured on the left side of the
+image\) are available whenever a notebook is in the Running
+state.](https://docs.paperspace.com/assets/images/notebook-file-manager-4823ac255cc2e3a05c97897653833f80.png)
 
-Fig. 1. The first image is eczema, the second Melanoma; the third is psoriasis, and finally healthy skin. 
+The notebook must be in the **Running** state to display files.
 
-4. **Methodology** 
+### How to upload large files and folders to the file manager​
 
-In this section, the methodology of the proposed system for detection, extraction and classification of skin diseases images is described. The system will help significantly in the detection of melanoma, Eczema and Psoriasis. The whole architecture can be divided into several modules comprising of preprocessing, feature extraction, and 
+To upload a large number of files or a large amount of data, it is best to use
+command-line libraries such as [curl](https://curl.se),
+[Wget](https://www.gnu.org/software/wget/), or
+[gdown](https://github.com/wkentaro/gdown).
 
-classification. The block diagram of the system is shown in Fig 2. 
+Here is an example of how to use Wget to download the [Stanford Dogs
+dataset](http://vision.stanford.edu/aditya86/ImageNetDogs/) to our notebook:
 
-![](output.009.png)
+![An easy way to download a large dataset to a notebook is to use the wget
+command.](https://docs.paperspace.com/assets/images/stanford-dogs-121f8efedac73ef8a7ce19c7cbb56e51.gif)
 
-Fig. 2. The proposed system block diagram. 
+This command downloads the dataset to our current folder:
 
-1. *Preprocessing:* 
+    
+    
+    !wget http://vision.stanford.edu/aditya86/ImageNetDogs/images.tar  
+    
 
-Achieving high performance of skin disease detection system requires overcoming some major difficulties. Such as creating a database and  unifying image dimensions. In the  following section, the  technique  used in  image resizing is explained. 
+That's all there is to it! We can also perform the same command from the
+terminal if we are on the Pro or Growth subscription plans.
 
-·  *Image Resizing:* 
+#### Transferring files from Google Drive​
 
-To resolve the problem of different image sizes in the database an input image is either increase or decrease in size. Unifying the image size will get the same number of features from all images. Moreover, resizing the image reduces processing time and thus increases system performance. Fig 3 shows the original image of size is 260×325 pixels. Fig 4 shows the resized image with the new size of 227×227 pixels. 
+Files/folders in Google Drive can be brought into your notebook using `gdown`.
 
-![](output.010.png)
+  1. Through the notebook or terminal execute: `pip install gdown` to install and `pip install --upgrade gdown` to upgrade. Use a `!` before each command in the notebook.
+  2. In the permissions settings of the files/folders you want to upload, set the permissions to “Anyone with the Link.”
+  3. Obtain the `file id` by copying and extracting it from the file share link and use the following commands based on your needs.
 
-Fig. 3. Example of Original image of Eczema database. 
+![Obtain the file id in the Google Drive share
+link.](https://docs.paperspace.com/assets/images/googledrivelink-abc4772e91de38173d9b63c929c90052.png)
 
-![](output.011.png)
+  * For bigger than 500 Mb files use: `gdown "<file_ID>&confirm=t"`
+  * For smaller files `gdown <file_ID>`
+  * For Folders `gdown https://drive.google.com/drive/folders/<file_ID> -O /tmp/folder --folder`
 
-Fig. 4. Example of resizing image of Eczema database. 
+### How to download files and folders to the file manager​
 
-2. *Feature Extraction:* 
+To download large files or folders from the notebook, we suggest you zip/tar
+the files first. You can do this from the notebook or terminal.
 
-At the beginning, Convolutional Neural Network (CNN) is a set of stacked layers involving both nonlinear and linear processes. These layers are learned in a joint manner. The main building blocks of any CNN model are: convolutional layer, pooling layer, nonlinear Rectified Linear Units (ReLU) layer connected to a regular multilayer neural network called fully connected layer, and a loss layer at the backend. CNN has known for its significant performance in applications as the visual tasks and natural language processing [8]. 
+  1. Compress the files/folders using the following command in a notebook code cell or the terminal. If you use the notebook make sure to add a `!` before each command.
 
-![](output.012.png)
+    1. tar
+        
+                cd /notebooks  
+        tar -cf [filename].tar [file1] [file2]...  
+        
 
-Fig. 5. AlexNet block diagram [8]. 
+    2. zip
+        
+                cd /notebooks  
+        zip -r [filename].zip [file1] [file2]...  
+        
 
-AlexNet is a deep CNN model, developed by Krizhevsky et al. [8], to model the 2012 ImageNet for the Large Scale  Visual  Recognition  Challenge  (ILSVRC-2012).  AlexNet  consists  of  five  convolutional  layers;  where  a nonlinear ReLU layer is stacked after each convolutional layer. In addition, the first, second, and fifth layers contain maxpooling layers, as shown in Figure 5. Moreover, two normalization layers are stacked after the first and the second convolutional layers. Furthermore, two fully connected layers at the top of the model preceded by softmax 
+  2. Refresh the file manager
 
-layer. AlexNet was trained using more than 1.2 million images belonging to 1000 classes [8]. 
+  3. Right click on the compressed file created
 
-We proposed feature extraction from a pretrained convolutional neural network. Because it is the easiest and 
+  4. Select the option **Download**
 
-robust approach to use the power of pretrained deep learning networks. 
+If the files are in shared storage or a dataset, they can be downloaded by
+moving them into the file manager and following the steps shown above.
 
-3. *Classification:* 
+## What is shared storage?​
 
-Classification is a computer vision method. After extracting features, the role of classification is to classy the image via Support Vector Machine (SVM). A SVM can train classifier using extracted features from the training set [9]. 
+Refer to Introduction to the file structure of Gradient Notebooks to
+understand the overall file architecture of Gradient Notebooks.
 
-5. **Result** 
+Data can be shared between users on a team and between notebooks that belong
+to users on a team.
 
-The system is implemented in MATLAB 2018b. We used a platform of Intel Core i3 processor 2.10 GHz with 4- GB RAM. 
+Access to shared persistent storage must be done through code, either via the
+notebook terminal or via a code cell within a notebook, as there is currently
+no way to access shared persistent storage from the GUI.
 
-The Implementation results are shown in Figure 6. Initially, the input images are preprocessed, then features are extracted using pretrained CNN. Finally, classification is performed using SVM classifier. 
+note
 
-![](output.013.png)
+Shared storage cannot be accessed cross cluster. As a result, data stored in
+`/storage` on the Gradient cluster will not be accessible on the Graphcore
+cluster.
 
-Fig. 6. Result Screen. 
+### How to access shared persistent storage from a notebook code cell​
 
-In this study, 100 skin images were used by several dermatological disease patients, also were taken from the Internet. The proposed system can successfully detect 3 different skin diseases with an accuracy of 100%. 
+We can access shared persistent storage from a code cell within a notebook
+using the `!` operator and issuing our bash commands on a single line
+connected with the `&&` operator.
 
-We have used 20 of images for validation purpose and 80 images for training purpose. The system works well. The detection rate of our system is 100%. In the Table 5.1 we can see different detection rate for 3 different diseases. The detection rate of diseases is very high 100%. 
+For example, to create a new directory within our persistent `/storage`
+directory, we'll input the following:
 
-6. **Future Work** 
+    
+    
+    !cd /storage && mkdir data && cd data  
+    
 
-Jason Fried says, “When is your product or service finished? When should you put it out on the market? When is it safe to let people have it? Probably a lot sooner than you are comfortable with. Once your product does what it 
+This is what that would look like in a notebook code cell:
 
-needs to do, get it out there [10]. 
+![Access shared persistent storage using the ! operator and entering bash
+commands on a single line with the &amp;&amp; operator.](https://docs.paperspace.com/assets/images/slash-storage-44e5eb2a54ca33f3aa0e5ce342d8c256.gif)
 
-Just because you have still got a list of things to do does not mean it is not done. Do not hold everything else up because of a few leftovers. You can do them later. And doing them later may mean doing them better, too. [10]. There are many enhancements and extensions which will be added in the future, first, the method of detect skin disease must be on the mobile application developed, then detection the skin lesion in Dermis layer of the skin, finally must detect all the skin disease in the world and degree of disease. 
+We can also access persistent storage via the terminal, as described in the
+next section.
 
-7. **Conclusion** 
+### How to access shared persistent storage from a notebook terminal​
 
-Detection  of  skin  diseases  is  a  very  important  step  to  reduce  death  rates,  disease  transmission  and  the development of the skin disease. Clinical procedures to detect skin diseases are very expensive and time-consuming. Image processing techniques help to build automated screening system for dermatology at an initial stage. The extraction of features plays a key role in helping to classify skin diseases. 
+The terminal feature requires Gradient Pro or Gradient Growth subscriptions.
 
-In  this  research  the  method  of  detection  was  designed  by  using  pretrained  convolutional  neural  network (AlexNet) and SVM. In conclusion, we must not forget that this research has an effective role in the detection of skin diseases in Saudi Arabia because it has a very hot weather for the presence of deserts; this indicates that skin diseases are widespread. This research supports medical efficiency in Saudi Arabia. 
+To access persistent storage in a Gradient Notebooks terminal, we can use the
+`cd` command to change into the persistent directory `/storage`.
 
-Table 1. Disease Detection Rate 
+Let's say we'd like to create a new persistent directory called `data`. We can
+accomplish this as follows:
 
-Disease  Sample  Image  Total  Disease  Detection ![](output.014.png)Name  Image  detected  rate % ![](output.015.png)![](output.016.png)![](output.017.png)
+    
+    
+    cd /storage  
+    mkdir data  
+    cd data  
+    
 
-Eczema  5  5  100% ![](output.018.png)![](output.019.png)
+Let's try it out:
 
-Melanoma  5  5  100% ![](output.020.png)![](output.021.png)
+![Here we use the terminal to create a new shared persistent storage directory
+located at /storage/data.](https://docs.paperspace.com/assets/images/terminal-storage-759f79b1c3726e9cc729fd283abd3456.gif)
 
-Psoriasis  5  5  100%![](output.022.png)![](output.023.png)
+We can now use the directory located at `/storage/data` to store any files we
+need to access across users and notebooks.
 
-Healthy  5  5  100% ![](output.024.png)
+### How to view storage limits​
 
-skin ![](output.025.png)
+Storage in Gradient is scoped to the team level. By default, storage tiers are
+as follows:
 
-**Created with an evaluation copy of Aspose.Words. To discover the full versions of our APIs please visit: https://products.aspose.com/words/**
-![ref4]  *Nawal Soliman ALKolifi ALEnezi  / Procedia Computer Science 163 (2019) 85–92*
+| Free| Pro| Growth| Enterprise  
+---|---|---|---|---  
+Storage| 5 GB| 15 GB| 50 GB| ∞ GB  
+  
+Excess storage is billed at $0.29 per GB per month and this is prorated for
+the duration of the month.
 
-8  *Nawal Soliman ALKolifi ALEnezi/ Procedia Computer Science 00 (2019) 000 000* 
+As an example, if we are on the Pro plan, which grants us 15 GB of storage,
+and we use 50 GB of storage for an entire month, we will be billed (50 - 15) *
+0.29 = $10.15 on top of our normal bill.
 
-**References** 
+To view storage utilization, visit the **Storage** tab in the workspace
+settings.
 
-1. Arifin, S., Kibria, G., Firoze, A., Amini, A., & Yan, H. (2012) “Dermatological Disease Diagnosis Using Color-Skin Images.” Xian: 
+Here we have an example of the **Storage** tab for a new team that is not yet
+using any volume storage:
 
-*International Conference on Machine Learning and Cybernetics*. 
+![A new team that has yet to upload data will have nothing to display in the
+Storage tab in team settings.](https://docs.paperspace.com/assets/images/empty-storage-example-80ea2bc7b391fd35d607f4cd2c181faa.png)
 
-2. Yasir, R., Rahman, A., & Ahmed, N. (2014) “Dermatological Disease Detection using Image Processing and Artificial Neural Network. 
+Here we have an example of a Private Workspace team that is using a good
+amount of storage:
 
-“Dhaka*: International Conference on Electrical and Computer Engineering*. 
+![A team that has uploaded data will see a summary of storage volumes in the
+Storage tab.](https://docs.paperspace.com/assets/images/storage-example-8e7fefc63f426be5edbff0638d0a70f0.png)
 
-3. Santy, A., & Joseph, R. (2015) “Segmentation Methods for Computer Aided Melanoma Detection.” *Global Conference on* 
+If we expect to be billed for storage overages, we can use the **Utilization**
+tab to explore our storage use further.
 
-*Communication* *Technologies.* 
+Use the file management tab to upload data, organize files and folders, and
+download files stored in a notebook.
 
-4. Zeljkovic, V., Druzgalski, C., Bojic-Minic, S., Tameze, C., & Mayorga, P. (2015) “ Supplemental Melanoma Diagnosis for Darker 
+Some additional options such as renaming, duplicating, and deleting files and
+folders are available by clicking the menu icon on the individual entity.
 
-Skin Complexion Gradients.” *Pan American Health Care Exchanges* 
+![A number of file and folder management options are available in the Files
+sidebar.](https://docs.paperspace.com/assets/images/file-management-options-ba85cc0d826fbc5a44fb0f415b0dcb92.png)
 
-5. Suganya R. (2016) “An Automated Computer Aided Diagnosis of Skin Lesions Detection and Classification for Dermoscopy Images.” *International Conference on Recent Trends in Information Technology*. 
-5. Alam, N., Munia, T., Tavakolian, K., Vasefi, V., MacKinnon, N., & Fazel-Rezai, R. (2016) “Automatic Detection and Severity 
+There are multiple ways to upload files to a notebook, which are discussed in
+the following sections.
 
-Measurement of Eczema Using Image Processing.” *IEEE*. 
+## What is a dataset?​
 
-7. Kumar, V., Kumar, S., & Saboo, V. (2016) “Dermatological Disease Detection Using Image Processing and Machine Learning.” *IEEE*. 
-7. Krizhevsky, A., ILYA, S., & Geoffrey, E. (2012) “ImageNet Classification with Deep Convolutional Neural Networks.” *Advances in* 
+Refer to Introduction to the file structure of Gradient Notebooks to
+understand the overall file architecture of Gradient Notebooks.
 
-*Neural* *Information Processing Systems.* 
+Gradient Datasets are available as a first-class resource within Gradient
+Notebooks.
 
-9. Cristianini, N., Shawe, J., “Support Vector Machines”, 2000. 
-9. SOMMERVILLE, I., “Software Engineering”. 9th .2011. 
+### How to mount datasets in a notebook​
 
-**Created with an evaluation copy of Aspose.Words. To discover the full versions of our APIs please visit: https://products.aspose.com/words/**
-![ref5]
+The IDE supports mounting Gradient Datasets to explore data and train models.
+Use the datasets tab to mount existing team datasets, mount public datasets,
+and create new team datasets.
 
-![](output.028.png)
-**Created with an evaluation copy of Aspose.Words. To discover the full versions of our APIs please visit: https://products.aspose.com/words/**
+Mounting a dataset is as easy as clicking the MOUNT button next to either the
+team or public dataset you would like to use.
 
-[ref1]: output.001.png
-[ref2]: output.006.png
-[ref3]: output.007.png
-[ref4]: output.026.png
-[ref5]: output.027.png
+![Mount a public dataset](https://docs.paperspace.com/assets/images/mount-public-dataset-5ad4d25bca8844329aad46f78f033f94.gif)
+
+When mounting a team dataset, this will only mount the `latest` version of a
+dataset. To change the version of the dataset please see the Advanced Settings
+section below.
+
+## How to add small datasets to a notebook​
+
+To add a new dataset, click on the + icon. Then name, describe and upload the
+data. Feel free to close the modal once you start the upload, this process is
+still happening in the background.
+
+![Upload some images from Stanford Dogs dataset](https://docs.paperspace.com/assets/images/uploading-files-to-dataset-b69a1d40e1981eb19b98c5abcc281442.gif)
+
+Datasets can also be added from the Gradient Project level. To learn more see
+[this article](https://docs.paperspace.com/gradient/data/#how-to-create-a-dataset-and-dataset-version-in-the-cli).
+
+### How to add large datasets (5GB +) to a notebook​
+
+To create datasets larger than 5GB, you can use the CLI through the terminal.
+To learn more about how to create a dataset through the CLI see [this
+article](https://docs.paperspace.com/gradient/data/#how-to-create-a-dataset-and-dataset-version-in-the-cli)
+
+### Datasets Advanced Settings​
+
+To access the settings file that manages all of your mounted Datasets go to
+`.gradient/settings.yaml`. Here you can see all of the mounted Datasets and
+their arguments. This file should only be used to do one of the following:
+
+  1. Change the `version-id` of the dataset that should be mounted.
+
+    
+    
+    integrations:  
+      quarterly-reports: # mounts in /datasets/quarterly-reports  
+        type: dataset # denotes a paperspace dataset  
+        id: dataset-id # a paperspace dataset id  
+        version: verion-id # a paperspace version id  
+      my-bucket-data: # mounts in /datasets/my-bucket-data  
+        type: s3 # an s3 bucket  
+        url: s3://my-bucket/my-data # your s3 bucket url  
+        accessKeyId: AK123 # your s3 access key id  
+        secretAccessKey: secret:my-bucket-secret-key # a paperspace secret with your s3 secret key  
+        region: "us-west-1" # the aws region your bucket is in, if not in aws set "endpoint"  
+        endpoint: "https://my-bucket-host.com" # a custom bucket host, do not set region if set  
+    
+
+## Other Data Sources​
+
+### DigitalOcean Spaces​
+
+The Gradient IDE provides the ability to mount DigitalOcean Spaces into
+Notebooks to access data that is stored externally. This is available to Pro
+and Growth plans. Follow these simple steps to mount your DigitalOcean Space.
+
+  1. Add a new data source and select the DigitalOcean Spaces icon.
+  2. Enter the endpoint url (e.g. `https://jane.nyc3.digitaloceanspaces.com`), display name (an arbitrary name for the data source), along with the access key & secret.
+    * note: you will have to upload project secrets to the under the project settings tab.
+
+![DigitalOcean Spaces data source](https://docs.paperspace.com/assets/images/do-data-source-b78516e544a1e4bedaf50b819a361eed.png)
+
+Once the data source is created, find the source in the list of data sources
+and click the mount button.
+
+This will create a bidrectional mount on the underlying container for reading
+and writing data to the space.
+
+### AWS S3​
+
+The Gradient IDE provides the ability to mount public and private S3 buckets
+into the Notebook to access data that is stored externally. This is available
+to Pro and Growth plans. Follow these simple steps to mount your S3.
+
+  1. Add a new data source and select the Amazon S3 icon.
+  2. Enter the name of your datasource and bucket url. 
+  3. If the bucket is private add an Access Key ID and Secret Access Key by choosing a Gradient Secret in the dropdown. [Learn more](https://docs.paperspace.com/gradient/secrets/) about how to create a Gradient secret. 
+  4. The data source can now be mounted to your notebook and accessed through the data source panel.
+
+![This is how you mount an AWS S3 data source into the
+IDE](https://docs.paperspace.com/assets/images/s3-data-source-mount-8490fb3e309a91bfe76a125cd2bc17d7.gif)
+
+#### S3-Compatible Data Source​
+
+To connect to other S3-compatible data sources like Google Cloud Platform
+(GCP), follow these steps.
+
+  1. Add the S3-compatible bucket url. For GCP it would look like `s3://example-bucket-name`
+  2. Open the Advanced Settings and change the default endpoint. For GCP enter `https://storage.googleapis.com`
+
+![This is how you mount an S3-compatible data source into the
+IDE](https://docs.paperspace.com/assets/images/s3-compatible-data-source-mount-26bd6b54518904d74048874a17c29e01.png)
+
+### Making an S3 Bucket Publicly Accessible​
+
+ ** _Warning: This will allow anyone on the internet to access your files. DO
+NOT enable this if you have sensitive information in your S3 bucket._**
+
+To make an AWS S3 bucket publicly accessible without credentials, you'll need
+to update two settings in your bucket settings under the Permissions tab:
+
+  1. Uncheck "Block all public access".
+
+![Unchecked &quot;Block all public access&quot;
+checkbox.](https://docs.paperspace.com/assets/images/block-public-access-ca72ceb5e18a98b4fa279033a08bc324.png)
+
+  2. Edit ACL to allow Everyone (public access) List Objects and Read Bucket ACL.
+
+![Checked Everyone \(public access\) List Objects and Read Bucket ACL
+checkboxes.](https://docs.paperspace.com/assets/images/block-public-access-ca72ceb5e18a98b4fa279033a08bc324.png)
+
+## Storage uses and billing​
+
+Gradient Notebooks provide volume storage and bucket storage. The delineation
+refers to whether the data is available online or offline and helps users pay
+only for what they use.
+
+With volume storage, data is available only while running a Gradient Resource
+such as a notebook or workflow. With bucket storage, data is available for
+online or offline viewing.
+
+### Volume storage​
+
+Volumes are persistent storage resources that provide shared access to a
+filesystem while the instance is online.
+
+Examples of volume storage include:
+
+  *  **Gradient Notebooks:** Any information stored in `/storage` and in `/notebooks`
+  *  **Gradient Datasets:** Any dataset cache in Gradient Workflows or Gradient Deployments
+
+For more information about team volumes go to the Storage tab in the Team
+Settings view which can be found by clicking the user icon in the top right.
+
+![Visit Team settings &gt; Storage to view info on storage
+volumes.](https://docs.paperspace.com/assets/images/storage-be14e1cff2cd5a4e4b10d3fb5ba457dd.gif)
+
+### Volume storage billing​
+
+The amount of volume storage you have access to is dictated by your Gradient
+subscription tier as shown below. These storage limit are on a per notebook
+basis.
+
+Any storage over these limits will be charged at $.29/GB/month.
+
+These charges are accrued hourly at the current usage of the bucket. For
+example, if a user with a free subscription, goes over the 5GB limit for 3
+days then the account will only be charged for the 3 days of usage over the
+free limit.
+
+Subscription| Volume Storage  
+---|---  
+Free| 5GB  
+Pro| 15GB  
+Growth| 50GB  
+  
+### Bucket storage​
+
+Buckets refers to long-term storage which is primarily used for offline
+viewing of files and dataset versioning.
+
+Examples of bucket storage include:
+
+  *  **Offline data for Gradient Notebooks:** Files and datasets viewable offline in a notebook. In the offline view, buckets will store `.ipynb` files, `.md` files, any git tracked files, and any files included in the `.notebookinclude` file.
+  *  **Versioned Datasets:** Each time a Gradient Dataset is versioned, these iterations of the dataset are stored within a bucket. For more information see [Versioned Data](https://docs.paperspace.com/gradient/data/#versioned-data).
+
+info
+
+To avoid getting charged for bucket storage, delete Gradient Notebooks and
+versioned datasets that may no longer be in use.
+
+![This diagram illustrates the lifecyle of storage while running a Gradient
+Notebook.](https://docs.paperspace.com/assets/images/storage-lifecycle-b50c5a41090731bd3c794a23cfb37451.png)
+
+### Bucket storage billing​
+
+No matter the subscription type all Gradient users receive 2GB free bucket
+storage.
+
+Users who exceed that limit will be charged $0.29/GB/Month.
+
+These charges are accrued hourly at the current usage of the bucket. For
+example, if a user goes over the 2GB limit for 3 days then the account will
+only be charged for the 3 days of usage over the free limit.
+
+danger
+
+If a user does not have a credit card associated with the team then there will
+be a strict cap at 2GB and could lead to a failed notebook teardown.
+
+[PreviousRuntimes](https://docs.paperspace.com/gradient/notebooks/runtimes)[NextMachines](https://docs.paperspace.com/gradient/notebooks/machines)
+
+![](https://t.co/i/adsct?bci=3&eci=2&event_id=c3c15a41-5e1b-4b29-9d4a-251ccc7c050a&events=%5B%5B%22pageview%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=7b256d00-405d-4dea-8191-6f39a9fea9ff&tw_document_href=https%3A%2F%2Fdocs.paperspace.com%2Fgradient%2Fnotebooks%2Fnotebook-
+storage%2F&tw_iframe_status=0&tw_order_quantity=0&tw_sale_amount=0&txn_id=nyjr5&type=javascript&version=2.3.29)![](https://analytics.twitter.com/i/adsct?bci=3&eci=2&event_id=c3c15a41-5e1b-4b29-9d4a-251ccc7c050a&events=%5B%5B%22pageview%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=7b256d00-405d-4dea-8191-6f39a9fea9ff&tw_document_href=https%3A%2F%2Fdocs.paperspace.com%2Fgradient%2Fnotebooks%2Fnotebook-
+storage%2F&tw_iframe_status=0&tw_order_quantity=0&tw_sale_amount=0&txn_id=nyjr5&type=javascript&version=2.3.29)
+

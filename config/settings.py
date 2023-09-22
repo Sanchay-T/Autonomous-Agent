@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+
+
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +29,7 @@ SECRET_KEY = "django-insecure-g1@70ubz+x+s8k3r=9_*1x1dbc47twig@l6evh2$pzqd%!qiaf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['stingray-app-s3fip.ondigitalocean.app', 'chat.wovoai.com','127.0.0.1']
 
 
 # Application definition
