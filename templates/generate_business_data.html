@@ -170,7 +170,8 @@
         border: none;
     }
 
-    .url_btn:hover , .btnn:hover {
+    .url_btn:hover,
+    .btnn:hover {
         background: #5969f3;
         color: #fff;
 
@@ -186,9 +187,9 @@
     .chatbot {
         display: flex;
         flex-direction: column;
-        min-height: 65%;
-        height: 65%;
-        max-height: 65%;
+        min-height: 20rem;
+        height: 25rem;
+        max-height: 25rem;
         width: min(100%, 600px);
         background-color: #fff;
         padding: 0.2rem;
@@ -219,6 +220,13 @@
         .message-input textarea {
             height: auto;
         }
+    }
+
+
+    .section1 {
+        padding: 60px 0 0 0;
+        min-height: 100vh;
+        background-color: #f2f2f2;
     }
 
 
@@ -332,14 +340,14 @@
     }
 
     .chatbotcontent {
-        height: 100%;
+        {% comment %} height: 100%; {% endcomment %}
     }
 
-    #file_input_label{
-        width : 100%;
+    #file_input_label {
+        width: 100%;
     }
 
-    .url-success{
+    .url-success {
         color: green;
     }
 </style>
@@ -362,10 +370,10 @@
 {% block content %}
 <!-- chatbot creating loader -->
 
-<section class="vh-100">
+<section class="section1">
 
 
-    <div class="container h-100 p-5" data-aos="fade-up">
+    <div class="container-fluid py-4" data-aos="fade-up">
         <div class="chatbot_creating">
             <div style="color: #f4696b" class="la-ball-fussion la-3x">
                 <div></div>
@@ -385,84 +393,124 @@
             <div class="loader"></div>
         </div>
 
-        <div class="row h-100 align-items-center justify-content-center">
+        <div class="row  justify-content-center">
 
-            <div id="email_container" class="row gx-0 gap-3 justify-content-center">
+            <div class="col-sm-6 p-4">
+                <h3 class="text-center font-weight-bold mb-4">How to Train Your Chatbot</h3>
 
-                <h2 class="text-center">Please proceed with your Email.</h2>
-                <div class="emailcontainer">
-                    <div class="email-div">
-                        <input type="email" name="email" placeholder="Enter your email address" required />
-                        <div class="email-error">Email cannot be empty.</div>
-                    </div>
-                    <button class="email_button">Submit</button>
-                </div>
+                <p class="lead mb-3">
+                    <i class="fas fa-chevron-right text-primary"></i>
+                    First, ensure you've provided your correct email address. This will be used for important
+                    notifications and updates regarding your chatbot.
+                </p>
+
+                <p class="lead mb-3">
+                    <i class="fas fa-chevron-right text-primary"></i>
+                    Start by conversing with the chatbot below. Inform it about your business and provide relevant
+                    details. This will assist in training and fine-tuning its responses.
+                </p>
+
+                <p class="lead mb-3">
+                    <i class="fas fa-chevron-right text-primary"></i>
+                    For advanced configurations and to speed up the training process, you can drag and drop a file with
+                    relevant content or paste a URL. The system will utilize this data to enhance the chatbot's
+                    knowledge.
+                </p>
+
+                <p class="lead mb-3">
+                    <i class="fas fa-chevron-right text-primary"></i>
+                    Once your chatbot is configured, you can embed it on your website. Simply copy the provided embed
+                    code and place it on your site.
+                </p>
+
+                <p class="lead mb-3">
+                    <i class="fas fa-chevron-right text-primary"></i>
+                    If you encounter any issues or have questions, please reach out to our support team at <a
+                        href="mailto:support@example.com">support@example.com</a> for assistance.
+                </p>
             </div>
 
 
-            <div class="chatbotcontent row gx-0 justify-content-center align-items-center">
-                <div class="chatbot">
-                    <div class="chat-container" id="chat-container">
-                        <!-- Messages will be dynamically added here -->
-                        <div id="chats"></div>
-                        <div id="loading" tabindex="0">
-                            <lottie-player
-                                src="https://lottie.host/c04594cc-52c6-47d4-b073-687a34b491a6/8uRSGnrpd3.json"
-                                background="#FFFFFF" speed="1" style="width: 4rem; height: 4rem" loop autoplay
-                                direction="1" mode="normal"></lottie-player>
+            <div class="col-sm-6">
+
+                <div id="email_container" class="row gx-0 gap-3 justify-content-center">
+
+                    <h2 class="text-center">Please proceed with your Email.</h2>
+                    <div class="emailcontainer">
+                        <div class="email-div">
+                            <input type="email" name="email" placeholder="Enter your email address" required />
+                            <div class="email-error">Email cannot be empty.</div>
                         </div>
-                    </div>
-                    <div class="message-input">
-                        <textarea id="user-input" placeholder="Type your message..." cols="1" rows="1"></textarea>
-                        <!-- <textarea name="" id="" > -->
-                        <button id="send-button" class="send-btn">Send</button>
+                        <button class="email_button">Submit</button>
                     </div>
                 </div>
 
 
-                <div class="embedcode">
-                    <div class="embedcode-container">
-                        <div class="embedcode-text">
-                            <p>Copy and paste the following code in your website to embed the chatbot.</p>
-                        </div>
-                        <div class="embedcode-area">
-                            <textarea name="" id="" readonly cols="30" rows="10"></textarea>
-                        </div>
-                        <button class="embedcode_copy_btn btnn">Copy</button>
-                    </div>
-                </div>
-
-
-
-                <div class="section2">
-                    <div class="upload-container">
-                        <label id="file_input_label" for="file-input">
-                            <div class="upload-area">
-                                <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                                <div class="upload-text">Drag and drop a file here or click to browse</div>
+                <div class="chatbotcontent row gx-0 justify-content-center align-items-center">
+                    <div class="chatbot">
+                        <div class="chat-container">
+                            <!-- Messages will be dynamically added here -->
+                            <div id="chats"></div>
+                            <div id="loading" tabindex="0">
+                                <lottie-player
+                                    src="https://lottie.host/c04594cc-52c6-47d4-b073-687a34b491a6/8uRSGnrpd3.json"
+                                    background="#FFFFFF" speed="1" style="width: 4rem; height: 4rem" loop autoplay
+                                    direction="1" mode="normal"></lottie-player>
                             </div>
-                        </label>
-                        <input type="file" id="file-input" accept=".txt, .pdf" />
+                        </div>
+                        <div class="message-input">
+                            <textarea id="user-input" placeholder="Type your message..." cols="1" rows="1"></textarea>
+                            <!-- <textarea name="" id="" > -->
+                            <button id="send-button" class="send-btn">Send</button>
+                        </div>
                     </div>
 
 
-                    <div class="url-container">
-                        <form id="url_form" method="POST" action="{% url 'url_data_post' %}">
-                            {% csrf_token %}
-
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <input type="text" class="url_input form-control" name="url"
-                                        placeholder="Paste url if any...">
-                                </div>
-                                <div class="col-md-3">
-                                    <button type="submit" class="send-url btn url_btn w-100">Scrape</button>
-                                </div>
+                    <div class="embedcode">
+                        <div class="embedcode-container">
+                            <div class="embedcode-text">
+                                <p>Copy and paste the following code in your website to embed the chatbot.</p>
                             </div>
-                        </form>
+                            <div class="embedcode-area">
+                                <textarea name="" id="" readonly cols="30" rows="10"></textarea>
+                            </div>
+                            <button class="embedcode_copy_btn btnn">Copy</button>
+                        </div>
+                    </div>
 
+
+
+                    <div class="section2">
+                        <div class="upload-container">
+                            <label id="file_input_label" for="file-input">
+                                <div class="upload-area">
+                                    <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                    <div class="upload-text">Drag and drop a file here or click to browse</div>
+                                </div>
+                            </label>
+                            <input type="file" id="file-input" accept=".txt, .pdf" />
+                        </div>
+
+
+                        <div class="url-container">
+                            <form id="url_form" method="POST" action="{% url 'url_data_post' %}">
+                                {% csrf_token %}
+
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <input type="text" class="url_input form-control" name="url"
+                                            placeholder="Paste url if any...">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="submit" class="send-url btn url_btn w-100">Scrape</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -477,23 +525,22 @@
 
 
 
-
 {% block moreJS %}
 
 <script>
-    // const chatContainer = document.getElementById("chat-container");
-
+    
     let converter = new showdown.Converter();
-
+    
     const uploadContainer = $(".upload-container");
     const uploadArea = $(".upload-area");
     const fileInput = $("#file-input");
-
-
+    
+    
+    const chatContainer = $(".chat-container");
     const userInputElement = $("#user-input");
     const sendButton = $("#send-button");
     const loading = $("#loading");
-    const chatContainer = $("#chats");
+    const chats = $("#chats");
     const email_loader = $(".email_loader");
     const email_container = $("#email_container");
     const upload_container = $(".upload-container");
@@ -513,10 +560,10 @@
 
     {% if user_id %}
     email_container.hide();
-    chatbotcontent.show();
+    chatbotcontent.show(); 
     {% else %}
-    chatbotcontent.hide()
-    {% endif %}
+    chatbotcontent.hide() 
+    {% endif %} 
 
     embedcode.hide();
     chatbot_creating_loader.hide();
@@ -535,7 +582,8 @@
     function sendMessage(message, isUser = true) {
         const messageDiv = document.createElement("div");
         let className = isUser ? "user-message" : "bot-message";
-        chatContainer.append(`<div class="${className}">${message}</div>`);
+        chats.append(`<div class="${className}">${message}</div>`);
+        chatContainer.scrollTop(chatContainer.prop('scrollHeight'));
     }
 
     function showLoadingAnimation() {
@@ -694,7 +742,8 @@
                     return;
                 }
                 $(".url_input").remove();
-                $(".url-container").html("<p class='url-success'><b>Nice!</b> Your url has been scraped! :)</p>")
+                $(".url-container").html(
+                    "<p class='url-success'><b>Nice!</b> Your url has been scraped! :)</p>")
                 sendMessage(response.message, false);
             },
             error: function () {
