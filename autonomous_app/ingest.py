@@ -9,7 +9,7 @@ from langchain.cache import SQLiteCache
 from langchain.docstore.document import Document
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import TextSplitter
-from langchain.vectorstores import Chroma
+from langchain.vectorstores import Chroma , Qdrant
 from langchain.embeddings import OpenAIEmbeddings
 import os
 from dotenv import load_dotenv
@@ -25,6 +25,11 @@ langchain.llm_cache = SQLiteCache(database_path="llm_cache.db")
 logger = logging.getLogger(__name__)
 api_key = os.getenv("OPENAI_API_KEY")
 wandb_api_key = os.getenv("WANDB_API_KEY")
+
+
+url = "https://fa1dffb4-23bf-4b57-8cc2-730c85ead277.us-east-1-0.aws.cloud.qdrant.io:6333"
+api_key_q = "q_l-IpY7Y2j4nVO4mfCM28HmKosSLvO8vZBbCRpq7hU-ffF1KlSXNQ"
+
 
 def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_path:str, wandb_project:str, prompt_file:str):
     
@@ -64,7 +69,7 @@ def chunk_documents(
     split_documents = markdown_text_splitter.split_documents(documents)
     return split_documents
 
-def create_vector_store(documents, vector_store_path:str ) -> Chroma:
+def create_vector_store(documents, vector_store_path:str ) -> Qdrant:
 
     embedding_function = OpenAIEmbeddings(openai_api_key=api_key)
 
@@ -72,15 +77,25 @@ def create_vector_store(documents, vector_store_path:str ) -> Chroma:
     # user_vector_store_path = os.path.join(vector_store_path, user_key)
 
 
-    vector_store = Chroma.from_documents(
-        documents=documents,
-        embedding=embedding_function,
-        persist_directory=vector_store_path,
+    # vector_store = Chroma.from_documents(
+    #     documents=documents,
+    #     embedding=embedding_function,
+    #     persist_directory=vector_store_path,
+    # )
+    #
+    # return vector_store
+
+    vector_store = Qdrant.from_documents(
+        documents,
+        embedding_function,
+        url=url,
+        prefer_grpc=True,
+        api_key=api_key_q,
+        collection_name="my_documents",
     )
-    vector_store.persist()
     return vector_store
 
-def log_prompt(prompt:dict, run:wandb.run ):
+def log_prompt(prompt:dict, run:wandb.run):
     prompt_artifact = wandb.Artifact(name="chat_prompt", type="prompt")
     with prompt_artifact.new_file("prompt.json") as f:
         f.write(json.dumps(prompt))
