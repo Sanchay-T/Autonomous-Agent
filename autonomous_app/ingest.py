@@ -15,32 +15,38 @@ import os
 from dotenv import load_dotenv
 load_dotenv(".env")
 
+
 doc_dir = os.path.join("documents" , "iteration_1")
 
 vector_store_path = os.path.join("vector_store")
+
 
 prompt_file_path = os.path.join("autonomous_app" , "chat_prompt.json")
 
 langchain.llm_cache = SQLiteCache(database_path="llm_cache.db")
 logger = logging.getLogger(__name__)
-api_key = os.getenv("OPENAI_API_KEY")
 
 
 
-url = "https://fa1dffb4-23bf-4b57-8cc2-730c85ead277.us-east-1-0.aws.cloud.qdrant.io:6333"
-api_key_q = "q_l-IpY7Y2j4nVO4mfCM28HmKosSLvO8vZBbCRpq7hU-ffF1KlSXNQ"
+url="https://c48daa38-a7a7-4c89-9cd9-718a1461e4ae.us-east-1-0.aws.cloud.qdrant.io:6333"
+api_key_q = "2N5Wlg_y2xwgtJu0Iq5T5uHyesdewC3Vy-VX31YAq-laiQO1tCxAkg"
 
 
-def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_path:str,prompt_file:str):
+def ingest_data():
+
+    chunk_size = 600
+
+    chunk_overlap = 200
     
     # Load the documents
-    documents = load_documents(docs_dir)
+    documents = load_documents(doc_dir)
+    print("Load Documents " , documents)
     
     # Split the documents into chunks
     chunked_documents = chunk_documents(documents, chunk_size, chunk_overlap)
     
     # Create the vector store with the chunked documents
-    vector_store = create_vector_store(chunked_documents, vector_store_path)
+    vector_store = create_vector_store(chunked_documents)
     return documents, vector_store
 
 def load_documents(data_dir:str) -> List[Document]:
@@ -51,7 +57,7 @@ def load_documents(data_dir:str) -> List[Document]:
     return documents
 
 def chunk_documents(
-    documents: List[Document], chunk_size: int = 500, chunk_overlap=0
+    documents: List[Document], chunk_size: int = 600, chunk_overlap=200
 ) -> List[Document]:
     """Split documents into chunks
 
@@ -63,15 +69,16 @@ def chunk_documents(
     Returns:
         List[Document]: A list of chunked documents.
     """
+    print("Before chunking " , documents)
     markdown_text_splitter = CharacterTextSplitter(
         chunk_size=chunk_size, chunk_overlap=chunk_overlap
     )
     split_documents = markdown_text_splitter.split_documents(documents)
     return split_documents
 
-def create_vector_store(documents, vector_store_path:str ) -> Qdrant:
+def create_vector_store(chunk_documents) -> Qdrant:
 
-    embedding_function = OpenAIEmbeddings(openai_api_key=api_key)
+    embedding_function = OpenAIEmbeddings()
 
 
     # user_vector_store_path = os.path.join(vector_store_path, user_key)
@@ -85,12 +92,15 @@ def create_vector_store(documents, vector_store_path:str ) -> Qdrant:
     #
     # return vector_store
 
+    print("Docs " , chunk_documents)
+
     vector_store = Qdrant.from_documents(
-        documents,
+        chunk_documents,
         embedding_function,
         url=url,
-        prefer_grpc=True,
+        prefer_grpc=False,
         api_key=api_key_q,
+        force_recreate=False,
         collection_name="my_documents",
     )
     return vector_store
@@ -152,3 +162,7 @@ def create_vector_store(documents, vector_store_path:str ) -> Qdrant:
 #
 #     # Finish the wandb run
 #     run.finish()
+
+
+ingest_data()
+

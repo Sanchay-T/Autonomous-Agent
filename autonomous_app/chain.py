@@ -15,12 +15,13 @@ from langchain.embeddings import OpenAIEmbeddings
 
 load_dotenv(".env")
 
-url = "https://fa1dffb4-23bf-4b57-8cc2-730c85ead277.us-east-1-0.aws.cloud.qdrant.io:6333"
-api_key_q = "q_l-IpY7Y2j4nVO4mfCM28HmKosSLvO8vZBbCRpq7hU-ffF1KlSXNQ"
+url="https://c48daa38-a7a7-4c89-9cd9-718a1461e4ae.us-east-1-0.aws.cloud.qdrant.io:6333"
+# url = "https://fa1dffb4-23bf-4b57-8cc2-730c85ead277.us-east-1-0.aws.cloud.qdrant.io:6333"
+api_key_q = "2N5Wlg_y2xwgtJu0Iq5T5uHyesdewC3Vy-VX31YAq-laiQO1tCxAkg"
 
 api_key = os.getenv("OPENAI_API_KEY")
 logger = logging.getLogger(__name__)
-def load_vector_store(documents, vector_store_path:str ) -> Qdrant:
+def load_vector_store(documents) -> Qdrant:
 
     embedding_function = OpenAIEmbeddings(openai_api_key=api_key)
 
@@ -37,11 +38,12 @@ def load_vector_store(documents, vector_store_path:str ) -> Qdrant:
     # return vector_store
 
     vector_store = Qdrant.from_documents(
-        documents,
-        embedding_function,
+        documents=documents,
+        embedding=embedding_function,
         url=url,
-        prefer_grpc=True,
+        prefer_grpc=False,
         api_key=api_key_q,
+        force_recreate=True,
         collection_name="my_documents",
     )
     return vector_store
@@ -61,14 +63,16 @@ def load_chain(vector_store: Qdrant, openai_api_key: str):
     Returns:
         ConversationalRetrievalChain: A ConversationalRetrievalChain object
     """
-    retriever = vector_store.as_retriever()
+
+    retriever = vector_store.as_retriever(search_type="mmr")
     llm = ChatOpenAI(
         openai_api_key=openai_api_key,
         model_name='gpt-3.5-turbo-16k-0613',
         temperature=0,
     )
-    chat_prompt_dir = 'chat_prompt.json'
-    qa_prompt = load_chat_prompt(f"{chat_prompt_dir}")
+    chat_prompt_dir = os.path.join("autonomous_app", "chat_prompt.json")
+    print("Chat prompt dir " , chat_prompt_dir)
+    qa_prompt = load_chat_prompt(chat_prompt_dir)
     qa_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
         chain_type="stuff",

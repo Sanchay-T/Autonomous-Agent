@@ -312,6 +312,9 @@
 
 
     .embedcode {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         position: absolute;
         display: flex;
         flex-direction: column;
@@ -383,6 +386,19 @@
             </div>
 
             <p>Creating your Chatbot. Please be patient.</p>
+        </div>
+
+        
+        <div class="embedcode">
+            <div class="embedcode-container">
+                <div class="embedcode-text">
+                    <p>Copy and paste the following code in your website to embed the chatbot.</p>
+                </div>
+                <div class="embedcode-area">
+                    <textarea name="" id="" readonly cols="30" rows="10"></textarea>
+                </div>
+                <button class="embedcode_copy_btn btnn">Copy</button>
+            </div>
         </div>
 
 
@@ -462,19 +478,6 @@
                             <textarea id="user-input" placeholder="Type your message..." cols="1" rows="1"></textarea>
                             <!-- <textarea name="" id="" > -->
                             <button id="send-button" class="send-btn">Send</button>
-                        </div>
-                    </div>
-
-
-                    <div class="embedcode">
-                        <div class="embedcode-container">
-                            <div class="embedcode-text">
-                                <p>Copy and paste the following code in your website to embed the chatbot.</p>
-                            </div>
-                            <div class="embedcode-area">
-                                <textarea name="" id="" readonly cols="30" rows="10"></textarea>
-                            </div>
-                            <button class="embedcode_copy_btn btnn">Copy</button>
                         </div>
                     </div>
 

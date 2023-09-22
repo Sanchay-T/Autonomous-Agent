@@ -13,7 +13,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from .pdf2markdown import convert_and_save
 
 from .utils import *
-from .ingest import ingest_and_log_data
+from .ingest import ingest_data
 import json
 
 from .html2markdown import url_to_doc
@@ -311,7 +311,7 @@ def create_chatbot(request):
 
     print("Before ingest")
     try:
-        ingest_and_log_data()
+        ingest_data()
         return JsonResponse({'message': "Chatbot created successfully." , 'chatbot_key' : unique_cb_key})
     except Exception as e:
         print(e)

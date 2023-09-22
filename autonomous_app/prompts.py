@@ -17,7 +17,10 @@ def load_chat_prompt(f_name: Union[pathlib.Path, str] = None) -> ChatPromptTempl
     if isinstance(f_name, str) and f_name:
         f_name = pathlib.Path(f_name)
     if f_name and f_name.is_file():
-        template = json.load(f_name.open("r"))
+        print("Loading chat prompt from file... " , f_name)
+        with f_name.open("r") as file:
+            template = json.loads(file.read())
+
     else:
         logger.warning(
             f"No chat prompt provided. Using default chat prompt from {__name__}"

@@ -4,13 +4,16 @@ from types import SimpleNamespace
 import gradio as gr
 import wandb
 from .chain import get_answer, load_chain, load_vector_store
+from .ingest import load_documents , chunk_documents
 
 from dotenv import load_dotenv
+
+doc_dir = os.path.join("documents" , "iteration_1")
+
 
 load_dotenv(".env")
 
 
-print("Openai key " , os.getenv("OPENAI_API_KEY"))
 
 class Chat:
     """A chatbot interface that persists the vectorstore and chain between calls."""
@@ -57,14 +60,15 @@ class Chat:
             )
 
         if self.vector_store is None:
-            self.vector_store = load_vector_store(
-                wandb_run=self.wandb_run,
-            )
+
+            docs = load_documents(doc_dir)
+            # print("AI DOCS " , docs)
+            chunks = chunk_documents(docs, chunk_size=600, chunk_overlap=200)
+
+            self.vector_store = load_vector_store(chunks)
             
         if self.chain is None:
-            self.chain = load_chain(
-                self.wandb_run, self.vector_store, openai_api_key=openai_key
-            )
+            self.chain = load_chain(self.vector_store, openai_api_key=openai_key)
 
         history = history or []
         question = question.lower()
