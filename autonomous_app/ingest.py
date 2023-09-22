@@ -19,19 +19,19 @@ doc_dir = os.path.join("documents" , "iteration_1")
 
 vector_store_path = os.path.join("vector_store")
 
-prompt_file_path = os.path.join( "autonomous_app" , "chat_prompt.json") 
+prompt_file_path = os.path.join("autonomous_app" , "chat_prompt.json")
 
 langchain.llm_cache = SQLiteCache(database_path="llm_cache.db")
 logger = logging.getLogger(__name__)
 api_key = os.getenv("OPENAI_API_KEY")
-wandb_api_key = os.getenv("WANDB_API_KEY")
+
 
 
 url = "https://fa1dffb4-23bf-4b57-8cc2-730c85ead277.us-east-1-0.aws.cloud.qdrant.io:6333"
 api_key_q = "q_l-IpY7Y2j4nVO4mfCM28HmKosSLvO8vZBbCRpq7hU-ffF1KlSXNQ"
 
 
-def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_path:str, wandb_project:str, prompt_file:str):
+def ingest_data(docs_dir:str, chunk_size:int, chunk_overlap:int, vector_store_path:str,prompt_file:str):
     
     # Load the documents
     documents = load_documents(docs_dir)
@@ -95,18 +95,18 @@ def create_vector_store(documents, vector_store_path:str ) -> Qdrant:
     )
     return vector_store
 
-def log_prompt(prompt:dict, run:wandb.run):
-    prompt_artifact = wandb.Artifact(name="chat_prompt", type="prompt")
-    with prompt_artifact.new_file("prompt.json") as f:
-        f.write(json.dumps(prompt))
-    run.log_artifact(prompt_artifact)
-
-def log_dataset(documents:List[Document], run:wandb.run):
-    document_artifact = wandb.Artifact(name="documentation_dataset", type="dataset")
-    with document_artifact.new_file("document.json") as f:
-        for document in documents:
-            f.write(document.json() + "\n")
-    run.log_artifact(document_artifact)
+# def log_prompt(prompt:dict, run:wandb.run):
+#     prompt_artifact = wandb.Artifact(name="chat_prompt", type="prompt")
+#     with prompt_artifact.new_file("prompt.json") as f:
+#         f.write(json.dumps(prompt))
+#     run.log_artifact(prompt_artifact)
+#
+# def log_dataset(documents:List[Document], run:wandb.run):
+#     document_artifact = wandb.Artifact(name="documentation_dataset", type="dataset")
+#     with document_artifact.new_file("document.json") as f:
+#         for document in documents:
+#             f.write(document.json() + "\n")
+#     run.log_artifact(document_artifact)
 
 # def log_index(vector_store_dir:str, run:wandb.run):
 #     index_artifact = wandb.Artifact(name="vector_store", type="search_index")
@@ -116,39 +116,39 @@ def log_dataset(documents:List[Document], run:wandb.run):
 
 
 
-def ingest_and_log_data(
-        docs_dir: str = doc_dir,
-        chunk_size: int = 600,
-        chunk_overlap: int = 200,
-        vector_store_path: str = vector_store_path,
-        prompt_file_path: str = prompt_file_path,
-        wandb_project: str = "AI Agents Hackathon",
-    ):
-    """
-    Ingest documentation data, create a vector store, and log artifacts to W&B.
-    Designed to be used within a Django context.
-    """
-    run = wandb.init(project=wandb_project)  # Move the wandb initialization to this function
-    # user_vector_store_path = os.path.join(vector_store_path, unique_user_key)
-
-
-    # Ingest data
-    documents = ingest_data(
-        docs_dir=docs_dir,
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        vector_store_path=vector_store_path,
-        wandb_project=wandb_project,
-        prompt_file=prompt_file_path,
-    )
-
-    # Log data to wandb
-    log_dataset(documents, run )
-    log_index(vector_store_path, run)
-    
-    with open(prompt_file_path, 'r') as f:
-        prompt_data = json.load(f)
-    log_prompt(prompt_data, run)
-
-    # Finish the wandb run
-    run.finish()
+# def ingest_and_log_data(
+#         docs_dir: str = doc_dir,
+#         chunk_size: int = 600,
+#         chunk_overlap: int = 200,
+#         vector_store_path: str = vector_store_path,
+#         prompt_file_path: str = prompt_file_path,
+#         wandb_project: str = "AI Agents Hackathon",
+#     ):
+#     """
+#     Ingest documentation data, create a vector store, and log artifacts to W&B.
+#     Designed to be used within a Django context.
+#     """
+#     run = wandb.init(project=wandb_project)  # Move the wandb initialization to this function
+#     # user_vector_store_path = os.path.join(vector_store_path, unique_user_key)
+#
+#
+#     # Ingest data
+#     documents = ingest_data(
+#         docs_dir=docs_dir,
+#         chunk_size=chunk_size,
+#         chunk_overlap=chunk_overlap,
+#         vector_store_path=vector_store_path,
+#         wandb_project=wandb_project,
+#         prompt_file=prompt_file_path,
+#     )
+#
+#     # Log data to wandb
+#     log_dataset(documents, run )
+#     log_index(vector_store_path, run)
+#
+#     with open(prompt_file_path, 'r') as f:
+#         prompt_data = json.load(f)
+#     log_prompt(prompt_data, run)
+#
+#     # Finish the wandb run
+#     run.finish()

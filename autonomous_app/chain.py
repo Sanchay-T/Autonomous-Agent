@@ -5,7 +5,7 @@ import logging
 import wandb
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
-from langchain.vectorstores import Chroma , Weaviate
+from langchain.vectorstores import Chroma , Qdrant
 from langchain.embeddings import OpenAIEmbeddings
 from .prompts import load_chat_prompt
 import os
@@ -13,40 +13,46 @@ from dotenv import load_dotenv
 
 from langchain.embeddings import OpenAIEmbeddings
 
-load_dotenv(".env") 
+load_dotenv(".env")
+
+url = "https://fa1dffb4-23bf-4b57-8cc2-730c85ead277.us-east-1-0.aws.cloud.qdrant.io:6333"
+api_key_q = "q_l-IpY7Y2j4nVO4mfCM28HmKosSLvO8vZBbCRpq7hU-ffF1KlSXNQ"
 
 api_key = os.getenv("OPENAI_API_KEY")
 logger = logging.getLogger(__name__)
+def load_vector_store(documents, vector_store_path:str ) -> Qdrant:
+
+    embedding_function = OpenAIEmbeddings(openai_api_key=api_key)
 
 
-def load_vector_store(wandb_run: wandb.run) -> Chroma:
-    """Load a vector store from a Weights & Biases artifact
-    Args:
-        run (wandb.run): An active Weights & Biases run
-        openai_api_key (str): The OpenAI API key to use for embedding
-    Returns:
-        Chroma: A chroma vector store object
-    """
-    # model_name = "BAAI/bge-small-en"
-    # model_kwargs = {'device': 'cpu'}
-    # encode_kwargs = {'normalize_embeddings': True}
-    # load vector store artifact
-    vector_store_artifact_dir = wandb_run.use_artifact(
-        wandb_run.config.vector_store_artifact, type="search_index"
-    ).download()
-    
-    embedding_fn = OpenAIEmbeddings(openai_api_key=api_key)
-    # load vector store
-    vector_store = Chroma(
-        embedding_function=embedding_fn, persist_directory=vector_store_artifact_dir
+    # user_vector_store_path = os.path.join(vector_store_path, user_key)
+
+
+    # vector_store = Chroma.from_documents(
+    #     documents=documents,
+    #     embedding=embedding_function,
+    #     persist_directory=vector_store_path,
+    # )
+    #
+    # return vector_store
+
+    vector_store = Qdrant.from_documents(
+        documents,
+        embedding_function,
+        url=url,
+        prefer_grpc=True,
+        api_key=api_key_q,
+        collection_name="my_documents",
     )
-
     return vector_store
 
 
 
 
-def load_chain(wandb_run: wandb.run, vector_store: Chroma, openai_api_key: str):
+
+
+
+def load_chain(vector_store: Qdrant, openai_api_key: str):
     """Load a ConversationalQA chain from a config and a vector store
     Args:
         wandb_run (wandb.run): An active Weights & Biases run
@@ -58,14 +64,11 @@ def load_chain(wandb_run: wandb.run, vector_store: Chroma, openai_api_key: str):
     retriever = vector_store.as_retriever()
     llm = ChatOpenAI(
         openai_api_key=openai_api_key,
-        model_name=wandb_run.config.model_name,
-        temperature=wandb_run.config.chat_temperature,
-        max_retries=wandb_run.config.max_fallback_retries,
+        model_name='gpt-3.5-turbo-16k-0613',
+        temperature=0,
     )
-    chat_prompt_dir = wandb_run.use_artifact(
-        wandb_run.config.chat_prompt_artifact, type="prompt"
-    ).download()
-    qa_prompt = load_chat_prompt(f"{chat_prompt_dir}/prompt.json")
+    chat_prompt_dir = 'chat_prompt.json'
+    qa_prompt = load_chat_prompt(f"{chat_prompt_dir}")
     qa_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
         chain_type="stuff",
