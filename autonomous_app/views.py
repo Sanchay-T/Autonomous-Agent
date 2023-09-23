@@ -7,6 +7,8 @@ from .config import default_config
 import os
 from .models import *
 import re
+from django.shortcuts import redirect
+
 import hashlib
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
@@ -37,7 +39,8 @@ conversation_stack = conversation_initiate()
 # Create your views here.
 
 def landing(request):
-    return render(request , "landing.html")
+    return redirect('http://www.wovoai.com')
+
 
 def bard(request):
     return render(request , "bard_chat.html")
